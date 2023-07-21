@@ -13,17 +13,27 @@ CREATE TABLE "user" (
     "access_level" INTEGER NOT NULL DEFAULT(0)
 );
 
-CREATE TABLE "client" (
-	"id" SERIAL PRIMARY KEY,
-	"user_id" INTEGER REFERENCES "user",
-	"accountant_id" INTEGER REFERENCES "accountant"
-);
-
 CREATE TABLE "accountants" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INTEGER REFERENCES "user",
 	"first_name" TEXT NOT NULL,
 	"last_name" TEXT NOT NULL
+);
+
+CREATE TABLE "client" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INTEGER REFERENCES "user",
+	"accountant_id" INTEGER REFERENCES "accountants"
+);
+
+CREATE TABLE "weeks" (
+	"id" SERIAL PRIMARY KEY,
+	"start_date" DATE UNIQUE
+);
+
+CREATE TABLE "categories" (
+	"id" SERIAL PRIMARY KEY,
+	"category" TEXT
 );
 
 CREATE TABLE "transactions" (
@@ -35,15 +45,5 @@ CREATE TABLE "transactions" (
 	"client_id" INTEGER REFERENCES "client" NOT NULL,
 	"week_id" INTEGER REFERENCES "weeks" NOT NULL,
 	"category_id" INTEGER REFERENCES "categories"
-);
-
-CREATE TABLE "weeks" (
-	"id" SERIAL PRIMARY KEY,
-	"start_date" DATE UNIQUE
-);
-
-CREATE TABLE "categories" (
-	"id" SERIAL PRIMARY KEY,
-	"category" TEXT
 );
 
