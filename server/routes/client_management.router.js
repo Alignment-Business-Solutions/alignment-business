@@ -10,6 +10,9 @@ router.get('/', (req,res) => {
     .then(result => {
         console.log('clientRouter GET result ==> ', result.rows)
         res.send(result.rows)
+    }).catch( err => {
+        console.log('Error with ClientRouter GET', err)
+        res.sendStatus(500)
     })
 
 })
