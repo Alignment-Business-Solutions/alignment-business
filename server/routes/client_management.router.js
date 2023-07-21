@@ -5,6 +5,16 @@ const router = express.Router();
 
 router.get('/', (req,res) => {
     // GET route code here
+    pool.query(`SELECT * FROM client JOIN accountants 
+    ON client.accountant_id = accountants.id
+    ORDER BY client.company_name;` , [req.user.id])
+    .then(result => {
+        console.log('clientRouter GET result ==> ', result.rows)
+        res.send(result.rows)
+    }).catch( err => {
+        console.log('Error with ClientRouter GET', err)
+        res.sendStatus(500)
+    })
 
 })
 
