@@ -20,6 +20,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import ViewSummary from '../ViewSummary/ViewSummary';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +58,13 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+            exact
+            path="/viewsummary"
+          >
+            <ViewSummary />
           </ProtectedRoute>
 
           <ProtectedRoute
