@@ -6,3 +6,5 @@ const MyClients = ( state = [], action ) => {
             return state
     }
 }
+
+export default MyClients;
