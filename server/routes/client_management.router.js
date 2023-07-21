@@ -7,7 +7,7 @@ router.get('/', (req,res) => {
     // GET route code here
     pool.query(`SELECT * FROM client JOIN accountants 
     ON client.accountant_id = accountants.id
-    ORDER BY client.company_name;` , [req.user.id])
+   WHERE accountant_id = $1;` , [req.user.id])
     .then(result => {
         console.log('clientRouter GET result ==> ', result.rows)
         res.send(result.rows)
