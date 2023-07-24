@@ -20,7 +20,7 @@ router.get('/myClients', (req,res) => {
 
 router.get('/', (req,res) => {
     // GET route code here
-    pool.query(`SELECT * FROM client` , [req.user.id])
+    pool.query(`SELECT * FROM client` )
     .then(result => {
         console.log('clientRouter GET result ==> ', result.rows)
         res.send(result.rows)
