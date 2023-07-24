@@ -9,7 +9,7 @@ function SinglePL() {
 
 
     useEffect(() => {
-    
+        dispatch({type:"FETCH_WEEK", payload: {week:1, client:2}}); 
     }, []);
 
 
