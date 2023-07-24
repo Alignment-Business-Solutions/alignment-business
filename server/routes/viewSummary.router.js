@@ -37,15 +37,13 @@ router.post('/', (req, res) => {
 });
 
 router.get('/weeks', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM "transactions" 
-    WHERE "client_id" = 1
-    AND "week_id" = 1
-    ORDER BY "category_id";`;
+    const queryText = `SELECT * FROM "weeks"
+    ORDER BY "start_date";`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
-            console.log('error in GET recent_PL router:', error);
+            console.log('error in GET weeksDropdown:', error);
             res.sendStatus(500);
         })
 });
