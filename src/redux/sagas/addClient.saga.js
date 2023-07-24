@@ -13,3 +13,7 @@ function* addClient(action) {
         console.log('Error with Add Client PUT saga', err)
     }
 }
+
+function* addClientSaga(){
+    yield takeLatest('ADD_CLIENT', addClient)
+}
