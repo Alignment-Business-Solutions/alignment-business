@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Table from "./Table/Table";
+import ItemForm from "./ItemForm/ItemForm";
+
 
 function SinglePL() {
 
@@ -23,8 +25,10 @@ function SinglePL() {
 
     return (
         <>
+
+        <ItemForm categories={categories}/> 
         <button onClick={showForm}>Create New Item</button>
-        
+
             <Table 
                 weekData={weekData}
                 accLevel={user.access_level}
