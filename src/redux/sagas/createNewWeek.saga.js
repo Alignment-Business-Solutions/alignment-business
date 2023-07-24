@@ -5,7 +5,7 @@ function* submitNewWeek (action) {
     console.log('in submitNewWeek saga!')
     try {
         console.log('action.payload for submitNewWeek POST saga is:', action.payload);
-        yield axios.post('/api/createNewWeek', action.payload);
+        yield axios.post('/api/viewSummary', action.payload);
     } catch (error) {
         console.log('Error in submitNewWeek saga', error);
     }
