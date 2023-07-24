@@ -35,13 +35,14 @@ router.post('/', (req, res) => {
     // POST route code here
   });
 
-router.put('/', (req, res) => {
+router.put('/add', (req, res) => {
+    console.log('OUR REQ.BODY',req.body)
       // PUT route code here
      const sqlText = (`UPDATE client SET "accountant_id" = $1
       WHERE client."id" = $2;
       `)
 
-      pool.query(sqlText, [req.body.company_name], [req.body.id])
+      pool.query(sqlText, [req.body.accountant_id], [req.body.id])
       .then(result => {
         res.sendStatus(201)
       })

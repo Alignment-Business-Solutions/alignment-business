@@ -14,10 +14,10 @@ function ClientList() {
     });
   }, []);
 
-  const assignClient = () => {
+  const assignClient = (client_id, accountant_id) => {
     dispatch({
         type: 'ADD_CLIENT',
-        payload: {company_name}
+        payload: {client_id, accountant_id}
     })
     console.log("Assigned to Accountant");
   };
