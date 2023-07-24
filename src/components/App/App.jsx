@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ClientList from '../ClientList/ClientList';
 
 
 import SinglePL from '../SinglePL/SinglePL';
@@ -61,6 +62,13 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows the Clients View
+            exact
+            path="/clients"
+          >
+            <ClientList />
+          </ProtectedRoute>
 
           <ProtectedRoute 
             exact
@@ -76,7 +84,6 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute> */}
-
           <Route
             exact
             path="/login"
