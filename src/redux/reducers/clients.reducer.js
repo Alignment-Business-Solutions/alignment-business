@@ -1,12 +1,12 @@
 
 
-const MyClients = ( state = [], action ) => {
+const AllClients = ( state = [], action ) => {
     switch (action.type) {
-        case 'SET_MY_CLIENTS' :
+        case 'SET_ALL_CLIENTS' :
             return action.payload;
         default :
             return state
     }
 }
 
-export default MyClients;
+export default AllClients;
