@@ -1,6 +1,6 @@
 import React,{useEffect, useReact} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-
+import MyClients from '../MyClients/MyClients';
 function ClientList() {
     const dispatch = useDispatch();
     const allClients = useSelector((store) => store.allClients)
@@ -29,7 +29,7 @@ function ClientList() {
             ))}
               
         </ul>
-
+         
    </div> 
    )
 }
