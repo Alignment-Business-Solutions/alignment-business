@@ -27,12 +27,23 @@ function* updateItemData(action) {
     }
 }
 
-
-
+function* deleteItemData(action) {
+    const idToDel = action.payload.data;
+    const week = action.payload.week;
+    const client = action.payload.client;
+    try {
+        yield axios.delete(`/api/single/${idToDel}`);
+        yield put({type:"FETCH_WEEK", payload: {week, client}}); 
+    }
+    catch {
+        console.log('error with deleting item data on server');
+    }
+}
 
 function* singlePLSaga() {
     yield takeLatest("FETCH_WEEK", fetchWeekData);
     yield takeLatest("UPDATE_ITEM", updateItemData);
+    yield takeLatest("DELETE_ITEM", deleteItemData);
 
 
 }

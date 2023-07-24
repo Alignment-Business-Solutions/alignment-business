@@ -20,6 +20,12 @@ function TableItem({item, accLevel}) {
             setEditToggleValue(!editToggleValue);
         }
     }
+    function deleteItem() {
+        dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
+                                                week: 1,
+                                                client: 1}});
+
+    }
 
     function handleChange(type, change) {
         console.log('inhandleChange', type, change);
@@ -86,7 +92,7 @@ function TableItem({item, accLevel}) {
                 {accLevel !== 0 ? (
                 <>
                     <td><button onClick={editToggle}>Save</button></td>
-                    <td><button>Remove</button></td>
+                    <td><button onClick={deleteItem}>Remove</button></td>
                 </>
                 ) : (<></>)}
             </tr> 
@@ -128,7 +134,7 @@ function TableItem({item, accLevel}) {
             {accLevel !== 0 ? (
             <>
                 <td><button onClick={editToggle}>Edit</button></td>
-                <td><button>Remove</button></td>
+                <td><button onClick={deleteItem}>Remove</button></td>
             </>
             ) : (<></>)}
         </tr>

@@ -64,6 +64,19 @@ router.put('/:id', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+    console.log(req.params.id);
+    const queryText = `DELETE FROM transactions WHERE id=$1;`;
+    pool.query(queryText, [req.params.id])
+    .then(results => {
+        console.log('success');
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error with query', queryText, "error ==", error);
+        res.sendStatus(500);
+    });
+});
+
 module.exports = router;
 
 
