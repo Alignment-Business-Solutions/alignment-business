@@ -38,18 +38,26 @@ router.post('/', (req, res) => {
 router.put('/add', (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here
-     const sqlText = (`UPDATE client SET "accountant_id" = $1
+      // protect route at some point
+     const sqlText = `UPDATE client SET "accountant_id" = $1
       WHERE client."id" = $2;
-      `)
-
-      pool.query(sqlText, [req.body.accountant_id], [req.body.id])
+      `;
+    const sqlValues = [req.user.id,req.body.client_id]
+      pool.query(sqlText,sqlValues)
       .then(result => {
         res.sendStatus(201)
-      })
-      .catch(err => {
-        console.log('Error SERVER UPDATING CLIENT LIST===>', err)
+      }).catch(err => {
+        console.log('Error with CLIENT PUT', err)
         res.sendStatus(500)
       })
+      
+    //   .then(result => {
+    //     res.sendStatus(201)
+    //   })
+    //   .catch(err => {
+    //     console.log('Error SERVER UPDATING CLIENT LIST===>', err)
+    //     res.sendStatus(500)
+    //   })
 
 });
 
