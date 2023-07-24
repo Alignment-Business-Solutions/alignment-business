@@ -4,7 +4,7 @@ import {put, takeLatest} from 'redux-saga/effects'
 function* fetchRecentPL () {
     console.log('in fetchRecentPL saga!')
     try {
-        const recentPL = yield axios.get ('/api/recentPL');
+        const recentPL = yield axios.get ('/api/viewSummary');
         console.log( 'data received from fetchRecentPL GET:', recentPL.data);
         yield put ({ type: 'SET_RECENT_PL', payload: recentPL.data});
     } catch (error) {

@@ -16,6 +16,7 @@ function ViewSummary() {
 
     function pageLoad(recentPL) {
         dispatch({ type: 'FETCH_RECENT_PL' })
+        dispatch({ type: 'FETCH_WEEKS_DROPDOWN'})
     }
 
     function submitNewWeek(event) {
@@ -107,6 +108,13 @@ function ViewSummary() {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <form>
+                    <select>
+                        
+                    </select>
+                </form>
             </div>
         </div>
     )
