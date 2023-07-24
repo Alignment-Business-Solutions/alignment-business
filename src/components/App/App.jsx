@@ -18,6 +18,9 @@ import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
+import SinglePL from '../SinglePL/SinglePL';
+
 import './App.css';
 
 function App() {
@@ -84,6 +87,13 @@ function App() {
               // Otherwise, show the registration page
               <RegisterPage />
             }
+          </Route>
+
+          <Route
+            exact
+            path="/one"
+          >
+            <SinglePL/>
           </Route>
 
           <Route
