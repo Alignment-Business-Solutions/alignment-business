@@ -15,6 +15,16 @@ function ClientList() {
     return (
         <div>
         <h1>Under Construction</h1>
+        <ul>
+            {myClients && myClients.map((client, i) => (
+                <li key={i}>
+                    {client.company_name}
+                </li>
+                
+              
+            ))}
+              <button> Add</button>
+        </ul>
 
    </div> 
    )
