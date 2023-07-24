@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import Table from "./Table/Table";
 
 function SinglePL() {
 
@@ -17,8 +17,7 @@ function SinglePL() {
 
 
     return (
-         
-            <p>{JSON.stringify(weekData)}</p>    
+        <Table weekData={weekData}/>         
 
     );
 
