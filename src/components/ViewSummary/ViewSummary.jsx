@@ -11,6 +11,7 @@ function ViewSummary() {
     const history = useHistory();
 
     const recentPL = useSelector(store => store.recentPL);
+    const weeksDropdown = useSelector(store => store.weeksDropdown)
     const [addClicker, setAddClicker] = useState(false);
     const [start_date, setStartDate] = useState('')
 

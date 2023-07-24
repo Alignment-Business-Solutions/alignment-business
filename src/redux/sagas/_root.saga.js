@@ -26,6 +26,7 @@ export default function* rootSaga() {
     clientsSaga(),
     myClientsSaga(),
     submitNewWeekSaga(),
-    fetchWeeksDropdownSaga
+    fetchWeeksDropdownSaga(),
+    
   ]);
 }
