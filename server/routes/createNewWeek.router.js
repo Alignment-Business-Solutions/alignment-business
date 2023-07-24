@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     ]
 
     const queryText = `INSERT INTO "weeks" ("start_date") VALUES
-	$1;`;
+	($1);`;
     pool.query(queryText, start_date)
         .then(result => {
             res.sendStatus(201);
