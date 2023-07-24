@@ -75,14 +75,21 @@ function ViewSummary() {
                         </tr>
                     </thead>
                     <tbody>
-                        {recentPL.map(transaction => {
-                            if (transaction.category_id === 1){
+                    {recentPL.map(transaction => {
+                            if (transaction.category_id === 1 && transaction.paid === true){
                                 return <tr key={transaction.id}>
                                     <td>{transaction.date}</td>
                                     <td>{transaction.payee}</td>
                                     <td>{transaction.amount}</td>
-                                    <td></td>
+                                    <td><input type="checkbox" checked readOnly/></td>
                                 </tr>
+                            } else if (transaction.category_id === 1 && transaction.paid === false) {
+                                return <tr key={transaction.id}>
+                                    <td>{transaction.date}</td>
+                                    <td>{transaction.payee}</td>
+                                    <td>{transaction.amount}</td>
+                                    <td><input type="checkbox" readOnly/></td>
+                                </tr>                                
                             }
                         })}
                     </tbody>
