@@ -88,7 +88,7 @@ function ViewSummary() {
                                     <td>{transaction.date}</td>
                                     <td>{transaction.payee}</td>
                                     <td>{transaction.amount}</td>
-                                    <td><input type="checkbox" readOnly/></td>
+                                    <td><input type="checkbox" disabled/></td>
                                 </tr>                                
                             }
                         })}
@@ -123,7 +123,7 @@ function ViewSummary() {
                                     <td>{transaction.date}</td>
                                     <td>{transaction.payee}</td>
                                     <td>{transaction.amount}</td>
-                                    <td><input type="checkbox" readOnly/></td>
+                                    <td><input type="checkbox" disabled/></td>
                                 </tr>                                
                             }
                         })}
