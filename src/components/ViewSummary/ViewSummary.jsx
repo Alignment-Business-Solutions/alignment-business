@@ -62,7 +62,7 @@ function ViewSummary() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Week of 5/1</th>
+                            <th>Most Recent Week</th>
                         </tr>
                         <tr>
                             <th>Income</th>
@@ -97,7 +97,7 @@ function ViewSummary() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Week of 5/1</th>
+                            <th>Most Recent Week</th>
                         </tr>
                         <tr>
                             <th>Expenses</th>
