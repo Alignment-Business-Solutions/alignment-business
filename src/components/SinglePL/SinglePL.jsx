@@ -5,20 +5,21 @@ import { useSelector, useDispatch } from "react-redux";
 function SinglePL() {
 
     const dispatch = useDispatch();
-    const weekData = useSelector(store => store.singlePLReducer);
+    const weekData = useSelector(store => store.singlePL);
 
 
     useEffect(() => {
-        dispatch({type:"FETCH_WEEK", payload: {week:1, client:2}}); 
+        dispatch({type:"FETCH_WEEK", payload: {week:1, client:1}}); 
     }, []);
 
 
 
 
 
-
     return (
-        <p>as;dlkfjas;ldkfjfa;sldkfjl</p>
+         
+            <p>{JSON.stringify(weekData)}</p>    
+
     );
 
 

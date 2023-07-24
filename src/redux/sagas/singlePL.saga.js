@@ -4,14 +4,10 @@ import { put, takeLatest, takeLeading } from 'redux-saga/effects';
 
 
 function* fetchWeekData(action) {
-    console.log(action); 
+    const params = {week: action.payload.week, client: action.payload.client};
+                    
     try {
-        const results = yield axios.get(`/api/single`, {
-                                                       params: {
-                                                         week: action.payload.week,
-                                                         client: action.payload.client
-                                                       }});
-
+        const results = yield axios.get(`/api/single`, {params});
         yield put({type:"SET_WEEK_DATA", payload:results.data});
     }
     catch {
