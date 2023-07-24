@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ClientList from '../ClientList/ClientList';
+import MyClients from '../MyClients/MyClients';
 
 
 import SinglePL from '../SinglePL/SinglePL';
@@ -68,6 +69,14 @@ function App() {
             path="/clients"
           >
             <ClientList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // shows Accountants Clients 
+            exact
+            path="/myClients"
+          >
+            <MyClients />
           </ProtectedRoute>
 
           <ProtectedRoute 
