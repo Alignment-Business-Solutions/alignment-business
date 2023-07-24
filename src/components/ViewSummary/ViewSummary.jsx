@@ -12,17 +12,26 @@ function ViewSummary() {
 
     const recentPL = useSelector(store => store.recentPL);
     const [addClicker, setAddClicker] = useState(false);
+    const [start_date, setStartDate] = useState('')
 
     function pageLoad(recentPL) {
         dispatch({ type: 'FETCH_RECENT_PL' })
     }
 
-    function createNewWeek() {
+    function newWeekActivate() {
         console.log('Create New Week Button Clicked!');
-        setAddClicker(true)
+        setAddClicker(true);
     }
 
-
+    function submitNewWeek(event) {
+        event.preventDefault();
+        let newWeek = {
+            start_date
+        };
+        console.log('newWeek being submitted is:', newWeek);
+        dispatch({ type: 'SUBMIT_NEW_WEEK', payload: newWeek });
+        setAddClicker(false);
+    }
 
     useEffect(() => {
         pageLoad();
@@ -32,11 +41,18 @@ function ViewSummary() {
         <div>
             {
                 addClicker ?
-                <form>
-                    <label>Starting Date </label>
+                <form onSubmit={(event) => submitNewWeek(event)}>
+                    <label>Starting Date</label>
+                    <input
+                        placeholder="Example: 12/12/2023"
+                        value={start_date}
+                        onChange={(event) => setStartDate(event.target.value)}
+                        required
+                    />
+                    <button type="submit">Submit New Week!</button>
                 </form>
                  :
-                <button onClick={() => createNewWeek()}>Create New Week</button>
+                <button onClick={() => newWeekActivate()}>Create New Week</button>
             }
             <div>
                 <table>
