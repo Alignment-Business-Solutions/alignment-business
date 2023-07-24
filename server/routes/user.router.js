@@ -20,17 +20,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const userType = req.body.userType;
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  // Set the access_level based on userType
+  const accessLevel = userType === 'Accountant' ? 1 : 0;
+
+  const queryText = `INSERT INTO "user" (username, password, access_level)
+    VALUES ($1, $2, $3) RETURNING id`;
+
   pool
-    .query(queryText, [username, password])
+    .query(queryText, [username, password, accessLevel])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
 });
+
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route

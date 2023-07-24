@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import AccountantRegisterForm from '../AccountantRegisterForm/AccountantRegisterForm';
+import ClientRegisterForm from '../ClientRegisterForm/ClientRegisterForm';
 
 function RegisterForm() {
+  const [userType, setUserType] = useState('Accountant');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
@@ -13,6 +16,7 @@ function RegisterForm() {
     dispatch({
       type: 'REGISTER',
       payload: {
+        userType: userType,
         username: username,
         password: password,
       },
@@ -28,33 +32,33 @@ function RegisterForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
-          Username:
+        <label>
           <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
+            type="radio"
+            name="userType"
+            value="Accountant"
+            checked={userType === 'Accountant'}
+            onChange={() => setUserType('Accountant')}
           />
+          Accountant
         </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
+        <label>
           <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
+            type="radio"
+            name="userType"
+            value="Client"
+            checked={userType === 'Client'}
+            onChange={() => setUserType('Client')}
           />
+          Client
         </label>
-      </div>
-      <div>
+              {/* Conditionally render separate register forms based on userType */}
+        {userType === 'Accountant' && <AccountantRegisterForm username = {username} password={password} setUsername={setUsername} setPassword={setPassword}/>}
+              {userType === 'Client' && <ClientRegisterForm username = {username} password={password} setUsername={setUsername} setPassword={setPassword}/>}
+
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
-    </form>
+          </form>
   );
 }
 
