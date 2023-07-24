@@ -26,12 +26,13 @@ function ClientList() {
         <h1>Clients</h1>
         <ul>
             {allClients && allClients.map((client, i) => (
-                <>
+               
                 <li key={i}>
                     {client.company_name}
+                     <button onClick={assignClient}> Add</button>
                 </li>
-                <button onClick={assignClient}> Add</button>
-                </>
+               
+               
             ))}
               
         </ul>
