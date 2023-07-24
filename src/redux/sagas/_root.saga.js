@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import singlePLsaga from './singlePL.saga';
 import clientsSaga from './clients.saga'
 import fetchRecentSaga from './fetch_recent_pl.saga';
+import submitNewWeekSaga from './createNewWeek.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +21,8 @@ export default function* rootSaga() {
     userSaga(),
     fetchRecentSaga(),
     singlePLsaga(),
-    clientsSaga()
+    clientsSaga(),
+    submitNewWeekSaga(),
+    
   ]);
 }

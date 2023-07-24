@@ -18,11 +18,6 @@ function ViewSummary() {
         dispatch({ type: 'FETCH_RECENT_PL' })
     }
 
-    function newWeekActivate() {
-        console.log('Create New Week Button Clicked!');
-        setAddClicker(true);
-    }
-
     function submitNewWeek(event) {
         event.preventDefault();
         let newWeek = {
@@ -50,9 +45,10 @@ function ViewSummary() {
                         required
                     />
                     <button type="submit">Submit New Week!</button>
+                    <button onClick={() => setAddClicker(false)}>Cancel Add Week</button>
                 </form>
                  :
-                <button onClick={() => newWeekActivate()}>Create New Week</button>
+                <button onClick={() => setAddClicker(true)}>Create New Week</button>
             }
             <div>
                 <table>
