@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import MyClients from './clients.reducer';
+import allClients from './clients.reducer';
 import singlePL from './singlePL.reducer.js';
-
+import recentPL from './recentPL.reducer';
+import weeksDropdown from './weeksDropdown.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -15,8 +16,11 @@ import singlePL from './singlePL.reducer.js';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  MyClients,
-    singlePL,
+  allClients,
+  recentPL,
+  singlePL,
+  weeksDropdown,
+  
 });
 
 export default rootReducer;

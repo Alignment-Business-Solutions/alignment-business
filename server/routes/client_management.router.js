@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/', (req,res) => {
+router.get('/myClients', (req,res) => {
     // GET route code here
     pool.query(`SELECT * FROM client JOIN accountants 
     ON client.accountant_id = accountants.id
@@ -20,7 +20,7 @@ router.get('/', (req,res) => {
 
 router.get('/', (req,res) => {
     // GET route code here
-    pool.query(`SELECT * FROM client` , [req.user.id])
+    pool.query(`SELECT * FROM client` )
     .then(result => {
         console.log('clientRouter GET result ==> ', result.rows)
         res.send(result.rows)
@@ -37,6 +37,9 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
       // PUT route code here
+      pool.query(`UPDATE client SET "accountant_id" = $1
+      WHERE client."id" = $2;
+      `)
 
 });
 
