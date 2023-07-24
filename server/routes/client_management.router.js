@@ -37,6 +37,9 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
       // PUT route code here
+      pool.query(`UPDATE client SET "accountant_id" = $1
+      WHERE client."id" = $2;
+      `)
 
 });
 
