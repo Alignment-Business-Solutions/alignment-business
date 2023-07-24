@@ -11,19 +11,23 @@ function ClientList() {
         });
       }, []);
 
+      const assignClient = () => {
+        console.log('Assigned to Accountant')
+      }
 
     return (
         <div>
         <h1>Under Construction</h1>
         <ul>
             {myClients && myClients.map((client, i) => (
+                <>
                 <li key={i}>
                     {client.company_name}
                 </li>
-                
-              
+                <button onClick={assignClient}> Add</button>
+                </>
             ))}
-              <button> Add</button>
+              
         </ul>
 
    </div> 
