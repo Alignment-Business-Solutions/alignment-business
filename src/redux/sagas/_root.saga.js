@@ -7,6 +7,7 @@ import clientsSaga from './clients.saga'
 import fetchRecentSaga from './fetch_recent_pl.saga';
 import myClientsSaga from './myClients.saga'
 import submitNewWeekSaga from './createNewWeek.saga';
+import addClientSaga from './addClient.saga';
 import fetchWeeksDropdownSaga from './fetchWeeksDropdown.saga';
 import categoriesSaga from './categories.saga';
 
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     clientsSaga(),
     myClientsSaga(),
     submitNewWeekSaga(),
+    addClientSaga(),
     fetchWeeksDropdownSaga(),
     categoriesSaga(),
     

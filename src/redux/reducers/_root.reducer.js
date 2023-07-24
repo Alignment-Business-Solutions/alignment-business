@@ -4,6 +4,7 @@ import user from './user.reducer';
 import allClients from './clients.reducer';
 import singlePL from './singlePL.reducer.js';
 import recentPL from './recentPL.reducer';
+import myClients from './myClients.reducer'
 import weeksDropdown from './weeksDropdown.reducer';
 import categories from './categories.reducer.js';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   allClients,
   recentPL,
   singlePL,
+  myClients,
   weeksDropdown,
   categories,
 
