@@ -3,11 +3,11 @@ import {useDispatch, useSelector} from 'react-redux'
 
 function ClientList() {
     const dispatch = useDispatch();
-    const myClients = useSelector((store) => store.myClients)
+    const allClients = useSelector((store) => store.allClients)
 
     useEffect(() => {
         dispatch({
-          type: "FETCH_MY_CLIENTS",
+          type: "FETCH_ALL_CLIENTS",
         });
       }, []);
 
@@ -19,7 +19,7 @@ function ClientList() {
         <div>
         <h1>Clients</h1>
         <ul>
-            {myClients && myClients.map((client, i) => (
+            {allClients && allClients.map((client, i) => (
                 <>
                 <li key={i}>
                     {client.company_name}

@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/', (req,res) => {
+router.get('/myClients', (req,res) => {
     // GET route code here
     pool.query(`SELECT * FROM client JOIN accountants 
     ON client.accountant_id = accountants.id
