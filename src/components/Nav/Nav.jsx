@@ -52,7 +52,7 @@ function Nav() {
               Clients
             </Link>
 
-            <Link className="navLink" to="/summary">
+            <Link className="navLink" to="/user">
               Summary
             </Link>
 
@@ -81,7 +81,7 @@ function Nav() {
               Clients
             </Link>
 
-            <Link className="navLink" to="/summary">
+            <Link className="navLink" to="/user">
               Summary
             </Link>
 
