@@ -42,6 +42,13 @@ router.put('/', (req, res) => {
       `)
 
       pool.query(sqlText, [req.body.company_name], [req.body.id])
+      .then(result => {
+        res.sendStatus(201)
+      })
+      .catch(err => {
+        console.log('Error SERVER UPDATING CLIENT LIST===>', err)
+        res.sendStatus(500)
+      })
 
 });
 
