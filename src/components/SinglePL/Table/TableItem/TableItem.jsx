@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 
-function TableItem({item, accLevel}) { 
+function TableItem({item, accLevel, categories}) { 
     const [editToggleValue, setEditToggleValue] = useState(false);
     const [itemEd, setItemEd] = useState(item);
     const dispatch = useDispatch();
@@ -72,7 +72,14 @@ function TableItem({item, accLevel}) {
                     onChange={(e)=>handleChange("payee", e.target.value)}
                 />
             </td>
-            <td>{itemEd.category_id}</td>
+            <td>
+                <select>
+                    <option value={itemEd.category_id}>{categories[itemEd.category_id-1].category}</option>
+                    {categories.map(cat => (
+                        <option value={cat.id+1}>{cat.category}</option>
+                    ))}
+                </select>
+            </td>
             <td>
                 <input
                     type="text"
@@ -114,7 +121,7 @@ function TableItem({item, accLevel}) {
                     readOnly
                 />
             </td>
-            <td>{itemEd.category_id}</td>
+            <td>{categories && categories[itemEd.category_id-1].category}</td>
             <td>
                 <input
                     type="text"
