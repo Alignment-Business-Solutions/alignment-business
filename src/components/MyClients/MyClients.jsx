@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 function MyClients() {
 
     const dispatch = useDispatch();
-    const allClients = useSelector((store) => store.allClients);
+    const myClients = useSelector((store) => store.myClients);
 
   useEffect(() => {
     dispatch({
@@ -15,7 +15,11 @@ function MyClients() {
   }, []);
 
         return (
-            <p>Under Construction</p>
+            <ul>
+                {myClients && myClients.map((oneClient, i) => (
+                    <li key={i}> {oneClient.company_name}</li>
+                ))}
+            </ul>
         )
 }
 
