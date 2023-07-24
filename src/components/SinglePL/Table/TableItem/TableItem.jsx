@@ -3,20 +3,40 @@
 
 
 function TableItem({item, accLevel}) { 
-
+    let date = item.date
+    date = date.slice(0, 10);
+    
 
     return (
 
         <tr>
-            <td>{item.date}</td>
-            <td>{item.payee}</td>
+            <td>
+                <input
+                    type="date"
+                    value={date}
+                    readOnly
+                />
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={item.payee}
+                    readOnly
+                />
+            </td>
             <td>{item.category_id}</td>
-            <td>{item.amount}</td>
+            <td>
+                <input
+                    type="text"
+                    value={item.amount}
+                />
+            </td>
             <td>
                 <input
                     type="checkbox"
                     value={item.paid}
                     checked={item.paid}
+                    readOnly
                 />
                 
             </td>
