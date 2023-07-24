@@ -17,3 +17,5 @@ function* addClient(action) {
 function* addClientSaga(){
     yield takeLatest('ADD_CLIENT', addClient)
 }
+
+export default addClientSaga
