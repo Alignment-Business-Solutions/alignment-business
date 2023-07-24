@@ -8,6 +8,8 @@ function ViewSummary () {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    
+    const recentPL = useSelector(store => store.recentPL);
 
     useEffect(() => {
         dispatch({type: 'FETCH_RECENT_PL'})
