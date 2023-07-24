@@ -14,6 +14,7 @@ function ViewSummary() {
     const weeksDropdown = useSelector(store => store.weeksDropdown)
     const [addClicker, setAddClicker] = useState(false);
     const [start_date, setStartDate] = useState('')
+    const [weekSelected, setWeekSelected] = useState(0)
 
     function pageLoad(recentPL) {
         dispatch({ type: 'FETCH_RECENT_PL' })
@@ -28,6 +29,11 @@ function ViewSummary() {
         console.log('newWeek being submitted is:', newWeek);
         dispatch({ type: 'SUBMIT_NEW_WEEK', payload: newWeek });
         setAddClicker(false);
+    }
+
+    function goToWeek(event) {
+        event.preventDefault();
+        dispatch({ type: 'FETCH_WEEK'})
     }
 
     useEffect(() => {
@@ -56,7 +62,7 @@ function ViewSummary() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Week of 5/1</th>
+                            <th>Most Recent Week</th>
                         </tr>
                         <tr>
                             <th>Income</th>
@@ -69,14 +75,21 @@ function ViewSummary() {
                         </tr>
                     </thead>
                     <tbody>
-                        {recentPL.map(transaction => {
-                            if (transaction.category_id === 1){
+                    {recentPL.map(transaction => {
+                            if (transaction.category_id === 1 && transaction.paid === true){
                                 return <tr key={transaction.id}>
                                     <td>{transaction.date}</td>
                                     <td>{transaction.payee}</td>
                                     <td>{transaction.amount}</td>
-                                    <td></td>
+                                    <td><input type="checkbox" checked readOnly/></td>
                                 </tr>
+                            } else if (transaction.category_id === 1 && transaction.paid === false) {
+                                return <tr key={transaction.id}>
+                                    <td>{transaction.date}</td>
+                                    <td>{transaction.payee}</td>
+                                    <td>{transaction.amount}</td>
+                                    <td><input type="checkbox" disabled/></td>
+                                </tr>                                
                             }
                         })}
                     </tbody>
@@ -84,7 +97,7 @@ function ViewSummary() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Week of 5/1</th>
+                            <th>Most Recent Week</th>
                         </tr>
                         <tr>
                             <th>Expenses</th>
@@ -98,23 +111,37 @@ function ViewSummary() {
                     </thead>
                     <tbody>
                     {recentPL.map(transaction => {
-                            if (transaction.category_id === 2){
+                            if (transaction.category_id === 2 && transaction.paid === true){
                                 return <tr key={transaction.id}>
                                     <td>{transaction.date}</td>
                                     <td>{transaction.payee}</td>
                                     <td>{transaction.amount}</td>
-                                    <td></td>
+                                    <td><input type="checkbox" checked readOnly/></td>
                                 </tr>
+                            } else if (transaction.category_id === 2 && transaction.paid === false) {
+                                return <tr key={transaction.id}>
+                                    <td>{transaction.date}</td>
+                                    <td>{transaction.payee}</td>
+                                    <td>{transaction.amount}</td>
+                                    <td><input type="checkbox" disabled/></td>
+                                </tr>                                
                             }
                         })}
                     </tbody>
                 </table>
             </div>
             <div>
-                <form>
-                    <select>
-                        
+                <form onSubmit={(event) => goToWeek(event)}>
+                    <select
+                        value={weekSelected}
+                        onChange={(event) => setWeekSelected(event.target.value)}
+                    >
+                        <option value=""> -- Click to Select a week!</option>
+                        {weeksDropdown.map(week => (
+                            <option value={week.id}>{week.start_date}</option>
+                        ))}
                     </select>
+                    <button type="submit">Go To Week Details</button>
                 </form>
             </div>
         </div>
