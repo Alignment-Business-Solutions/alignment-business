@@ -17,11 +17,13 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ClientList from '../ClientList/ClientList';
 
 
 import SinglePL from '../SinglePL/SinglePL';
 
 import './App.css';
+import ViewSummary from '../ViewSummary/ViewSummary';
 
 function App() {
   const dispatch = useDispatch();
@@ -60,7 +62,28 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows the Clients View
+            exact
+            path="/clients"
+          >
+            <ClientList />
+          </ProtectedRoute>
 
+          <ProtectedRoute 
+            exact
+            path="/viewsummary"
+          >
+            <ViewSummary />
+          </ProtectedRoute>
+
+          {/* <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/info"
+          >
+            <InfoPage />
+          </ProtectedRoute> */}
           <Route
             exact
             path="/login"
