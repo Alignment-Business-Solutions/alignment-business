@@ -11,11 +11,13 @@ function ViewSummary() {
     const history = useHistory();
 
     const recentPL = useSelector(store => store.recentPL);
+    const weeksDropdown = useSelector(store => store.weeksDropdown)
     const [addClicker, setAddClicker] = useState(false);
     const [start_date, setStartDate] = useState('')
 
     function pageLoad(recentPL) {
         dispatch({ type: 'FETCH_RECENT_PL' })
+        dispatch({ type: 'FETCH_WEEKS_DROPDOWN'})
     }
 
     function submitNewWeek(event) {
@@ -107,6 +109,13 @@ function ViewSummary() {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <form>
+                    <select>
+                        
+                    </select>
+                </form>
             </div>
         </div>
     )
