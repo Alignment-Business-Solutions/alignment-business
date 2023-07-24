@@ -3,7 +3,7 @@
 import TableItem from "./TableItem/TableItem";
 
 
-function Table({weekData}) {
+function Table({weekData, accLevel}) {
 
     return (
         <table>
@@ -13,10 +13,53 @@ function Table({weekData}) {
                 <th>Category</th>
                 <th>Amount</th>
                 <th>Paid?</th>
+                {accLevel !== 0 ? (
+                <>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                </>
+                ) : (<></>)}
             </thead>
-            <tbody>
+            <tbody> 
+                <tr>
+                    <td>Income</td>
+                    <td>Income</td>
+                    <td>Income</td>
+                    <td>Income</td>
+                    <td>Income</td>
+                     {accLevel !== 0 ? (
+                        <>
+                            <td>Income</td>
+                            <td>Income</td>
+                        </>
+                     ) : (<></>)}
+                </tr>
                 {weekData.map(item => (
-                <TableItem key={item.id} item={item}/>
+                    (item.category_id === 1) ? (
+                    <TableItem key={item.id} item={item} accLevel={accLevel}/>
+                    ) : (
+                        <></>
+                    )
+                ))}
+                <tr>
+                    <td>Expense</td>
+                    <td>Expense</td>
+                    <td>Expense</td>
+                    <td>Expense</td>
+                    <td>Expense</td>
+                      {accLevel !== 0 ? (
+                        <>
+                            <td>Expense</td>
+                            <td>Expense</td>
+                        </>
+                     ) : (<></>)}
+                </tr>
+                {weekData.map(item => (
+                    (item.category_id !== 1) ? (
+                    <TableItem key={item.id} item={item} accLevel={accLevel}/>
+                    ) : (
+                        <></>
+                    )
                 ))}
             </tbody>
         </table>
