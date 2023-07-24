@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import MyClients from './clients.reducer';
 import singlePL from './singlePL.reducer.js';
+import recentPL from './recentPL.reducer';
 
 
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   MyClients,
-    singlePL,
+  recentPL,
+  singlePL,
 });
 
 export default rootReducer;
