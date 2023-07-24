@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const clientRouter = require('./routes/client_management.router')
 const singlePLRouter = require('./routes/singlePL.router.js');
 const recentPLRouter = require('./routes/recent_PL.router')
+const createNewWeekRouter = require('./routes/createNewWeek.router')
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +29,7 @@ app.use('/api/user', userRouter);
 app.use('/api/client', clientRouter);
 app.use('/api/recentPL', recentPLRouter);
 app.use('/api/single', singlePLRouter);
+app.use('/api/createNewWeek', createNewWeekRouter);
 // Serve static files
 app.use(express.static('build'));
 
