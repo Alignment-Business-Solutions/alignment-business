@@ -13,3 +13,9 @@ function* fetchMyClients() {
         console.log('Error with MyCLients SAGA ', err)
     }
 }
+
+function* clientsFetch(){
+    yield takeLatest('FETCH_MY_CLIENTS', fetchMyClients)
+}
+
+export default clientsFetch
