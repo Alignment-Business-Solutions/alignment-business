@@ -54,6 +54,7 @@ function Table({weekData, accLevel}) {
                         </>
                      ) : (<></>)}
                 </tr>
+
                 {weekData.map(item => (
                     (item.category_id !== 1) ? (
                     <TableItem key={item.id} item={item} accLevel={accLevel}/>
