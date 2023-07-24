@@ -11,12 +11,18 @@ function ViewSummary() {
     const history = useHistory();
 
     const recentPL = useSelector(store => store.recentPL);
-    let recentIncome = [];
-    let recentExpenses = [];
+    const [addClicker, setAddClicker] = useState(false);
 
     function pageLoad(recentPL) {
         dispatch({ type: 'FETCH_RECENT_PL' })
     }
+
+    function createNewWeek() {
+        console.log('Create New Week Button Clicked!');
+        setAddClicker(true)
+    }
+
+
 
     useEffect(() => {
         pageLoad();
@@ -24,6 +30,14 @@ function ViewSummary() {
 
     return (
         <div>
+            {
+                addClicker ?
+                <form>
+                    <label>Starting Date </label>
+                </form>
+                 :
+                <button onClick={() => createNewWeek()}>Create New Week</button>
+            }
             <div>
                 <table>
                     <thead>
