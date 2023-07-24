@@ -15,7 +15,10 @@ function ClientList() {
   }, []);
 
   const assignClient = () => {
-    
+    dispatch({
+        type: 'ADD_CLIENT',
+        payload: {company_name}
+    })
     console.log("Assigned to Accountant");
   };
 
