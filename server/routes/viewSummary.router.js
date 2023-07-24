@@ -6,9 +6,10 @@ const {
 } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "transactions"."id", "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
-    WHERE "client_id" = 1
-    AND "week_id" = 1
+    const queryText = `SELECT "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
+    WHERE "week_id" = (
+    SELECT MAX("week_id") FROM "transactions" WHERE "client_id" = 1
+    )
     ORDER BY "category_id";`;
     pool.query(queryText)
         .then(result => {
