@@ -28,11 +28,11 @@ function Nav() {
               About Us
             </Link>
           </>
-        ) : (
-          // If a user is logged in, show these links
+        ) : // If CLIENT-LEVEL user is logged in, show these links:
+        user.access_level === 0 ? (
           <>
             <Link className="navLink" to="/user">
-              Home
+              Summary
             </Link>
 
             <Link className="navLink" to="/about">
@@ -40,6 +40,64 @@ function Nav() {
             </Link>
             <Link className="navLink" to="/clients">
               Clients
+            </Link>
+
+            <LogOutButton className="navLink" />
+          </>
+        ) : // If ACCOUNTANT-LEVEL user is logged in, show these links:
+        user.access_level === 1 ? (
+          <>
+            <Link className="navLink" to="/accountant">
+              Accountant Dashboard
+            </Link>
+
+            <Link className="navLink" to="/clients">
+              Clients
+            </Link>
+
+            <Link className="navLink" to="/user">
+              Summary
+            </Link>
+
+            <Link className="navLink" to="/balance">
+              Balance
+            </Link>
+
+            <Link className="navLink" to="/profitloss">
+              P&L
+            </Link>
+
+            <Link className="navLink" to="/cashflow">
+              Cash Flow
+            </Link>
+
+            <LogOutButton className="navLink" />
+          </>
+        ) : (
+          // If ADMIN-LEVEL user is logged in, show these links:
+          <>
+            <Link className="navLink" to="/admin">
+              Admin Dashboard
+            </Link>
+
+            <Link className="navLink" to="/clients">
+              Clients
+            </Link>
+
+            <Link className="navLink" to="/user">
+              Summary
+            </Link>
+
+            <Link className="navLink" to="/balance">
+              Balance
+            </Link>
+
+            <Link className="navLink" to="/profitloss">
+              P&L
+            </Link>
+
+            <Link className="navLink" to="/cashflow">
+              Cash Flow
             </Link>
 
             <LogOutButton className="navLink" />
