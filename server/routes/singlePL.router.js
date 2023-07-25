@@ -30,7 +30,31 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // POST route code here
+    console.log(req.body);
+    
+    const item = req.body;
+    const queryText = `
+        INSERT INTO "transactions"
+        ("date", "payee", "amount", "paid", "client_id", "week_id", "category_id")
+        VALUES( $1, $2, $3, $4, $5, $6, $7 );`;
+    const values = [
+        item.date,
+        item.payee,
+        item.amount,
+        item.paid,
+        item.client_id,
+        item.week_id,
+        item.category_id
+    ];
+    
+    pool.query(queryText, values)
+    .then(results => {
+        console.log('success createing item', results.command);
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('error with query', queryText, "error", error);
+        res.sendStatus(500);
+    });
 });
 
 router.put('/:id', (req, res) => {

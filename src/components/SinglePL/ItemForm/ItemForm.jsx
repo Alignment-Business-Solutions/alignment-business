@@ -9,7 +9,9 @@ function ItemForm({categories}) {
                                     payee: String,
                                     category_id: 0,
                                     amount: "$0.00",
-                                    paid: false
+                                    paid: false,
+                                    week_id: 1,
+                                    client_id: 1,
                                         });
     const [cat, setCat] = useState('');
     const dispatch = useDispatch();
@@ -35,11 +37,9 @@ function ItemForm({categories}) {
         }
     }
 
-    function handleSubmit() {
-        dispatch({});
-
-
-
+    function handleSubmit(event) {
+        event.preventDefault(); 
+        dispatch({type:"POST_ITEM", payload: item});
     }
 
     function findCatName() {
