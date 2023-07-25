@@ -8,6 +8,8 @@ import fetchRecentSaga from './fetch_recent_pl.saga';
 import myClientsSaga from './myClients.saga'
 import submitNewWeekSaga from './createNewWeek.saga';
 import addClientSaga from './addClient.saga';
+import fetchWeeksDropdownSaga from './fetchWeeksDropdown.saga';
+import categoriesSaga from './categories.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +29,8 @@ export default function* rootSaga() {
     myClientsSaga(),
     submitNewWeekSaga(),
     addClientSaga(),
+    fetchWeeksDropdownSaga(),
+    categoriesSaga(),
+    
   ]);
 }
