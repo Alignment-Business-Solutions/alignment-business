@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import SinglePLMultiView from "./MultiPL/SinglePL(inMulti)";
 
 function AllPL() {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const allPL = useSelector(store => store.allWeeks);
+    const allWeeks = useSelector(store => store.allWeeks);
+    const allPL = useSelector(store => store.allPL)
 
-
+    // function pageLoad(allWeeks) {
+    //     console.log('in pageLoad function!');
+    //     allWeeks.forEach(week => {
+    //         dispatch({type:"ADD_TO_ALLPL", payload: {week: week.id, client: client}}); 
+    //     });
+    // };
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_WEEKS' });
+        // pageLoad(allPL)
     }, []);
 
 
@@ -21,23 +29,15 @@ function AllPL() {
             <h2>All Weeks Profits & Loss</h2>
 
             <div>
-                {allPL.map((week, i) => (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Payee</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>Paid?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                ))}
+                {allWeeks.map((week, i) => (
+                    <SinglePLMultiView week = {week} client = {1} />
+))}
             </div>
+            {/* <div>
+                {allPL.map((week, i) => (
+                    <SinglePLMultiView week = {week} client = {1} />
+))}
+            </div> */}
         </div>
     )
 }

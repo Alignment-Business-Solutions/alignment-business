@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
         const week = req.query.week/1;
         const client_id = req.query.client/1;
         const user_id = req.user.id;
+        console.log( 'req.query.week is:', req.query.week);
         console.log('accountant user_id', user_id);
         console.log('week', week);
         console.log('client_id', client_id);

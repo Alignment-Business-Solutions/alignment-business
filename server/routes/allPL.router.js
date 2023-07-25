@@ -9,9 +9,7 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "date", "payee", "amount", "paid", "category_id", "start_date", "week_id" FROM "transactions"
-    JOIN "weeks" ON "weeks"."id" = "transactions"."week_id" 
-    ORDER BY "week_id";`;
+    const queryText = `SELECT "weeks"."id" FROM "weeks";`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);

@@ -7,7 +7,7 @@ import recentPL from './recentPL.reducer';
 import myClients from './myClients.reducer'
 import weeksDropdown from './weeksDropdown.reducer';
 import allWeeks from './allWeeks.reducer';
-
+import allPL from './allPL.reducer';
 import categories from './categories.reducer.js';
 
 // rootReducer is the primary reducer for our entire project
@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
   myClients,
   weeksDropdown,
   allWeeks,
-
+  allPL,
   
   categories,
 

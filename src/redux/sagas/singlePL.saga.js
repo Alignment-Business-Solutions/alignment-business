@@ -1,15 +1,30 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 
 
 function* fetchWeekData(action) {
     const params = {week: action.payload.week, client: action.payload.client};
+    console.log( 'action.payload is:', action.payload);
     try {        
         const resultCats = yield axios.get('/api/cat');
         yield put({type:"SET_CAT", payload: resultCats.data});
         const results = yield axios.get(`/api/single`, {params});
         yield put({type:"SET_WEEK_DATA", payload:results.data}); 
+    }
+    catch {
+        console.log('error with fetching week data from  server');
+    }
+}
+
+function* addToAllPL(action) {
+    const params = {week: action.payload.week, client: action.payload.client};
+    console.log( 'action.payload is:', action.payload);
+    try {        
+        const resultCats = yield axios.get('/api/cat');
+        yield put({type:"SET_CAT", payload: resultCats.data});
+        const results = yield axios.get(`/api/single`, {params});
+        yield put({type:"SET_ALLPL", payload: results.data}); 
     }
     catch {
         console.log('error with fetching week data from  server');
@@ -53,11 +68,11 @@ function* postItemData(action) {
 }
 
 function* singlePLSaga() {
-    yield takeLatest("FETCH_WEEK", fetchWeekData);
+    yield takeEvery("FETCH_WEEK", fetchWeekData);
     yield takeLatest("UPDATE_ITEM", updateItemData);
     yield takeLatest("DELETE_ITEM", deleteItemData);
     yield takeLatest("POST_ITEM", postItemData);
-
+    yield takeLatest("ADD_TO_ALLPL", addToAllPL);
 }
 
 export default singlePLSaga;
