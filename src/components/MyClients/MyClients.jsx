@@ -34,9 +34,12 @@ function MyClients() {
                 <h2>Accountants's Clients</h2>
             <ul>
                 {myClients && myClients.map((oneClient, i) => (
+                    <>
                     <li key={i}> {oneClient.company_name}</li>
-                ))}
-                <button onClick={removeClient(myClients.id)}>❌</button>
+                    
+                    <button onClick={() => removeClient(oneClient.id)}>❌</button>
+                </>))}
+                
             </ul>
             <button onClick={goClients}>Clients</button>
         </div>)
