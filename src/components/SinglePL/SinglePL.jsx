@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
-
+import ImportCSV from "./ImportCSV/ImportCSV";
 
 function SinglePL() {
 
@@ -24,7 +24,7 @@ function SinglePL() {
 
     return (
         <>
-
+        <ImportCSV />
         <ItemForm categories={categories}/> 
         <button onClick={showForm}>Create New Item</button>
 
