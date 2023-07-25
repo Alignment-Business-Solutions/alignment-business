@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 
 
 function TableItem({item, accLevel, categories}) { 
+    
     const [editToggleValue, setEditToggleValue] = useState(false);
     const [itemEd, setItemEd] = useState(item);
     const dispatch = useDispatch();
-    
+    const [cat, setCat] = useState(''); 
+
     function editToggle() {
         if(editToggleValue) {
             console.log('save');
@@ -24,7 +26,6 @@ function TableItem({item, accLevel, categories}) {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
                                                 week: 1,
                                                 client: 1}});
-
     }
 
     function handleChange(type, change) {
@@ -36,7 +37,7 @@ function TableItem({item, accLevel, categories}) {
             case "payee":
                 setItemEd({...itemEd, payee: change});
                 break
-            case "category":
+            case "cat":
                 setItemEd({...itemEd, category_id: change});
                 break
             case "amount":
@@ -48,16 +49,25 @@ function TableItem({item, accLevel, categories}) {
         }
     }
 
+    function findCatName() {
+        for (let cat of categories) {
+            if ( cat.id === itemEd.category_id) {
+                setCat(cat.category);
+            }
+        }
+    }
+
     useEffect(() => {
         let date = item.date
         date = date.slice(0, 10);
         setItemEd({...itemEd, date: date});
+        findCatName();
     }, []);
 
     return (
         (editToggleValue) ? (
         <>
-        <tr key={item.id}>
+        <tr key={itemEd.id}>
             <td>
                 <input
                     type="date"
@@ -73,10 +83,10 @@ function TableItem({item, accLevel, categories}) {
                 />
             </td>
             <td>
-                <select>
-                    <option value={itemEd.category_id}>{categories[itemEd.category_id-1].category}</option>
-                    {categories.map(cat => (
-                        <option value={cat.id+1}>{cat.category}</option>
+                <select onChange={(e)=>handleChange("cat", e.target.value)}>
+                    <option value={itemEd.category_id}>{cat}</option>
+                    {categories && categories.map((cat, i) => (
+                        <option key={i} value={cat.id}>{cat.category}</option>
                     ))}
                 </select>
             </td>

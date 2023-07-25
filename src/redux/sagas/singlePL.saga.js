@@ -5,9 +5,11 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchWeekData(action) {
     const params = {week: action.payload.week, client: action.payload.client};
-    try {
+    try {        
+        const resultCats = yield axios.get('/api/cat');
+        yield put({type:"SET_CAT", payload: resultCats.data});
         const results = yield axios.get(`/api/single`, {params});
-        yield put({type:"SET_WEEK_DATA", payload:results.data});
+        yield put({type:"SET_WEEK_DATA", payload:results.data}); 
     }
     catch {
         console.log('error with fetching week data from  server');

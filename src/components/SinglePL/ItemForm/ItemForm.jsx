@@ -8,7 +8,7 @@ function ItemForm({categories}) {
             <fieldset>
                 <legend>Add Transaction</legend>
 
-                <label htmlFor="inputOne">Date</label>
+                <lable htmlFor="inputOne">Date</lable>
                 <input 
                     name="inputOne"
                     type="date"
@@ -23,8 +23,8 @@ function ItemForm({categories}) {
                 <lable htmlFor="inputThree-select">Category</lable>
                 <select htmlFor="inputThree">
                     <option></option>
-                    {categories.map(cat => (
-                        <option value={cat.id+1}>{cat.category}</option>
+                    {categories.map((cat, i) => (
+                        <option value={cat.id+1} key={i} >{cat.category} </option>
                     ))}
                 </select>
 

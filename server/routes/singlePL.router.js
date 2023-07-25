@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         console.log('accountant user_id', user_id);
         console.log('week', week);
         console.log('client_id', client_id);
-        const query_text =  `SELECT * FROM transactions WHERE client_id = $1 and week_id = $2 ORDER BY date ASC;`; 
+        const query_text =  `SELECT * FROM transactions WHERE client_id = $1 and week_id = $2 ORDER BY id ASC;`; 
         
         pool.query(query_text, [client_id, week])
         .then(results => {

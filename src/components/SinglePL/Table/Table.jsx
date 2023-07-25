@@ -8,17 +8,19 @@ function Table({weekData, accLevel, categories}) {
     return (
         <table>
             <thead>
-                <th>Date</th>
-                <th>Payee</th>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Paid?</th>
-                {accLevel !== 0 ? (
-                <>
-                    <th>Edit</th>
-                    <th>Remove</th>
-                </>
-                ) : (<></>)}
+                <tr>
+                    <th>Date</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Paid?</th>
+                    {accLevel !== 0 ? (
+                    <>
+                        <th>Edit</th>
+                        <th>Remove</th>
+                    </>
+                    ) : (<></>)}
+                </tr> 
             </thead>
             <tbody> 
                 <tr>
@@ -36,7 +38,7 @@ function Table({weekData, accLevel, categories}) {
                 </tr>
                 {weekData.map(item => (
                     (item.category_id === 1) ? (
-                    <TableItem key={item.id} item={item} accLevel={accLevel} categories={categories}/>
+                    <TableItem item={item} accLevel={accLevel} categories={categories}/>
                     ) : (
                         <></>
                     )
@@ -57,7 +59,7 @@ function Table({weekData, accLevel, categories}) {
 
                 {weekData.map(item => (
                     (item.category_id !== 1) ? (
-                    <TableItem key={item.id} item={item} accLevel={accLevel} categories={categories}/>
+                    <TableItem item={item} accLevel={accLevel} categories={categories}/>
                     ) : (
                         <></>
                     )
