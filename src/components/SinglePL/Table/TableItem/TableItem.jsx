@@ -22,6 +22,7 @@ function TableItem({item, accLevel, categories}) {
             setEditToggleValue(!editToggleValue);
         }
     }
+    //figure out why delete isn't working consecutively
     function deleteItem() {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
                                                 week: 1,
@@ -131,7 +132,7 @@ function TableItem({item, accLevel, categories}) {
                     readOnly
                 />
             </td>
-            <td>{categories && categories[itemEd.category_id-1].category}</td>
+            <td>{cat}</td>
             <td>
                 <input
                     type="text"

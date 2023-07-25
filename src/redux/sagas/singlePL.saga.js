@@ -42,11 +42,21 @@ function* deleteItemData(action) {
     }
 }
 
+function* postItemData(action) {
+    const item = action.payload;
+    try {
+        yield axios.post(`/api/single`, item);
+    }
+    catch {
+        console.log('error with deleting item data on server');
+    }
+}
+
 function* singlePLSaga() {
     yield takeLatest("FETCH_WEEK", fetchWeekData);
     yield takeLatest("UPDATE_ITEM", updateItemData);
     yield takeLatest("DELETE_ITEM", deleteItemData);
-
+    yield takeLatest("POST_ITEM", postItemData);
 
 }
 
