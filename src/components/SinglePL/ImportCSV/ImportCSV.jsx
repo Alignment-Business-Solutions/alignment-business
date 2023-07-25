@@ -1,14 +1,12 @@
-
-
+import { useState } from "react";
 
 function ImportCSV() {
-
-    function cscsvcccv(file) {
-        console.log(file); 
+    
+    function cscsvcccv() {
     }
     
     return (
-        <input type="file" id="myfile" name="myfile"/>
+        <input type="file" id="myfile" name="myfile" onChange={cscsvcccv}/>
     );
 
 
