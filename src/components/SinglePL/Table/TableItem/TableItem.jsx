@@ -131,7 +131,7 @@ function TableItem({item, accLevel, categories}) {
                     readOnly
                 />
             </td>
-            <td>{categories && categories[itemEd.category_id-1].category}</td>
+            <td>{cat}</td>
             <td>
                 <input
                     type="text"
