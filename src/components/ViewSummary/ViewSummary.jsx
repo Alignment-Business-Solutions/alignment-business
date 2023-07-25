@@ -138,7 +138,7 @@ function ViewSummary() {
                     >
                         <option value=""> -- Click to Select a week!</option>
                         {weeksDropdown.map(week => (
-                            <option value={week.id}>{week.start_date}</option>
+                            <option key={week.id} value={week.id}>{week.start_date}</option>
                         ))}
                     </select>
                     <button type="submit">Go To Week Details</button>

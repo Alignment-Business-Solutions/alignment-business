@@ -20,7 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ClientList from '../ClientList/ClientList';
 import MyClients from '../MyClients/MyClients';
 
-
+import MultiPL from '../MultiPL/MultiPL';
 import SinglePL from '../SinglePL/SinglePL';
 
 import './App.css';
@@ -86,13 +86,13 @@ function App() {
             <ViewSummary />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+          <ProtectedRoute
             exact
-            path="/info"
+            path="/allPL"
           >
-            <InfoPage />
-          </ProtectedRoute> */}
+            <MultiPL />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
