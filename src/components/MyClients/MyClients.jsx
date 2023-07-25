@@ -18,6 +18,16 @@ function MyClients() {
   const goClients = () => {
     history.push('/clients')
   }
+   
+  const removeClient = () => {
+  
+        dispatch({
+            type: 'REMOVE_CLIENT',
+            payload: {client_id}
+        })
+        console.log("Assigned to Accountant");
+      
+  }
 
         return (
             <div>
@@ -26,6 +36,7 @@ function MyClients() {
                 {myClients && myClients.map((oneClient, i) => (
                     <li key={i}> {oneClient.company_name}</li>
                 ))}
+                <button onClick={removeClient}>❌</button>
             </ul>
             <button onClick={goClients}>Clients</button>
         </div>)
