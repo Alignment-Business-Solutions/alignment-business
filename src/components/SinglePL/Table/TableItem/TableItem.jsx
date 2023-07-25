@@ -22,6 +22,7 @@ function TableItem({item, accLevel, categories}) {
             setEditToggleValue(!editToggleValue);
         }
     }
+    //figure out why delete isn't working consecutively
     function deleteItem() {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
                                                 week: 1,
