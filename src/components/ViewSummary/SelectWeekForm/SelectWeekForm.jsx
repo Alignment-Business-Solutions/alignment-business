@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function SelectWeekForm() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const weeksDropdown = useSelector(store => store.weeksDropdown)
     const [weekSelected, setWeekSelected] = useState(0)
 
     function goToWeek(event) {
         event.preventDefault();
-        dispatch({ type: 'FETCH_WEEK', payload: weekSelected})
+        console.log('weekSelected is:', weekSelected);
+        dispatch({ type: 'FETCH_WEEK', payload: weekSelected});
+        history.push('/one');
     }
 
     return (

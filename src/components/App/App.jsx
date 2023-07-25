@@ -20,7 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ClientList from '../ClientList/ClientList';
 import MyClients from '../MyClients/MyClients';
 
-import MultiPL from '../MultiPL/MultiPL';
+import MultiPL from '../AllPL/AllPL';
 import SinglePL from '../SinglePL/SinglePL';
 
 import './App.css';

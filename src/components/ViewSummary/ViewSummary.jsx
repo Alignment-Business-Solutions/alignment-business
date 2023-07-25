@@ -1,8 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useState } from "react";
 
 import AddWeekForm from "./AddWeekForm/AddWeekForm";
 import RecentPLTable from "./RecentPLTable/RecentPLTable";
