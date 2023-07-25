@@ -20,7 +20,7 @@ const AddAccountant = ({ isOpen, onRequestClose, onAdd }) => {
       <button type="button" onClick={onRequestClose}>
         X
       </button>
-      <h2>Add Accountant</h2>
+      <h2>New Accountant</h2>
       <form>
         <div>
           <label>
@@ -78,7 +78,7 @@ export default AddAccountant;
 // <div>
 //   {/* Conditionally render the button if access_level is 2 */}
 //   {user.access_level === 2 && (
-//     <button onClick={handleOpenModal}>Add Accountant</button>
+//     <button onClick={handleOpenModal}>New Accountant</button>
 //   )}
 
 //   {/* The AddAccountant modal */}
