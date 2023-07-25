@@ -71,17 +71,20 @@ export default AddAccountant;
 //   console.log(accountantData);
 // };
 
-
 // PUT IN RETURN:
 
-// <div>
-// {/* Button to open the AddAccountant modal */}
-// <button onClick={handleOpenModal}>Add Accountant</button>
+// IMPORT USER FROM REDUCER IN ORDER TO GET ACCESS LEVEL
 
-// {/* The AddAccountant modal */}
-// <AddAccountant
-//   isOpen={showModal}
-//   onRequestClose={handleCloseModal}
-//   onAdd={handleAddAccountant}
-// />
+// <div>
+//   {/* Conditionally render the button if access_level is 2 */}
+//   {user.access_level === 2 && (
+//     <button onClick={handleOpenModal}>Add Accountant</button>
+//   )}
+
+//   {/* The AddAccountant modal */}
+//   <AddAccountant
+//     isOpen={showModal}
+//     onRequestClose={handleCloseModal}
+//     onAdd={handleAddAccountant}
+//   />
 // </div>
