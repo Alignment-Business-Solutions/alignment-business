@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/myClients', (req,res) => {
     // GET route code here
-    pool.query(`SELECT * FROM client JOIN accountants 
+    pool.query(`SELECT "client"."id" AS "client_id", * FROM client JOIN accountants 
     ON client.accountant_id = accountants.id
    WHERE accountant_id = $1;` , [req.user.id])
     .then(result => {
@@ -51,15 +51,30 @@ router.put('/add', (req, res) => {
         res.sendStatus(500)
       })
       
-    //   .then(result => {
-    //     res.sendStatus(201)
-    //   })
-    //   .catch(err => {
-    //     console.log('Error SERVER UPDATING CLIENT LIST===>', err)
-    //     res.sendStatus(500)
-    //   })
+  
 
 });
+
+router.put('/remove', (req, res) => {
+    console.log('OUR REQ.BODY',req.body)
+      // PUT route code here
+      // protect route at some point
+const sqlText =  `UPDATE client SET "accountant_id" = NULL
+      WHERE "id" = $1`;
+const sqlValues = [req.body.client_id];
+      pool.query(sqlText,sqlValues)
+      .then(result => {
+        res.sendStatus(201)
+      }).catch(err => {
+        console.log('Error with CLIENT PUT', err)
+        res.sendStatus(500)
+      })
+      
+  
+
+});
+//UPDATE client SET "accountant_id" = null 
+//WHERE client.id = 1;
 
 router.delete('/', (req, res) => {
     // DELETE route code here

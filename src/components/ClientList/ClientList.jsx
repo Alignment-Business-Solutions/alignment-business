@@ -33,7 +33,12 @@ function ClientList() {
         <ul>
           {allClients.map((client, i) => (
             <li key={i}>
-              <ClientListItem client={client} assignClient={assignClient} />
+                {client.accountant_id == null ? (
+                        <ClientListItem client={client} assignClient={assignClient} />
+                ) : (
+                    <p>Assigned!</p>
+                )}
+          
             </li>
           ))}
         </ul>
