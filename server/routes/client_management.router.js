@@ -59,7 +59,7 @@ router.put('/remove', (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here
       // protect route at some point
-const sqlText =  `UPDATE client SET "accountant_id" = null
+const sqlText =  `UPDATE client SET "accountant_id" = NULL
       WHERE client."id" = $1 AND "accountant_id" = $2`;
 const sqlValues = [req.body.client_id, req.user.id];
       pool.query(sqlText,sqlValues)
