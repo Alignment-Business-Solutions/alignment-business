@@ -10,6 +10,12 @@ function* removeClient(action) {
             type: 'FETCH_MY_CLIENTS'
         })
     } catch(err) {
-        console.log('Error with Add Client PUT saga', err)
+        console.log('Error with REMOVE Client PUT saga', err)
     }
 }
+
+function* removeClientSaga(){
+    yield takeLatest('REMOVE_CLIENT', removeClient)
+}
+
+export default removeClientSaga
