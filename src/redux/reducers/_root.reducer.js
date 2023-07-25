@@ -7,6 +7,7 @@ import recentPL from './recentPL.reducer';
 import myClients from './myClients.reducer'
 import weeksDropdown from './weeksDropdown.reducer';
 import categories from './categories.reducer.js';
+import importData from './importData.reducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   myClients,
   weeksDropdown,
   categories,
+  importData,
 
 });
 

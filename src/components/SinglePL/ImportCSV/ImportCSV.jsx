@@ -1,22 +1,38 @@
-import { useState } from "react";
+import { useCSVReader } from 'react-papaparse';
+import { useDispatch } from 'react-redux';
 
 function ImportCSV() {
-    
-    function cscsvcccv() {
-    }
-    
+    const { CSVReader } = useCSVReader();
+    const dispatch = useDispatch();
+
     return (
-        <input type="file" id="myfile" name="myfile" onChange={cscsvcccv}/>
+        <CSVReader
+            config={{header: true}} 
+            onUploadAccepted={(results: any) => {
+                console.log(results);
+                dispatch({type:"IMPORT_DATA", payload: results.data});
+            }}
+        >
+          {({
+            getRootProps,
+            acceptedFile,
+            getRemoveFileProps,
+          }: any) => (
+            <>
+              <div>
+                <button type='button' {...getRootProps()}>
+                  Browse file
+                </button>
+                <div>
+                  {acceptedFile && acceptedFile.name}
+                </div>
+                <button {...getRemoveFileProps()} >
+                  Remove
+                </button>
+              </div>
+            </>
+          )}
+        </CSVReader>
     );
-
-
-
 }
-
 export default ImportCSV;
-
-
-
-
-
-

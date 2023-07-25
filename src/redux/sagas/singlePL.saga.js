@@ -52,12 +52,26 @@ function* postItemData(action) {
     }
 }
 
+function* handleImportData(action) {
+    const importData = action.payload;
+    const transformedData = [];
+    for (let item of importData) {
+        console.log(item);
+    }
+
+
+
+}
+
+
+
+
 function* singlePLSaga() {
     yield takeLatest("FETCH_WEEK", fetchWeekData);
     yield takeLatest("UPDATE_ITEM", updateItemData);
     yield takeLatest("DELETE_ITEM", deleteItemData);
     yield takeLatest("POST_ITEM", postItemData);
-
+    yield takeLatest("IMPORT_DATA", handleImportData);
 }
 
 export default singlePLSaga;

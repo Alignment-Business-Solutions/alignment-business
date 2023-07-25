@@ -11,6 +11,7 @@ function SinglePL() {
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
+    const importData = useSelector(store => store.importData); 
     const [formVis, setFormVis] = useState(false);
 
     function showForm() {
