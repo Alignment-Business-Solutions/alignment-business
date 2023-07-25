@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/myClients', (req,res) => {
     // GET route code here
-    pool.query(`SELECT * FROM client JOIN accountants 
+    pool.query(`SELECT "client"."id" AS "client_id", * FROM client JOIN accountants 
     ON client.accountant_id = accountants.id
    WHERE accountant_id = $1;` , [req.user.id])
     .then(result => {
@@ -60,8 +60,8 @@ router.put('/remove', (req, res) => {
       // PUT route code here
       // protect route at some point
 const sqlText =  `UPDATE client SET "accountant_id" = NULL
-      WHERE client."id" = $1 AND "accountant_id" = $2`;
-const sqlValues = [req.body.client_id, req.user.id];
+      WHERE "id" = $1`;
+const sqlValues = [req.body.client_id];
       pool.query(sqlText,sqlValues)
       .then(result => {
         res.sendStatus(201)

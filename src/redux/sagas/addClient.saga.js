@@ -6,8 +6,8 @@ function* addClient(action) {
     try{
         console.log('PUT Add Client action.payload ===>', action.payload)
         yield axios.put('/api/client/add', action.payload)
-        yield ({
-            type: 'FETCH_MY_CLIENTS'
+        yield put({
+            type: 'FETCH_ALL_CLIENTS'
         })
     } catch(err) {
         console.log('Error with Add Client PUT saga', err)
