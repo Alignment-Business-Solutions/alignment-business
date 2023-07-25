@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-function ClientRegisterForm({ username, setUsername, password, setPassword }) {
-  const [companyName, setCompanyName] = useState("");
+function ClientRegisterForm({ username, setUsername, password, setPassword, companyName, setCompanyName }) {
   return (
     <>
       <h3>Client Registration:</h3>
