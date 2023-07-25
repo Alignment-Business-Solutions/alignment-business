@@ -3,12 +3,13 @@ import { useState } from "react";
 function AccountantRegisterForm({
   username,
   password,
+  firstName,
+  lastName,
   setUsername,
   setPassword,
+  setFirstName,
+  setLastName,
 }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  // Add your accountant-specific form fields here
   return (
     <>
       <h3>Accountant Registration:</h3>
