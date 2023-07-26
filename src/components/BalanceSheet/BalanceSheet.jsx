@@ -3,9 +3,12 @@ import {useDispatch, useSelector} from 'react-redux'
 
 function BalanceSheet(){
 
+    const dispatch = useDispatch();
+    const balance = useSelector((store) => store.balance);
+
     return (
         <>
-        <p> Under Construction </p>
+    
         
         <table id='table'>
   <thead>
