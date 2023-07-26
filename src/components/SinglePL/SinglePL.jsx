@@ -39,7 +39,9 @@ function SinglePL() {
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>           
+            {formVis ? (
             <ItemForm categories={categories}/> 
+                ) : (<></>)} 
             <button onClick={showForm}>Create New Item</button>
                 <p>     </p>
                 <p>     </p>
