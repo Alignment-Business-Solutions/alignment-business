@@ -281,7 +281,7 @@ function TableItem({item, accLevel, categories, tableType}) {
                 />
                 
             </td>
-            {accLevel !== 0 ? (
+            {accLevel !== 0 && match === false ? (
             <>
                 <td><button onClick={editToggleTwo}>Edit</button></td>
                 <td><button onClick={addItem}>Add</button></td>
