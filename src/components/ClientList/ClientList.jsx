@@ -42,7 +42,7 @@ function ClientList() {
   const handleAddAccountant = (accountantData) => {
     // Send a POST request to your server with the accountantData
     axios
-      .post('/api/client/accountant', {
+      .post('/api/client/createaccountant', {
         first_name: accountantData.firstName,
         last_name: accountantData.lastName,
       })
