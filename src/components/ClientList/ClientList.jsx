@@ -62,7 +62,7 @@ function ClientList() {
         ) : (
           <p>There are no clients available at this time.</p>
         )}
-        <button onClick={goToMyClients}>Accountant's Clients</button>
+        <button onClick={goToMyClients}>My Clients</button>
       </div>
       <div>
         {/* Conditionally render the button if access_level is 2 */}
