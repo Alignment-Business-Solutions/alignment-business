@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ClientListItem from "../ClientListItem/ClientListItem";
 import AddAccountant from "../AddAccountant/AddAccountant";
+import axios from "axios";
 
 function ClientList() {
   const dispatch = useDispatch();
@@ -39,8 +40,23 @@ function ClientList() {
   };
 
   const handleAddAccountant = (accountantData) => {
-    // Handle the data sent from the AddAccountant modal
-    console.log(accountantData);
+    // Send a POST request to your server with the accountantData
+    axios
+      .post('/api/client/accountant', {
+        first_name: accountantData.firstName,
+        last_name: accountantData.lastName,
+      })
+      .then((response) => {
+        console.log('Accountant added successfully:', response.data);
+        // You can perform any additional actions here if needed
+      })
+      .catch((error) => {
+        console.error('Error adding accountant:', error);
+        // Handle errors if necessary
+      });
+
+    // Close the modal after sending the request
+    handleCloseModal();
   };
 
   return (
