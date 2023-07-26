@@ -22,7 +22,7 @@ router.get('/', (req,res) => {
     // GET route code here
     pool.query(`SELECT * FROM client` )
     .then(result => {
-        console.log('clientRouter GET result ==> ', result.rows)
+        console.log('clientRouter GET result for Client ==> ', result.rows)
         res.send(result.rows)
     }).catch( err => {
         console.log('Error with ClientRouter GET', err)
