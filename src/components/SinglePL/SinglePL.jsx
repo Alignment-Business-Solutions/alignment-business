@@ -25,10 +25,18 @@ function SinglePL() {
 
     return (
         <>
-        <ImportCSV week_id={1} client_id={1}/>
-        <ItemForm categories={categories}/> 
-        <button onClick={showForm}>Create New Item</button>
-
+            <h1>IMPORT ONLY SUPPORTS CSV FROM QUICKBOOKS</h1>
+            <ImportCSV week_id={1} client_id={1}/>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+            <ItemForm categories={categories}/> 
+            <button onClick={showForm}>Create New Item</button>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
             <Table 
                 weekData={weekData}
                 accLevel={user.access_level}
