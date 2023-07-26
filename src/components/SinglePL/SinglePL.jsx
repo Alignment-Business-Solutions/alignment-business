@@ -12,7 +12,8 @@ function SinglePL() {
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
-    const importData = useSelector(store => store.importData); 
+    const importQBData = useSelector(store => store.importQBData); 
+    const importRegData = useSelector(store => store.importRegData); 
     const [formVis, setFormVis] = useState(false);
 
     function showForm() {
@@ -49,9 +50,15 @@ function SinglePL() {
                 accLevel={user.access_level}
                 categories={categories}
             />
-            <h1> IMPORTED DATA </h1>
+            <h1> IMPORTED QUICK BOOKS DATA </h1>
             <Table
-                weekData={importData}
+                weekData={importQBData}
+                accLevel={user.access_level}
+                categories={categories}
+            />
+            <h1> IMPORTED REGISTER DATA </h1>
+            <Table
+                weekData={importRegData}
                 accLevel={user.access_level}
                 categories={categories}
             />
