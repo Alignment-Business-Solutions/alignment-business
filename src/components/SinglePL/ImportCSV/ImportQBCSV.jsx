@@ -10,7 +10,7 @@ function ImportQBCSV({week_id, client_id}) {
             config={{header: true}} 
             onUploadAccepted={(results: any) => {
                 console.log(results);
-                dispatch({type:"IMPORT_DATA", payload:{data: results.data,
+                dispatch({type:"IMPORT_QB_DATA", payload:{data: results.data,
                                                        week_id: week_id,
                                                        client_id: client_id}});
             }}

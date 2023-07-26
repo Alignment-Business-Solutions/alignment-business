@@ -67,7 +67,7 @@ function* postItemData(action) {
     }
 }
 
-function* handleImportData(action) {
+function* handleImportQBData(action) {
     const importData = action.payload.data;
     const week_id = action.payload.week_id;
     const client_id = action.payload.client_id;
@@ -165,7 +165,7 @@ function* singlePLSaga() {
     yield takeLatest("DELETE_ITEM", deleteItemData);
     yield takeLatest("POST_ITEM", postItemData);
     yield takeLatest("ADD_TO_ALLPL", addToAllPL);
-    yield takeLatest("IMPORT_DATA", handleImportData);
+    yield takeLatest("IMPORT_QB_DATA", handleImportQBData);
     yield takeLatest("IMPORT_REG_DATA", handleImportRegData);
 
 }
