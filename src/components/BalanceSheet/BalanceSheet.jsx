@@ -6,6 +6,11 @@ function BalanceSheet(){
     const dispatch = useDispatch();
     const balance = useSelector((store) => store.balance);
 
+    useEffect(() => {
+        dispatch({
+          type: "FETCH_BALANCE",
+        });
+      }, []);
     return (
         <>
     
