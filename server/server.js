@@ -13,6 +13,7 @@ const clientRouter = require('./routes/client_management.router')
 const singlePLRouter = require('./routes/singlePL.router.js');
 const viewSummary = require('./routes/viewSummary.router');
 const catRouter = require('./routes/categories.router.js');
+const balanceRouter = require('./routes/balance.router');
 
 // const createNewWeekRouter = require('./routes/createNewWeek.router')
 // Body parser middleware
@@ -32,6 +33,7 @@ app.use('/api/client', clientRouter);
 app.use('/api/viewSummary', viewSummary);
 app.use('/api/single', singlePLRouter);
 app.use('/api/cat', catRouter);
+app.use('/api/balance', balanceRouter);
 
 // app.use('/api/createNewWeek', createNewWeekRouter);
 // Serve static files
