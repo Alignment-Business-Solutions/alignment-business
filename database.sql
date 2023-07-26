@@ -88,3 +88,10 @@ INSERT INTO "transactions" ("date", "payee", "amount", "paid", "client_id", "wee
 	('2023-05-01', 'Clickup', '14.17', 'true', '1', '1', '2'),
 	('2023-05-01', 'Clickup', '18.13', 'true', '1', '1', '2');
 
+-- Balance Sheet Queries
+-- There is a query to create the table and an Insert statement that
+-- Will add some dummy data. You will need to to run the update queries 
+-- to see the 'ending_balance_actual' and 'ending_balance_cleared'
+
+
+
