@@ -9,6 +9,7 @@ import weeksDropdown from './weeksDropdown.reducer';
 import categories from './categories.reducer.js';
 import importQBData from './importQBData.reducer.js';
 import importRegData from './importRegData.reducer.js';
+import balance from './balance.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -28,7 +29,7 @@ const rootReducer = combineReducers({
   categories,
   importQBData,
   importRegData,
-
+  balance,
 
 });
 
