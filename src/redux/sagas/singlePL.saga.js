@@ -59,26 +59,31 @@ function* handleImportData(action) {
     const transformedData = [];
     
     for (let item of importData) {
-        console.log(item); 
+        // console.log(item);
+        const date = new Date(item.DATE);
+        const newDate = date.toISOString();
+        // console.log(newDate);
         if (item.SPENT !== "") { 
             transformedData.push({
                     amount: item.SPENT,
                     category_id: 2,
                     client_id: client_id,
-                    date: item.DATE,
+                    date: newDate,
                     paid: true,
                     payee: item.Payee,
-                    week_id: week_id
+                    week_id: week_id,
+                    id: undefined
             });
         } else {
             transformedData.push({
                     amount: item.RECEIVED,
                     category_id: 1,
                     client_id: client_id,
-                    date: item.DATE,
+                    date: newDate,
                     paid: true,
                     payee: item.Payee,
-                    week_id: week_id
+                    week_id: week_id,
+                    id: undefined
             });
         }
     }

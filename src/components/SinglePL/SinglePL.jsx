@@ -33,7 +33,13 @@ function SinglePL() {
                 weekData={weekData}
                 accLevel={user.access_level}
                 categories={categories}
-            />         
+            />
+            <h1> IMPORTED DATA </h1>
+            <Table
+                weekData={importData}
+                accLevel={user.access_level}
+                categories={categories}
+            />
         </>
     );
 
