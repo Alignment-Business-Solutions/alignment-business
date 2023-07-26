@@ -38,6 +38,13 @@ function AllPL() {
                     <SinglePLMultiView week = {week} client = {1} />
 ))}
             </div> */}
+            <div>
+                {allWeeks.map(week => (
+                    <div>
+                        <p>{week.start_date}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "weeks"."id" FROM "weeks";`;
+    const queryText = `SELECT "weeks"."id", "start_date" FROM "weeks";`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
