@@ -121,3 +121,6 @@ SET ending_balance_actual = beginning_cash + income_received
 WHERE "id" = 1;
 
 
+UPDATE balance
+SET ending_balance_cleared = beginning_cash + income_received - expenses_expected
+WHERE "id" = 1;
