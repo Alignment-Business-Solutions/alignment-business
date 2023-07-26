@@ -25,7 +25,7 @@ function SinglePL() {
 
     return (
         <>
-        <ImportCSV />
+        <ImportCSV week_id={1} client_id={1}/>
         <ItemForm categories={categories}/> 
         <button onClick={showForm}>Create New Item</button>
 

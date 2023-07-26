@@ -53,14 +53,42 @@ function* postItemData(action) {
 }
 
 function* handleImportData(action) {
-    const importData = action.payload;
+    const importData = action.payload.data;
+    const week_id = action.payload.week_id;
+    const client_id = action.payload.client_id;
     const transformedData = [];
+    
     for (let item of importData) {
-        console.log(item);
+        console.log(item); 
+        if (item.SPENT !== "") { 
+            transformedData.push({
+                    amount: item.SPENT,
+                    category_id: 2,
+                    client_id: client_id,
+                    date: item.DATE,
+                    paid: true,
+                    payee: item.Payee,
+                    week_id: week_id
+            });
+        } else {
+            transformedData.push({
+                    amount: item.RECEIVED,
+                    category_id: 1,
+                    client_id: client_id,
+                    date: item.DATE,
+                    paid: true,
+                    payee: item.Payee,
+                    week_id: week_id
+            });
+        }
     }
-
-
-
+    
+    try {
+        yield put({type:"SET_IMPORT_DATA", payload: transformedData}); 
+    }
+    catch {
+        console.log('error with setting import data reducer');
+    }
 }
 
 

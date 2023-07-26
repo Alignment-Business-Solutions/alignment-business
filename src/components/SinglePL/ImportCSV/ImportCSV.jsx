@@ -1,7 +1,7 @@
 import { useCSVReader } from 'react-papaparse';
 import { useDispatch } from 'react-redux';
 
-function ImportCSV() {
+function ImportCSV({week_id, client_id}) {
     const { CSVReader } = useCSVReader();
     const dispatch = useDispatch();
 
@@ -10,7 +10,9 @@ function ImportCSV() {
             config={{header: true}} 
             onUploadAccepted={(results: any) => {
                 console.log(results);
-                dispatch({type:"IMPORT_DATA", payload: results.data});
+                dispatch({type:"IMPORT_DATA", payload:{data: results.data,
+                                                       week_id: week_id,
+                                                       client_id: client_id}});
             }}
         >
           {({
