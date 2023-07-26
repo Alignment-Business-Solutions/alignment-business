@@ -41,7 +41,10 @@ function TableItem({item, accLevel, categories, tableType}) {
                                                 client: 1}});
     }
     
-    function addItem() {}
+    function addItem() {
+        dispatch({type:"POST_ITEM", payload: itemEd});
+    }
+
     function handleChange(type, change) {
         console.log('inhandleChange', type, change);
         switch(type) {
@@ -172,7 +175,9 @@ function TableItem({item, accLevel, categories, tableType}) {
             </>
         )
     );
-    } else {
+    } 
+    // refacter into separate compnents
+    else {
     return (
         (editToggleValue) ? (
         <>
