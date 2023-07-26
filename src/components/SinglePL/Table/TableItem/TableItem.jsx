@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 
-function TableItem({item, accLevel, categories}) { 
+function TableItem({item, accLevel, categories, tableType}) { 
     
     const [editToggleValue, setEditToggleValue] = useState(false);
     const [itemEd, setItemEd] = useState(item);
@@ -22,13 +22,26 @@ function TableItem({item, accLevel, categories}) {
             setEditToggleValue(!editToggleValue);
         }
     }
+
+    function editToggleTwo() {
+        if(editToggleValue) {
+            console.log('save');
+            console.log(itemEd);
+            setEditToggleValue(!editToggleValue); 
+        } else {
+            console.log('edit');
+            setEditToggleValue(!editToggleValue);
+        }
+    }
+
     //figure out why delete isn't working consecutively
     function deleteItem() {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
                                                 week: 1,
                                                 client: 1}});
     }
-
+    
+    function addItem() {}
     function handleChange(type, change) {
         console.log('inhandleChange', type, change);
         switch(type) {
@@ -64,7 +77,7 @@ function TableItem({item, accLevel, categories}) {
         setItemEd({...itemEd, date: date});
         findCatName();
     }, []);
-
+    if (tableType === 1) {
     return (
         (editToggleValue) ? (
         <>
@@ -159,10 +172,100 @@ function TableItem({item, accLevel, categories}) {
             </>
         )
     );
-
-
-
-
+    } else {
+    return (
+        (editToggleValue) ? (
+        <>
+        <tr key={itemEd.id}>
+            <td>
+                <input
+                    type="date"
+                    value={itemEd.date}
+                    onChange={(e)=>handleChange("date", e.target.value)}
+                />
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.payee}
+                    onChange={(e)=>handleChange("payee", e.target.value)}
+                />
+            </td>
+            <td>
+                <select onChange={(e)=>handleChange("cat", e.target.value)}>
+                    <option value={itemEd.category_id}>{cat}</option>
+                    {categories && categories.map((cat, i) => (
+                        <option key={i} value={cat.id}>{cat.category}</option>
+                    ))}
+                </select>
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.amount}
+                    onChange={(e)=>handleChange("amount", e.target.value)}
+                />
+            </td>
+            <td>
+                <input
+                    type="checkbox"
+                    value={itemEd.paid}
+                    checked={itemEd.paid}
+                    onChange={(e)=>handleChange("paid", e.target.checked)}
+                />
+                
+            </td>
+                {accLevel !== 0 ? (
+                <>
+                    <td><button onClick={editToggleTwo}>Save</button></td>
+                </>
+                ) : (<></>)}
+            </tr> 
+            </>
+        ) : (
+        <>
+        <tr key={itemEd.id}>
+            <td>
+                <input
+                    type="date"
+                    value={itemEd.date}
+                    readOnly
+                />
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.payee}
+                    readOnly
+                />
+            </td>
+            <td>{cat}</td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.amount}
+                    readOnly
+                />
+            </td>
+            <td>
+                <input
+                    type="checkbox"
+                    value={itemEd.paid}
+                    checked={itemEd.paid}
+                    readOnly
+                />
+                
+            </td>
+            {accLevel !== 0 ? (
+            <>
+                <td><button onClick={editToggleTwo}>Edit</button></td>
+                <td><button onClick={addItem}>Add</button></td>
+            </>
+            ) : (<></>)}
+        </tr>
+            </>
+        )
+    );
 }
-
+}
 export default TableItem;
