@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
-import ImportCSV from "./ImportCSV/ImportCSV";
+import ImportQBCSV from "./ImportCSV/ImportQBCSV";
+import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 
 function SinglePL() {
 
@@ -26,11 +27,17 @@ function SinglePL() {
     return (
         <>
             <h1>IMPORT ONLY SUPPORTS CSV FROM QUICKBOOKS</h1>
-            <ImportCSV week_id={1} client_id={1}/>
+            <ImportQBCSV week_id={1} client_id={1}/>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
+            <h1>IMPORT ONLY SUPPORTS REGISTER CSV</h1>
+             <ImportRegCSV week_id={1} client_id={1}/>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>           
             <ItemForm categories={categories}/> 
             <button onClick={showForm}>Create New Item</button>
                 <p>     </p>

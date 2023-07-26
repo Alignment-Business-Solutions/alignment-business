@@ -59,10 +59,8 @@ function* handleImportData(action) {
     const transformedData = [];
     
     for (let item of importData) {
-        // console.log(item);
         const date = new Date(item.DATE);
         const newDate = date.toISOString();
-        // console.log(newDate);
         if (item.SPENT !== "") { 
             transformedData.push({
                     amount: item.SPENT,
@@ -96,7 +94,21 @@ function* handleImportData(action) {
     }
 }
 
+function* handleImportRegData(action) {
+    const importData = action.payload.data;
+    const week_id = action.payload.week_id;
+    const client_id = action.payload.client_id;
+    const transformedData = [];
+    console.log(importData);
+    for (let i = 0; i<= importData.length; i++) {
+        console.log(importData[i]);
+        
 
+
+
+    }
+
+}
 
 
 function* singlePLSaga() {
@@ -105,6 +117,7 @@ function* singlePLSaga() {
     yield takeLatest("DELETE_ITEM", deleteItemData);
     yield takeLatest("POST_ITEM", postItemData);
     yield takeLatest("IMPORT_DATA", handleImportData);
+    yield takeLatest("IMPORT_REG_DATA", handleImportRegData);
 }
 
 export default singlePLSaga;

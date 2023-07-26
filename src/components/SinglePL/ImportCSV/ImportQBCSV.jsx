@@ -1,7 +1,7 @@
 import { useCSVReader } from 'react-papaparse';
 import { useDispatch } from 'react-redux';
 
-function ImportCSV({week_id, client_id}) {
+function ImportQBCSV({week_id, client_id}) {
     const { CSVReader } = useCSVReader();
     const dispatch = useDispatch();
 
@@ -37,4 +37,4 @@ function ImportCSV({week_id, client_id}) {
         </CSVReader>
     );
 }
-export default ImportCSV;
+export default ImportQBCSV;
