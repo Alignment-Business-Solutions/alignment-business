@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
-
+import ImportQBCSV from "./ImportCSV/ImportQBCSV";
+import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 
 function SinglePL() {
 
@@ -11,6 +12,8 @@ function SinglePL() {
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
+    const importQBData = useSelector(store => store.importQBData); 
+    const importRegData = useSelector(store => store.importRegData); 
     const [formVis, setFormVis] = useState(false);
 
     function showForm() {
@@ -24,15 +27,41 @@ function SinglePL() {
 
     return (
         <>
-
-        <ItemForm categories={categories}/> 
-        <button onClick={showForm}>Create New Item</button>
-
+            <h1>IMPORT ONLY SUPPORTS CSV FROM QUICKBOOKS</h1>
+            <ImportQBCSV week_id={1} client_id={1}/>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+            <h1>IMPORT ONLY SUPPORTS REGISTER CSV</h1>
+             <ImportRegCSV week_id={1} client_id={1}/>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>           
+            <ItemForm categories={categories}/> 
+            <button onClick={showForm}>Create New Item</button>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
+                <p>     </p>
             <Table 
                 weekData={weekData}
                 accLevel={user.access_level}
                 categories={categories}
-            />         
+            />
+            <h1> IMPORTED QUICK BOOKS DATA </h1>
+            <Table
+                weekData={importQBData}
+                accLevel={user.access_level}
+                categories={categories}
+            />
+            <h1> IMPORTED REGISTER DATA </h1>
+            <Table
+                weekData={importRegData}
+                accLevel={user.access_level}
+                categories={categories}
+            />
         </>
     );
 

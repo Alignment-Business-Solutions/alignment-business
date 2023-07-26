@@ -9,6 +9,9 @@ import weeksDropdown from './weeksDropdown.reducer';
 import allWeeks from './allWeeks.reducer';
 import allPL from './allPL.reducer';
 import categories from './categories.reducer.js';
+import importQBData from './importQBData.reducer.js';
+import importRegData from './importRegData.reducer.js';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,6 +31,9 @@ const rootReducer = combineReducers({
   allPL,
   
   categories,
+  importQBData,
+  importRegData,
+
 
 });
 
