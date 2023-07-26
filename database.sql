@@ -93,5 +93,18 @@ INSERT INTO "transactions" ("date", "payee", "amount", "paid", "client_id", "wee
 -- Will add some dummy data. You will need to to run the update queries 
 -- to see the 'ending_balance_actual' and 'ending_balance_cleared'
 
-
+CREATE TABLE "balance" (
+	"id" SERIAL PRIMARY KEY,
+	"beginning_cash" MONEY DEFAULT 0,
+	"income_received" MONEY DEFAULT 0,
+	"expenses_paid" MONEY DEFAULT 0,
+	"expenses_expected" MONEY DEFAULT 0,
+	"to_from_savings" MONEY DEFAULT 0,
+	"saving_balance" MONEY DEFAULT 0,
+	"outstanding_checks" MONEY DEFAULT 0,
+	"loan_to_from" MONEY DEFAULT 0,
+	"ending_balance_cleared" MONEY DEFAULT 0,
+	"ending_balance_actual" MONEY DEFAULT 0,
+	"client_id" INTEGER REFERENCES "client" NOT NULL
+);
 
