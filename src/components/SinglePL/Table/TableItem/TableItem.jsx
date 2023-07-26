@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 function TableItem({item, accLevel, categories, tableType}) { 
@@ -8,7 +8,8 @@ function TableItem({item, accLevel, categories, tableType}) {
     const [itemEd, setItemEd] = useState(item);
     const dispatch = useDispatch();
     const [cat, setCat] = useState(''); 
-
+    const dbData = useSelector(store => store.singlePL);
+    const [match, setMatch] = useState(false);
     function editToggle() {
         if(editToggleValue) {
             console.log('save');
@@ -73,13 +74,32 @@ function TableItem({item, accLevel, categories, tableType}) {
             }
         }
     }
-
-    useEffect(() => {
+    function matchChecker() {
+        if(tableType === 2){
+            // setItemEd({...itemEd, amount: `${itemEd.amount}`}); 
+            for (let dbItem of dbData) {
+                if (dbItem.amount === itemEd.amount && 
+                    dbItem.payee === itemEd.payee && 
+                    dbItem.date === itemEd.date &&
+                    dbItem.category_id === itemEd.category_id) {
+                     console.log('MATCH');
+                     setMatch(true);
+                 }
+            }
+        }
+    }
+    function onLoad() {
         let date = item.date
         date = date.slice(0, 10);
         setItemEd({...itemEd, date: date});
         findCatName();
+        matchChecker();
+    }
+
+    useEffect(() => {
+        onLoad();
     }, []);
+
     if (tableType === 1) {
     return (
         (editToggleValue) ? (
@@ -267,6 +287,7 @@ function TableItem({item, accLevel, categories, tableType}) {
                 <td><button onClick={addItem}>Add</button></td>
             </>
             ) : (<></>)}
+            {match ? <td>MATCH!!!!!!!</td> : <></>}
         </tr>
             </>
         )
