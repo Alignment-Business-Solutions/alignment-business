@@ -1,9 +1,9 @@
-
-
 import TableItem from "./TableItem/TableItem";
 
 
-function Table({weekData, accLevel, categories}) {
+function Table({weekData, accLevel, categories, tableType}) {
+
+
 
     return (
         <table>
@@ -38,7 +38,7 @@ function Table({weekData, accLevel, categories}) {
                 </tr>
                 {weekData.map(item => (
                     (item.category_id === 1) ? (
-                    <TableItem item={item} accLevel={accLevel} categories={categories}/>
+                    <TableItem item={item} accLevel={accLevel} categories={categories} tableType={tableType}/>
                     ) : (
                         <></>
                     )
@@ -59,7 +59,7 @@ function Table({weekData, accLevel, categories}) {
 
                 {weekData.map(item => (
                     (item.category_id !== 1) ? (
-                    <TableItem item={item} accLevel={accLevel} categories={categories}/>
+                    <TableItem item={item} accLevel={accLevel} categories={categories} tableType={tableType}/>
                     ) : (
                         <></>
                     )

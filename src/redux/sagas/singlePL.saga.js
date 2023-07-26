@@ -124,7 +124,7 @@ function* handleImportRegData(action) {
             if ( item[4] !== "") {
                 // console.log('expense');
                 transformedData.push({
-                        amount: item[4],
+                        amount: `$${item[4]}`,
                         category_id: 2,
                         client_id: client_id,
                         date: newDate,
@@ -136,7 +136,7 @@ function* handleImportRegData(action) {
             } else {
                 // console.log('income');
                 transformedData.push({
-                    amount: item[5],
+                    amount: `$${item[5]}`,
                     category_id: 1,
                     client_id: client_id,
                     date: newDate,

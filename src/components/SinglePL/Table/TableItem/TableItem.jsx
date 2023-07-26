@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
-function TableItem({item, accLevel, categories}) { 
+function TableItem({item, accLevel, categories, tableType}) { 
     
     const [editToggleValue, setEditToggleValue] = useState(false);
     const [itemEd, setItemEd] = useState(item);
     const dispatch = useDispatch();
     const [cat, setCat] = useState(''); 
-
+    const dbData = useSelector(store => store.singlePL);
+    const [match, setMatch] = useState(false);
     function editToggle() {
         if(editToggleValue) {
             console.log('save');
@@ -22,11 +23,27 @@ function TableItem({item, accLevel, categories}) {
             setEditToggleValue(!editToggleValue);
         }
     }
+
+    function editToggleTwo() {
+        if(editToggleValue) {
+            console.log('save');
+            console.log(itemEd);
+            setEditToggleValue(!editToggleValue); 
+        } else {
+            console.log('edit');
+            setEditToggleValue(!editToggleValue);
+        }
+    }
+
     //figure out why delete isn't working consecutively
     function deleteItem() {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
                                                 week: 1,
                                                 client: 1}});
+    }
+    
+    function addItem() {
+        dispatch({type:"POST_ITEM", payload: itemEd});
     }
 
     function handleChange(type, change) {
@@ -57,14 +74,33 @@ function TableItem({item, accLevel, categories}) {
             }
         }
     }
-
-    useEffect(() => {
+    function matchChecker() {
+        if(tableType === 2){
+            // setItemEd({...itemEd, amount: `${itemEd.amount}`}); 
+            for (let dbItem of dbData) {
+                if (dbItem.amount === itemEd.amount && 
+                    dbItem.payee === itemEd.payee && 
+                    dbItem.date === itemEd.date &&
+                    dbItem.category_id === itemEd.category_id) {
+                     console.log('MATCH');
+                     setMatch(true);
+                 }
+            }
+        }
+    }
+    function onLoad() {
         let date = item.date
         date = date.slice(0, 10);
         setItemEd({...itemEd, date: date});
         findCatName();
+        matchChecker();
+    }
+
+    useEffect(() => {
+        onLoad();
     }, []);
 
+    if (tableType === 1) {
     return (
         (editToggleValue) ? (
         <>
@@ -159,10 +195,103 @@ function TableItem({item, accLevel, categories}) {
             </>
         )
     );
-
-
-
-
+    } 
+    // refacter into separate compnents
+    else {
+    return (
+        (editToggleValue) ? (
+        <>
+        <tr key={itemEd.id}>
+            <td>
+                <input
+                    type="date"
+                    value={itemEd.date}
+                    onChange={(e)=>handleChange("date", e.target.value)}
+                />
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.payee}
+                    onChange={(e)=>handleChange("payee", e.target.value)}
+                />
+            </td>
+            <td>
+                <select onChange={(e)=>handleChange("cat", e.target.value)}>
+                    <option value={itemEd.category_id}>{cat}</option>
+                    {categories && categories.map((cat, i) => (
+                        <option key={i} value={cat.id}>{cat.category}</option>
+                    ))}
+                </select>
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.amount}
+                    onChange={(e)=>handleChange("amount", e.target.value)}
+                />
+            </td>
+            <td>
+                <input
+                    type="checkbox"
+                    value={itemEd.paid}
+                    checked={itemEd.paid}
+                    onChange={(e)=>handleChange("paid", e.target.checked)}
+                />
+                
+            </td>
+                {accLevel !== 0 ? (
+                <>
+                    <td><button onClick={editToggleTwo}>Save</button></td>
+                </>
+                ) : (<></>)}
+            </tr> 
+            </>
+        ) : (
+        <>
+        <tr key={itemEd.id}>
+            <td>
+                <input
+                    type="date"
+                    value={itemEd.date}
+                    readOnly
+                />
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.payee}
+                    readOnly
+                />
+            </td>
+            <td>{cat}</td>
+            <td>
+                <input
+                    type="text"
+                    value={itemEd.amount}
+                    readOnly
+                />
+            </td>
+            <td>
+                <input
+                    type="checkbox"
+                    value={itemEd.paid}
+                    checked={itemEd.paid}
+                    readOnly
+                />
+                
+            </td>
+            {accLevel !== 0 ? (
+            <>
+                <td><button onClick={editToggleTwo}>Edit</button></td>
+                <td><button onClick={addItem}>Add</button></td>
+            </>
+            ) : (<></>)}
+            {match ? <td>MATCH!!!!!!!</td> : <></>}
+        </tr>
+            </>
+        )
+    );
 }
-
+}
 export default TableItem;

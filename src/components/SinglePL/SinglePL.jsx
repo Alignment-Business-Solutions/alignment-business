@@ -49,18 +49,23 @@ function SinglePL() {
                 weekData={weekData}
                 accLevel={user.access_level}
                 categories={categories}
+                tableType={1}
             />
             <h1> IMPORTED QUICK BOOKS DATA </h1>
+            <h3> Data not saved !!!!!</h3>
             <Table
                 weekData={importQBData}
                 accLevel={user.access_level}
                 categories={categories}
+                tableType={2}
             />
             <h1> IMPORTED REGISTER DATA </h1>
+            <h3> Data not saved !!!</h3>
             <Table
                 weekData={importRegData}
                 accLevel={user.access_level}
                 categories={categories}
+                tableType={2}
             />
         </>
     );
