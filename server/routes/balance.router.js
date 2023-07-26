@@ -5,6 +5,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // GET route code here
+  pool.query(`SELECT * FROM "balance";` )
+  .then(result => {
+      console.log('balanceRouter GET result ==> ', result.rows)
+      res.send(result.rows)
+  }).catch( err => {
+      console.log('Error with balanceRouter GET', err)
+      res.sendStatus(500)
+  })
 });
 
 

@@ -10,7 +10,7 @@ function* fetchAllClients() {
             payload: clients.data
         })
     } catch(err) {
-        console.log('Error with MyCLients SAGA ', err)
+        console.log('Error with CLients SAGA ', err)
     }
 }
 
