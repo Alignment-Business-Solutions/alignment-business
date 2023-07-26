@@ -6,3 +6,5 @@ function BalanceSheet(){
         <p> Under Construction </p>
     )
 }
+
+export default BalanceSheet

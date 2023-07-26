@@ -25,6 +25,7 @@ import SinglePL from '../SinglePL/SinglePL';
 
 import './App.css';
 import ViewSummary from '../ViewSummary/ViewSummary';
+import BalanceSheet from '../BalanceSheet/BalanceSheet';
 
 function App() {
   const dispatch = useDispatch();
@@ -69,6 +70,13 @@ function App() {
             path="/clients"
           >
             <ClientList />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows the Balance Sheet View
+            exact
+            path="/balance"
+          >
+            <BalanceSheet />
           </ProtectedRoute>
 
           <ProtectedRoute
