@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 function BalanceSheet(){
 
     const dispatch = useDispatch();
-    const balance = useSelector((store) => store.balance);
+    const balanceSheet = useSelector((store) => store.balance);
 
     useEffect(() => {
         dispatch({
@@ -32,7 +32,9 @@ function BalanceSheet(){
     </tr>
   </thead>
   <tbody>
-
+        {balanceSheet && balanceSheet.map((balance,i) => (
+            <tr key={i}>{balance.beginning_cash}</tr>
+        ))}
 </tbody>
 </table>
    </> )
