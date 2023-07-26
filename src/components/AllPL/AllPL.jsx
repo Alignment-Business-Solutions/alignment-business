@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import SinglePLMultiView from "./MultiPL/SinglePL(inMulti)";
 
 function AllPL() {
 
@@ -9,18 +8,9 @@ function AllPL() {
     const history = useHistory();
 
     const allWeeks = useSelector(store => store.allWeeks);
-    const allPL = useSelector(store => store.allPL)
-
-    // function pageLoad(allWeeks) {
-    //     console.log('in pageLoad function!');
-    //     allWeeks.forEach(week => {
-    //         dispatch({type:"ADD_TO_ALLPL", payload: {week: week.id, client: client}}); 
-    //     });
-    // };
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_WEEKS' });
-        // pageLoad(allPL)
     }, []);
 
 
@@ -29,20 +19,65 @@ function AllPL() {
             <h2>All Weeks Profits & Loss</h2>
 
             <div>
-                {allWeeks.map((week, i) => (
-                    <SinglePLMultiView week = {week} client = {1} />
-))}
-            </div>
-            {/* <div>
-                {allPL.map((week, i) => (
-                    <SinglePLMultiView week = {week} client = {1} />
-))}
-            </div> */}
-            <div>
                 {allWeeks.map(week => (
-                    <div>
-                        <p>{week.start_date}</p>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Week of "Insert Week Here"</th>
+                            </tr>
+                            <tr>
+                                <th>Income</th>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <th>Payee</th>
+                                <th>Amount</th>
+                                <th>Paid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {week.map(transaction => {
+                                if (transaction.category_id === 1 && transaction.paid === true) {
+                                    return <tr key={transaction.id}>
+                                        <td>{transaction.date}</td>
+                                        <td>{transaction.payee}</td>
+                                        <td>{transaction.amount}</td>
+                                        <td><input type="checkbox" checked readOnly /></td>
+                                    </tr>
+                                } else if (transaction.category_id === 1 && transaction.paid === false) {
+                                    return <tr key={transaction.id}>
+                                        <td>{transaction.date}</td>
+                                        <td>{transaction.payee}</td>
+                                        <td>{transaction.amount}</td>
+                                        <td><input type="checkbox" disabled /></td>
+                                    </tr>
+                                }
+                            })}
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>Expenses</td>
+                            </tr>
+                            {week.map(transaction => {
+                                if (transaction.category_id === 2 && transaction.paid === true) {
+                                    return <tr key={transaction.id}>
+                                        <td>{transaction.date}</td>
+                                        <td>{transaction.payee}</td>
+                                        <td>{transaction.amount}</td>
+                                        <td><input type="checkbox" checked readOnly /></td>
+                                    </tr>
+                                } else if (transaction.category_id === 2 && transaction.paid === false) {
+                                    return <tr key={transaction.id}>
+                                        <td>{transaction.date}</td>
+                                        <td>{transaction.payee}</td>
+                                        <td>{transaction.amount}</td>
+                                        <td><input type="checkbox" disabled /></td>
+                                    </tr>
+                                }
+                            })}
+                        </tbody>
+                        <button>Click for Detailed View of this Week</button>
+                    </table>
                 ))}
             </div>
         </div>

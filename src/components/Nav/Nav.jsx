@@ -63,7 +63,7 @@ function Nav() {
               Balance
             </Link>
 
-            <Link className="navLink" to="/profitloss">
+            <Link className="navLink" to="/allpl">
               P&L
             </Link>
 

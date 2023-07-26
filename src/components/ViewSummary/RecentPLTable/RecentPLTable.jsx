@@ -42,6 +42,9 @@ function RecentPLTable() {
                         }
                     })}
                 </tbody>
+                <tbody>
+                    
+                </tbody>
             </table>
             <table>
                 <thead>
