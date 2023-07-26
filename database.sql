@@ -108,3 +108,9 @@ CREATE TABLE "balance" (
 	"client_id" INTEGER REFERENCES "client" NOT NULL
 );
 
+INSERT INTO balance ("beginning_cash", "income_received", "expenses_paid",
+"expenses_expected",
+"to_from_savings", "saving_balance", "outstanding_checks", 
+"loan_to_from", "client_id")
+VALUES ('2,387.13', '14,987.78', '8,725.15', 
+'8,725.15', '449.63', '1,942.59', '0.00', '0.00', 1);
