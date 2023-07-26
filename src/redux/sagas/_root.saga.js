@@ -11,7 +11,7 @@ import addClientSaga from './addClient.saga';
 import fetchWeeksDropdownSaga from './fetchWeeksDropdown.saga';
 import fetchAllWeeksSaga from './fetchAllWeeks.saga';
 import categoriesSaga from './categories.saga';
-
+import removeClientSaga from './removeClient.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -34,6 +34,6 @@ export default function* rootSaga() {
     fetchAllWeeksSaga(),
 
     categoriesSaga(),
-    
+    removeClientSaga(),
   ]);
 }
