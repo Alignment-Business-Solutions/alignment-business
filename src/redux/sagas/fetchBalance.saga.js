@@ -13,3 +13,9 @@ function* fetchBalance() {
         console.log('Error with Balance SAGA ', err)
     }
 }
+
+function* balanceFetch(){
+    yield takeLatest('FETCH_BALANCE', fetchBalance)
+}
+
+export default balanceFetch
