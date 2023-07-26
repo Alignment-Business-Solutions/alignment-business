@@ -122,7 +122,6 @@ function* handleImportRegData(action) {
             const date = new Date(item[0]);
             const newDate = date.toISOString();
             if ( item[4] !== "") {
-                // console.log('expense');
                 transformedData.push({
                         amount: `$${item[4]}`,
                         category_id: 2,

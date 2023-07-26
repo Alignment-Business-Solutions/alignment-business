@@ -12,7 +12,6 @@ function SinglePL() {
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
-    const importQBData = useSelector(store => store.importQBData); 
     const importRegData = useSelector(store => store.importRegData); 
     const [formVis, setFormVis] = useState(false);
 
@@ -27,14 +26,12 @@ function SinglePL() {
 
     return (
         <>
-            <h1>IMPORT ONLY SUPPORTS CSV FROM QUICKBOOKS</h1>
-            <ImportQBCSV week_id={1} client_id={1}/>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
             <h1>IMPORT ONLY SUPPORTS REGISTER CSV</h1>
-             <ImportRegCSV week_id={1} client_id={1}/>
+            <ImportRegCSV week_id={1} client_id={1}/>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
@@ -53,15 +50,7 @@ function SinglePL() {
                 categories={categories}
                 tableType={1}
             />
-            <h1> IMPORTED QUICK BOOKS DATA </h1>
-            <h3> Data not saved !!!!!</h3>
-            <Table
-                weekData={importQBData}
-                accLevel={user.access_level}
-                categories={categories}
-                tableType={2}
-            />
-            <h1> IMPORTED REGISTER DATA </h1>
+            <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
             <Table
                 weekData={importRegData}
