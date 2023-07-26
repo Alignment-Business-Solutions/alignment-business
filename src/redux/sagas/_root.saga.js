@@ -9,6 +9,7 @@ import myClientsSaga from './myClients.saga'
 import submitNewWeekSaga from './createNewWeek.saga';
 import addClientSaga from './addClient.saga';
 import fetchWeeksDropdownSaga from './fetchWeeksDropdown.saga';
+import fetchAllWeeksSaga from './fetchAllWeeks.saga';
 import categoriesSaga from './categories.saga';
 import removeClientSaga from './removeClient.saga';
 // rootSaga is the primary saga.
@@ -30,6 +31,8 @@ export default function* rootSaga() {
     submitNewWeekSaga(),
     addClientSaga(),
     fetchWeeksDropdownSaga(),
+    fetchAllWeeksSaga(),
+
     categoriesSaga(),
     removeClientSaga(),
   ]);

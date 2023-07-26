@@ -6,6 +6,8 @@ import singlePL from './singlePL.reducer.js';
 import recentPL from './recentPL.reducer';
 import myClients from './myClients.reducer'
 import weeksDropdown from './weeksDropdown.reducer';
+import allWeeks from './allWeeks.reducer';
+import allPL from './allPL.reducer';
 import categories from './categories.reducer.js';
 import importQBData from './importQBData.reducer.js';
 import importRegData from './importRegData.reducer.js';
@@ -25,6 +27,9 @@ const rootReducer = combineReducers({
   singlePL,
   myClients,
   weeksDropdown,
+  allWeeks,
+  allPL,
+  
   categories,
   importQBData,
   importRegData,

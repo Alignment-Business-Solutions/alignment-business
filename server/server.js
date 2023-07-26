@@ -11,7 +11,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const clientRouter = require('./routes/client_management.router')
 const singlePLRouter = require('./routes/singlePL.router.js');
-const viewSummary = require('./routes/viewSummary.router');
+const viewSummary = require('./routes/viewSummary.router')
+const allPLRouter = require('./routes/allPL.router')
 const catRouter = require('./routes/categories.router.js');
 const balanceRouter = require('./routes/balance.router');
 
@@ -32,6 +33,7 @@ app.use('/api/user', userRouter);
 app.use('/api/client', clientRouter);
 app.use('/api/viewSummary', viewSummary);
 app.use('/api/single', singlePLRouter);
+app.use('/api/allPL', allPLRouter);
 app.use('/api/cat', catRouter);
 app.use('/api/balance', balanceRouter);
 
