@@ -12,6 +12,7 @@ import categories from './categories.reducer.js';
 import importQBData from './importQBData.reducer.js';
 import importRegData from './importRegData.reducer.js';
 import balance from './balance.reducer';
+import clientInfo from './clientInfo.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   importQBData,
   importRegData,
   balance,
+  clientInfo,
 
 });
 

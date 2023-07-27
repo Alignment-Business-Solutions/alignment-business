@@ -8,6 +8,7 @@ function* fetchUser() {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
+    yield put ({ type: 'FETCH_CLIENT_INFO' })
 
     // the config includes credentials which
     // allow the server session to recognize the user
