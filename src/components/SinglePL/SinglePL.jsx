@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 
 import ExportCSV from './ExportCSV/ExportCSV.jsx';
+import { useHistory, Link } from "react-router-dom";
 
 function SinglePL() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
@@ -66,6 +67,11 @@ function SinglePL() {
                 categories={categories}
                 tableType={2}
             />
+            <Link
+                to="/viewsummary"
+            >
+                Go Back To Summary Page
+            </Link>
         </>
     );
 
