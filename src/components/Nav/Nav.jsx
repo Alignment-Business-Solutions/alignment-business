@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const client = useSelector((store) => store.selectedClient);
+  const path = `/viewsummary/${client.id}`;
 
   return (
     <div className="nav">
@@ -47,16 +49,12 @@ function Nav() {
         ) : // If ACCOUNTANT-LEVEL user is logged in, show these links:
         user.access_level === 1 ? (
           <>
-            <Link className="navLink" to="/accountant">
-              Accountant Dashboard
-            </Link>
-
             <Link className="navLink" to="/clients">
-              Clients
+              My Clients
             </Link>
 
-            <Link className="navLink" to="/user">
-              Summary
+            <Link className="navLink" to={path}>
+            {client.company_name}
             </Link>
 
             <Link className="navLink" to="/balance">
