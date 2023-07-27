@@ -32,8 +32,15 @@ function App() {
 
   const user = useSelector(store => store.user);
 
+  const clientInfo = useSelector(store => store.clientInfo);
+  const path = clientInfo && `/viewsummary/${clientInfo.id}`
+
+  console.log('clientInfo is:', clientInfo);
+  console.log('user.access_level is:', user.access_level);
+
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+
   }, [dispatch]);
 
   return (
@@ -108,12 +115,13 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              (user.access_level !== 0 ? (<Redirect to="/myClients"/>) : (<Redirect to={path}/>)) 
               :
               // Otherwise, show the login page
               <LoginPage />
             }
           </Route>
+
 
           <Route
             exact
@@ -142,7 +150,8 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              (user.access_level !== 0 ? (<Redirect to="/myClients"/>) : (<Redirect to={path}/>)) 
+
               :
               // Otherwise, show the Login page
               <LoginPage />

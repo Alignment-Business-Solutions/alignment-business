@@ -126,4 +126,17 @@ router.post('/createclient', (req, res) => {
     });
 });
 
+router.get('/info', (req, res) => {
+  console.log('In GET route for client info')
+  queryText = `SELECT * FROM "client" WHERE "user_id" = $1;`;
+  pool.query (queryText, [req.user.id])
+  .then((result) => {
+    console.log('Data received form getClientInfo:', result.rows);
+    res.send(result.rows)
+  }).catch(error => {
+    console.error('Error getting client info:', error)
+    res.sendStatus(500);
+  })
+})
+
 module.exports = router;

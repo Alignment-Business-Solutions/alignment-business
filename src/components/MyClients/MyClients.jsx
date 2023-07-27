@@ -28,12 +28,7 @@ function MyClients() {
         console.log("Assigned to Accountant");   
   }
 
-  console.log('my clients list is:', myClients);
-
-  function getClientID () {
-
-  }
-
+  // console.log('my clients list is:', myClients);
 
         return (
             <div>

@@ -14,8 +14,19 @@ function* fetchAllClients() {
     }
 }
 
+function * fetchClientInfo () {
+    try {
+        console.log('in fetchClientInfo saga');
+        const clientInfo = yield axios.get('/api/client/info')
+        yield put({ type: 'SET_CLIENT_INFO', payload: clientInfo.data[0]})
+    } catch (error) {
+        console.log('error in fetchClientInfo saga:', error);
+    }
+}
+
 function* clientsFetch(){
     yield takeLatest('FETCH_ALL_CLIENTS', fetchAllClients)
+    yield takeLatest('FETCH_CLIENT_INFO', fetchClientInfo)
 }
 
 export default clientsFetch
