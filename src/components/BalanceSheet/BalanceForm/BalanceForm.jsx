@@ -6,3 +6,4 @@ function BalanceForm() {
     )
 }
 
+export default BalanceForm

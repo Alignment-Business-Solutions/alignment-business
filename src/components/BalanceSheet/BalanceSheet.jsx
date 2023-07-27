@@ -1,6 +1,7 @@
 import React,{useEffect, useReact} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import BalanceItem from './BalanceItem/BalanceItem';
+import BalanceForm from './BalanceForm/BalanceForm';
 
 function BalanceSheet(){
 
@@ -14,8 +15,8 @@ function BalanceSheet(){
       }, []);
       console.log('Balance Sheet', balanceSheet)
     return (
-       
-    
+       <>
+    <BalanceForm />
         
         <table >
   <thead>
@@ -43,7 +44,7 @@ function BalanceSheet(){
         ))}
 </tbody>
 </table>
-    )
+</> )
 }
 
 export default BalanceSheet
