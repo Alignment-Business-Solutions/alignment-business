@@ -43,7 +43,12 @@ function TableItem({item, accLevel, categories, tableType}) {
     }
     
     function addItem() {
-        dispatch({type:"POST_ITEM", payload: itemEd});
+        if (itemEd.payee === "") {
+            alert('Add Payee');
+            return;
+        } else {
+            dispatch({type:"POST_ITEM", payload: itemEd});
+        }
     }
 
     function handleChange(type, change) {
