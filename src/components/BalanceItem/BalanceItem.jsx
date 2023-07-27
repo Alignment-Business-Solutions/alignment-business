@@ -7,3 +7,4 @@ function BalanceItem() {
     )
 }
 
+export default BalanceItem
