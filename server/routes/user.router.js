@@ -73,10 +73,26 @@ router.post("/register", async (req, res, next) => {
       // Query 3: Insert into "client" table
       const company_name = req.body.companyName;
 
-      const queryTextClient = `INSERT INTO "client" (user_id, company_name)
-          VALUES ($1, $2) RETURNING id`;
+      const queryTextCheckClient = `
+          SELECT * FROM "client" WHERE company_name = $1;
+        `;
 
-      await client.query(queryTextClient, [userId, company_name]);
+      const checkResult = await client.query(queryTextCheckClient, [
+        company_name,
+      ]);
+
+      if (checkResult.rowCount > 0) {
+        // Client already exists, so update the existing entry with new user_id
+        const queryTextClientUpdate = `
+            UPDATE "client" SET user_id = $1 WHERE company_name = $2;
+          `;
+
+        await client.query(queryTextClientUpdate, [userId, company_name]);
+      } else {
+        // Company does not exist, so do not create a new entry
+        res.status(400).json({ message: "Company does not exist" });
+        return; // Return early to skip the insertion step
+      }
     }
 
     await client.query("COMMIT"); // Commit the transaction
