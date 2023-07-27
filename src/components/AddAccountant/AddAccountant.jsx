@@ -8,6 +8,8 @@ const AddAccountant = ({ isOpen, onRequestClose, onAdd }) => {
   const handleAdd = () => {
     // Perform any additional validation or data processing here
     onAdd({ firstName, lastName });
+    setFirstName("");
+    setLastName("");
     onRequestClose(); // Close the modal after adding the accountant
   };
 

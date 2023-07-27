@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
-import ImportQBCSV from "./ImportCSV/ImportQBCSV";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 
+import ExportCSV from './ExportCSV/ExportCSV.jsx';
 
 function SinglePL() {
 
@@ -14,7 +14,6 @@ function SinglePL() {
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
-    const importQBData = useSelector(store => store.importQBData); 
     const importRegData = useSelector(store => store.importRegData); 
     const [formVis, setFormVis] = useState(false);
 
@@ -31,19 +30,20 @@ function SinglePL() {
 
     return (
         <>
-            <h1>IMPORT ONLY SUPPORTS CSV FROM QUICKBOOKS</h1>
-            <ImportQBCSV week_id={1} client_id={1}/>
+            {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
-            <h1>IMPORT ONLY SUPPORTS REGISTER CSV</h1>
-             <ImportRegCSV week_id={1} client_id={1}/>
+            <h1>IMPORT ONLY SUPPORTS REGISTER and QB CSV'S</h1>
+            <ImportRegCSV week_id={1} client_id={1}/>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>           
+            {formVis ? (
             <ItemForm categories={categories}/> 
+                ) : (<></>)} 
             <button onClick={showForm}>Create New Item</button>
                 <p>     </p>
                 <p>     </p>
@@ -55,15 +55,7 @@ function SinglePL() {
                 categories={categories}
                 tableType={1}
             />
-            <h1> IMPORTED QUICK BOOKS DATA </h1>
-            <h3> Data not saved !!!!!</h3>
-            <Table
-                weekData={importQBData}
-                accLevel={user.access_level}
-                categories={categories}
-                tableType={2}
-            />
-            <h1> IMPORTED REGISTER DATA </h1>
+            <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
             <Table
                 weekData={importRegData}
