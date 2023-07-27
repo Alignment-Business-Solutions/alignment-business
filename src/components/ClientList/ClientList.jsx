@@ -126,7 +126,7 @@ function ClientList() {
       </div>
       <div>
       {/* Conditionally render the button if access_level is 1 or 2 */}
-      {user.access_level >= 2 && (
+      {user.access_level >= 1 && (
           <button onClick={handleOpenClientModal}>New Client</button>
         )}
         <AddClient
