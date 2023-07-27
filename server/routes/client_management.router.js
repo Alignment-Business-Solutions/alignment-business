@@ -31,10 +31,6 @@ router.get('/', (req,res) => {
 
 })
 
-router.post('/', (req, res) => {
-    // POST route code here
-  });
-
 router.put('/add', (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here

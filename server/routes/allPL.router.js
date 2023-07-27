@@ -19,11 +19,13 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         const connection = await pool.connect();
     
         try {
-            const weeksSql = `SELECT "weeks"."id" FROM "weeks";`;
+            const weeksSql = `SELECT "weeks"."id", "start_date" FROM "weeks";`;
             const weeksResult = await connection.query(weeksSql);
             // weeksResult.rows is something like [ {id: 1}, {id: 2}, {etc} ]
     
-            const transactionsSql = `SELECT * FROM "transactions" WHERE "week_id" = $1;`;
+            const transactionsSql = `SELECT "transactions"."id", "date", "payee", "amount", "paid", "start_date", "client_id", "category_id", "week_id" FROM "transactions" 
+            JOIN "weeks" ON "weeks"."id" = "transactions"."week_id"
+            WHERE "week_id" = $1;`;
             // select all columns from transactions, one week at a time
             for (let week of weeksResult.rows) {
                 const transactionsResult = await connection.query(transactionsSql, [week.id]);

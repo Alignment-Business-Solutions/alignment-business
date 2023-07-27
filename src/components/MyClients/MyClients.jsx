@@ -1,6 +1,7 @@
 import React, { useEffect, useReact } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import MyClientsItem from "./MyClientsItem/MyClientsItem";
 
 
 function MyClients() {
@@ -27,27 +28,21 @@ function MyClients() {
         console.log("Assigned to Accountant");   
   }
 
-  function getClientID (client_id) {
-    console.log('Running getClientID', client_id);
+  console.log('my clients list is:', myClients);
 
-      dispatch({
-        type: 'GET_CLIENT_ID',
-        payload: {
-          id: client_id
-        },
-      });
-  };
+  function getClientID () {
+
+  }
+
 
         return (
             <div>
                 <h2>Accountants's Clients</h2>
             <ul>
-                {myClients && myClients.map((oneClient, i) => (
-                    <>
-                    <li key={i}> {oneClient.company_name}</li>
-                    <button type="submit" onClick={() => getClientID(oneClient.client_id)}>View Client Details</button>
-                    <button onClick={() => removeClient(oneClient.client_id)}>❌</button>
-               </> ))}
+                {myClients && myClients.map((client, i) => (
+                  <MyClientsItem key={i} client={client}/>
+
+               ))}
                 
             </ul>
             <button onClick={goClients}>Clients</button>
