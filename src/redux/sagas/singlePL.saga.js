@@ -119,31 +119,60 @@ function* handleImportRegData(action) {
         const item = importData[i];
         if (item[0].includes('/')) {
             // console.log(item);
+
             const date = new Date(item[0]);
             const newDate = date.toISOString();
-            if ( item[4] !== "") {
-                transformedData.push({
-                        amount: `$${item[4]}`,
-                        category_id: 2,
+            
+            if (item.length > 6) {
+                console.log(item); 
+                if ( item[4] !== "") {
+                    transformedData.push({
+                            amount: `$${item[4]}`,
+                            category_id: 2,
+                            client_id: client_id,
+                            date: newDate,
+                            paid: true,
+                            payee: item[2],
+                            week_id: week_id,
+                            id: undefined
+                    });
+                } else {
+                    // console.log('income');
+                    transformedData.push({
+                        amount: `$${item[5]}`,
+                        category_id: 1,
                         client_id: client_id,
                         date: newDate,
                         paid: true,
                         payee: item[2],
                         week_id: week_id,
                         id: undefined
-                });
-            } else {
-                // console.log('income');
-                transformedData.push({
-                    amount: `$${item[5]}`,
-                    category_id: 1,
-                    client_id: client_id,
-                    date: newDate,
-                    paid: true,
-                    payee: item[2],
-                    week_id: week_id,
-                    id: undefined
-                });
+                    });
+                }
+            } else {     
+                if ( item[4] !== "") {
+                    transformedData.push({
+                        amount: item[4],
+                        category_id: 2,
+                        client_id: client_id,
+                        date: newDate,
+                        paid: true,
+                        payee: ((item[2] !== "") ? (item[2]) : (item[1])),
+                        week_id: week_id,
+                        id: undefined
+                    });
+                } else {
+                    transformedData.push({
+                        amount: item[5],
+                        category_id: 1,
+                        client_id: client_id,
+                        date: newDate,
+                        paid: true,
+                        payee: ((item[2] !== "") ? (item[2]) : (item[1])),
+                        week_id: week_id,
+                        id: undefined
+                    });
+                }
             }
         }
     }
