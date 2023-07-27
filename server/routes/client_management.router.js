@@ -107,7 +107,8 @@ router.post('/createaccountant', (req, res) => {
 
 // Route for accountant to create a new client:
 router.post('/createclient', (req, res) => {
-  const { companyName } = req.body;
+  const { company_name } = req.body;
+  console.log("REQ.BODY IS:", req.body)
 
   const queryText = `
     INSERT INTO "client" (company_name)
@@ -115,7 +116,7 @@ router.post('/createclient', (req, res) => {
     RETURNING id;
   `;
 
-  const values = [companyName];
+  const values = [company_name];
 
   pool
     .query(queryText, values)
