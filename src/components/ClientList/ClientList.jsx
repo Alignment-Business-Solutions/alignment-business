@@ -77,7 +77,9 @@ function ClientList() {
       })
       .then((response) => {
         console.log("Client created successfully:", response.data);
-        // You can perform any additional actions here if needed
+        dispatch({
+          type: "FETCH_ALL_CLIENTS",
+        });
       })
       .catch((error) => {
         console.error("Error creating client:", error);
@@ -124,7 +126,7 @@ function ClientList() {
       </div>
       <div>
       {/* Conditionally render the button if access_level is 1 or 2 */}
-      {user.access_level >= 2 && (
+      {user.access_level >= 1 && (
           <button onClick={handleOpenClientModal}>New Client</button>
         )}
         <AddClient
