@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
+import ExportCSV from './ExportCSV/ExportCSV.jsx';
 
 function SinglePL() {
 
@@ -25,6 +26,7 @@ function SinglePL() {
 
     return (
         <>
+            {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
