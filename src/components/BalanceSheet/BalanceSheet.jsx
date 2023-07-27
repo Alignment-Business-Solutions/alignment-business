@@ -34,6 +34,7 @@ function BalanceSheet(){
   <tbody>
         {balanceSheet && balanceSheet.map((balance,i) => (
             <tr key={i}>{balance.beginning_cash}</tr>
+      
         ))}
 </tbody>
 </table>
