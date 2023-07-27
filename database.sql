@@ -105,7 +105,8 @@ CREATE TABLE "balance" (
 	"loan_to_from" MONEY DEFAULT 0,
 	"ending_balance_cleared" MONEY DEFAULT 0,
 	"ending_balance_actual" MONEY DEFAULT 0,
-	"client_id" INTEGER REFERENCES "client" NOT NULL
+	"client_id" INTEGER REFERENCES "client" NOT NULL,
+	"week_id" INTEGER REFERENCES "weeks" NOT NULL
 );
 
 INSERT INTO balance ("beginning_cash", "income_received", "expenses_paid",

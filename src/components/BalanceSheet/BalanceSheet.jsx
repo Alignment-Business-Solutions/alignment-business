@@ -19,7 +19,7 @@ function BalanceSheet(){
         <table id='table'>
   <thead>
     <tr>
-       <th>{balanceSheet.week_id}</th>
+     
       <th >Beginning Cash</th>
       <th >Income (received)</th>
       <th >Expenses (paid)</th>
