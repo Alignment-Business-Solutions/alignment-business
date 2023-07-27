@@ -1,9 +1,11 @@
 
 
 function BalanceItem({balance}) {
-
+console.log('Is this working?')
+console.log('Balance!', balance)
     return (
-        <>
+        <tr>
+        <td>{balance.week_id}</td>
         <td>{balance.beginning_cash}</td>
         <td>{balance.income_received}</td>
         <td>{balance.income_received}</td>
@@ -16,7 +18,9 @@ function BalanceItem({balance}) {
         <td>{balance.ending_balance_cleared}</td>
         <td>{balance.ending_balance_actual}</td>
        
-    </>)
+    </tr>)
+    
+    // <p>Hello</p>)
 }
 
 export default BalanceItem

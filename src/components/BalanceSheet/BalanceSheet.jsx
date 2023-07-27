@@ -12,14 +12,15 @@ function BalanceSheet(){
           type: "FETCH_BALANCE",
         });
       }, []);
+      console.log('Balance Sheet', balanceSheet)
     return (
-        <>
+       
     
         
-        <table id='table'>
+        <table >
   <thead>
     <tr>
-     
+      <th>Weeks</th>
       <th >Beginning Cash</th>
       <th >Income (received)</th>
       <th >Expenses (paid)</th>
@@ -36,12 +37,13 @@ function BalanceSheet(){
   <tbody>
    
         {balanceSheet && balanceSheet.map((balance,i) => (
-            <tr ><BalanceItem key={i} balance={balance}/></tr>
+
+             <BalanceItem key={i} balance={balance}/>
       
         ))}
 </tbody>
 </table>
-   </> )
+    )
 }
 
 export default BalanceSheet
