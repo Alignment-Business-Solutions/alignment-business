@@ -43,7 +43,12 @@ function TableItem({item, accLevel, categories, tableType}) {
     }
     
     function addItem() {
-        dispatch({type:"POST_ITEM", payload: itemEd});
+        if (itemEd.payee === "") {
+            alert('Add Payee');
+            return;
+        } else {
+            dispatch({type:"POST_ITEM", payload: itemEd});
+        }
     }
 
     function handleChange(type, change) {
@@ -281,7 +286,7 @@ function TableItem({item, accLevel, categories, tableType}) {
                 />
                 
             </td>
-            {accLevel !== 0 ? (
+            {accLevel !== 0 && match === false ? (
             <>
                 <td><button onClick={editToggleTwo}>Edit</button></td>
                 <td><button onClick={addItem}>Add</button></td>

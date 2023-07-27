@@ -40,6 +40,15 @@ function ItemForm({categories}) {
     function handleSubmit(event) {
         event.preventDefault(); 
         dispatch({type:"POST_ITEM", payload: item});
+        setItem({
+                date:'',
+                payee: String,
+                category_id: 0,
+                amount: "$0.00",
+                paid: false,
+                week_id: 1,
+                client_id: 1,
+                });
     }
 
     function findCatName() {

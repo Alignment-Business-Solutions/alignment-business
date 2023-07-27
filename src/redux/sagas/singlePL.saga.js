@@ -67,47 +67,47 @@ function* postItemData(action) {
     }
 }
 
-function* handleImportData(action) {
-    const importData = action.payload.data;
-    const week_id = action.payload.week_id;
-    const client_id = action.payload.client_id;
-    const transformedData = [];
-    
-    for (let item of importData) {
-        const date = new Date(item.DATE);
-        const newDate = date.toISOString();
-        if (item.SPENT !== "") { 
-            transformedData.push({
-                    amount: item.SPENT,
-                    category_id: 2,
-                    client_id: client_id,
-                    date: newDate,
-                    paid: true,
-                    payee: item.Payee,
-                    week_id: week_id,
-                    id: undefined
-            });
-        } else {
-            transformedData.push({
-                    amount: item.RECEIVED,
-                    category_id: 1,
-                    client_id: client_id,
-                    date: newDate,
-                    paid: true,
-                    payee: item.Payee,
-                    week_id: week_id,
-                    id: undefined
-            });
-        }
-    }
-    
-    try {
-        yield put({type:"SET_QB_IMPORT_DATA", payload: transformedData}); 
-    }
-    catch {
-        console.log('error with setting import data reducer');
-    }
-}
+// function* handleImportQBData(action) {
+//     const importData = action.payload.data;
+//     const week_id = action.payload.week_id;
+//     const client_id = action.payload.client_id;
+//     const transformedData = [];
+//     
+//     for (let item of importData) {
+//         const date = new Date(item.DATE);
+//         const newDate = date.toISOString();
+//         if (item.SPENT !== "") { 
+//             transformedData.push({
+//                     amount: item.SPENT,
+//                     category_id: 2,
+//                     client_id: client_id,
+//                     date: newDate,
+//                     paid: true,
+//                     payee: item.Payee,
+//                     week_id: week_id,
+//                     id: undefined
+//             });
+//         } else {
+//             transformedData.push({
+//                     amount: item.RECEIVED,
+//                     category_id: 1,
+//                     client_id: client_id,
+//                     date: newDate,
+//                     paid: true,
+//                     payee: item.Payee,
+//                     week_id: week_id,
+//                     id: undefined
+//             });
+//         }
+//     }
+//     
+//     try {
+//         yield put({type:"SET_QB_IMPORT_DATA", payload: transformedData}); 
+//     }
+//     catch {
+//         console.log('error with setting import data reducer');
+//     }
+// }
 
 function* handleImportRegData(action) {
     const importData = action.payload.data;
@@ -119,32 +119,60 @@ function* handleImportRegData(action) {
         const item = importData[i];
         if (item[0].includes('/')) {
             // console.log(item);
+
             const date = new Date(item[0]);
             const newDate = date.toISOString();
-            if ( item[4] !== "") {
-                // console.log('expense');
-                transformedData.push({
-                        amount: `$${item[4]}`,
-                        category_id: 2,
+            
+            if (item.length > 6) {
+                console.log(item); 
+                if ( item[4] !== "") {
+                    transformedData.push({
+                            amount: `$${item[4]}`,
+                            category_id: 2,
+                            client_id: client_id,
+                            date: newDate,
+                            paid: true,
+                            payee: item[2],
+                            week_id: week_id,
+                            id: undefined
+                    });
+                } else {
+                    // console.log('income');
+                    transformedData.push({
+                        amount: `$${item[5]}`,
+                        category_id: 1,
                         client_id: client_id,
                         date: newDate,
                         paid: true,
                         payee: item[2],
                         week_id: week_id,
                         id: undefined
-                });
-            } else {
-                // console.log('income');
-                transformedData.push({
-                    amount: `$${item[5]}`,
-                    category_id: 1,
-                    client_id: client_id,
-                    date: newDate,
-                    paid: true,
-                    payee: item[2],
-                    week_id: week_id,
-                    id: undefined
-                });
+                    });
+                }
+            } else {     
+                if ( item[4] !== "") {
+                    transformedData.push({
+                        amount: item[4],
+                        category_id: 2,
+                        client_id: client_id,
+                        date: newDate,
+                        paid: true,
+                        payee: ((item[2] !== "") ? (item[2]) : (item[1])),
+                        week_id: week_id,
+                        id: undefined
+                    });
+                } else {
+                    transformedData.push({
+                        amount: item[5],
+                        category_id: 1,
+                        client_id: client_id,
+                        date: newDate,
+                        paid: true,
+                        payee: ((item[2] !== "") ? (item[2]) : (item[1])),
+                        week_id: week_id,
+                        id: undefined
+                    });
+                }
             }
         }
     }
@@ -165,7 +193,7 @@ function* singlePLSaga() {
     yield takeLatest("DELETE_ITEM", deleteItemData);
     yield takeLatest("POST_ITEM", postItemData);
     yield takeLatest("ADD_TO_ALLPL", addToAllPL);
-    yield takeLatest("IMPORT_DATA", handleImportData);
+    // yield takeLatest("IMPORT_QB_DATA", handleImportQBData);
     yield takeLatest("IMPORT_REG_DATA", handleImportRegData);
 
 }
