@@ -20,14 +20,23 @@ function MyClients() {
   }
    
   const removeClient = (client_id) => {
-  
         dispatch({
             type: 'REMOVE_CLIENT',
             payload: {client_id}
         })
-        console.log("Assigned to Accountant");
-      
+        console.log("Assigned to Accountant");   
   }
+
+  function getClientID (client_id) {
+    console.log('Running getClientID', client_id);
+
+      dispatch({
+        type: 'GET_CLIENT_ID',
+        payload: {
+          id: client_id
+        },
+      });
+  };
 
         return (
             <div>
@@ -36,8 +45,8 @@ function MyClients() {
                 {myClients && myClients.map((oneClient, i) => (
                     <>
                     <li key={i}> {oneClient.company_name}</li>
-                    
-                    <button onClick={() => removeClient( oneClient.client_id)}>❌</button>
+                    <button type="submit" onClick={() => getClientID(oneClient.client_id)}>View Client Details</button>
+                    <button onClick={() => removeClient(oneClient.client_id)}>❌</button>
                </> ))}
                 
             </ul>

@@ -76,7 +76,13 @@ function AllPL() {
                                 }
                             })}
                         </tbody>
-                        <button>Click for Detailed View of this Week</button>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <button>Click To Edit This Week!</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 ))}
             </div>
