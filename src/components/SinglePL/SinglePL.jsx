@@ -33,7 +33,9 @@ function SinglePL() {
     }, []);
 
     return (
-        <>
+        <>  
+            {user.access_level !== 0 ? (
+            <>
             {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
                 <p>     </p>
                 <p>     </p>
@@ -53,12 +55,17 @@ function SinglePL() {
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
+                </>
+            ):(<></>)}
+
+
             <Table 
                 weekData={weekData}
                 accLevel={user.access_level}
                 categories={categories}
                 tableType={1}
             />
+                  
             <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
             <Table
@@ -72,14 +79,10 @@ function SinglePL() {
             >
                 Go Back To Summary Page
             </Link>
+
         </>
     );
-
-
-
-
 }
-
 
 export default SinglePL;
 
