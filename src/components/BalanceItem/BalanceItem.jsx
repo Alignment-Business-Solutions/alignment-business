@@ -1,6 +1,6 @@
 
 
-function BalanceItem() {
+function BalanceItem({balance}) {
 
     return (
         <p>🚧</p>

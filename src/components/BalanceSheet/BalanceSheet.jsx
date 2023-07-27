@@ -1,5 +1,6 @@
 import React,{useEffect, useReact} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import BalanceItem from '../BalanceItem/BalanceItem';
 
 function BalanceSheet(){
 
@@ -33,7 +34,7 @@ function BalanceSheet(){
   </thead>
   <tbody>
         {balanceSheet && balanceSheet.map((balance,i) => (
-            <tr key={i}>{balance.beginning_cash}</tr>
+            <tr key={i}><BalanceItem balance={balance}/></tr>
       
         ))}
 </tbody>
