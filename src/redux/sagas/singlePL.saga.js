@@ -59,8 +59,11 @@ function* deleteItemData(action) {
 
 function* postItemData(action) {
     const item = action.payload;
+    const week = item.week_id;
+    const client = item.client_id
     try {
         yield axios.post(`/api/single`, item);
+        yield put({type:"FETCH_WEEK", payload: {week, client}}); 
     }
     catch {
         console.log('error with deleting item data on server');

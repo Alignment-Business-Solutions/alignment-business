@@ -89,7 +89,7 @@ function App() {
 
           <ProtectedRoute 
             exact
-            path="/viewsummary"
+            path="/viewsummary/:client_id"
           >
             <ViewSummary />
           </ProtectedRoute>
@@ -131,7 +131,7 @@ function App() {
 
           <Route
             exact
-            path="/one"
+            path="/singlePL/:client_id/:week_id"
           >
             <SinglePL/>
           </Route>

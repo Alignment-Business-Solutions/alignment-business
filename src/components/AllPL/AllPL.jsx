@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import AllPL_Table from "./AllPL_Table/AllPLTable";
 
 function AllPL() {
 
@@ -76,8 +77,15 @@ function AllPL() {
                                 }
                             })}
                         </tbody>
-                        <button>Click for Detailed View of this Week</button>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <button>Click To Edit This Week!</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
+                    // <AllPL_Table week={week}/>
                 ))}
             </div>
         </div>

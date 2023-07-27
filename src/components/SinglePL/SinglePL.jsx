@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+
 import ExportCSV from './ExportCSV/ExportCSV.jsx';
 
 function SinglePL() {
@@ -19,9 +21,14 @@ function SinglePL() {
         setFormVis(!formVis);    
     }
 
+    const pathData = useParams();
+    const weekID = pathData.week_id/1;
+    const clientID = pathData.client_id/1;
+
+    console.log('pathData is:', pathData);
 
     useEffect(() => {
-        dispatch({type:"FETCH_WEEK", payload: {week:1, client:1}}); 
+        dispatch({type:"FETCH_WEEK", payload: {week: weekID, client: clientID}}); 
     }, []);
 
     return (
@@ -32,13 +39,13 @@ function SinglePL() {
                 <p>     </p>
                 <p>     </p>
             <h1>IMPORT ONLY SUPPORTS REGISTER and QB CSV'S</h1>
-            <ImportRegCSV week_id={1} client_id={1}/>
+            <ImportRegCSV week_id={weekID} client_id={clientID}/>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>           
             {formVis ? (
-            <ItemForm categories={categories}/> 
+            <ItemForm categories={categories} clientID={clientID} weekID={weekID}/> 
                 ) : (<></>)} 
             <button onClick={showForm}>Create New Item</button>
                 <p>     </p>

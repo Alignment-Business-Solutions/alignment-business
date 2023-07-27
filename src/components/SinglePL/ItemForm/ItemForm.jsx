@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 
-function ItemForm({categories}) {
+function ItemForm({categories, weekID, clientID}) {
     
     const [item, setItem] = useState({
                                     date:'',
@@ -10,8 +10,8 @@ function ItemForm({categories}) {
                                     category_id: 0,
                                     amount: "$0.00",
                                     paid: false,
-                                    week_id: 1,
-                                    client_id: 1,
+                                    week_id: weekID,
+                                    client_id: clientID,
                                         });
     const [cat, setCat] = useState('');
     const dispatch = useDispatch();
