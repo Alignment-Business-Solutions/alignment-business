@@ -19,6 +19,7 @@ function BalanceSheet(){
         <table id='table'>
   <thead>
     <tr>
+       
       <th >Beginning Cash</th>
       <th >Income (received)</th>
       <th >Expenses (paid)</th>
@@ -33,8 +34,9 @@ function BalanceSheet(){
     </tr>
   </thead>
   <tbody>
+   
         {balanceSheet && balanceSheet.map((balance,i) => (
-            <tr key={i}><BalanceItem balance={balance}/></tr>
+            <tr ><BalanceItem key={i} balance={balance}/></tr>
       
         ))}
 </tbody>
