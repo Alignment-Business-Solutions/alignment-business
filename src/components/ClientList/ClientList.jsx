@@ -77,7 +77,9 @@ function ClientList() {
       })
       .then((response) => {
         console.log("Client created successfully:", response.data);
-        // You can perform any additional actions here if needed
+        dispatch({
+          type: "FETCH_ALL_CLIENTS",
+        });
       })
       .catch((error) => {
         console.error("Error creating client:", error);
