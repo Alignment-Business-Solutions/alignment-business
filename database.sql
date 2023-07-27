@@ -110,11 +110,10 @@ CREATE TABLE "balance" (
 );
 
 INSERT INTO balance ("beginning_cash", "income_received", "expenses_paid",
-"expenses_expected",
-"to_from_savings", "saving_balance", "outstanding_checks", 
-"loan_to_from", "client_id")
-VALUES ('2,387.13', '14,987.78', '8,725.15', 
-'8,725.15', '449.63', '1,942.59', '0.00', '0.00', 1);
+"expenses_expected" ,"to_from_savings", "saving_balance", 
+"outstanding_checks", "loan_to_from", "client_id","week_id")
+VALUES ('2,387.13', '14,987.78', '8,725.15', '8,725.15',
+ '449.63', '1,942.59', '0.00', '0.00', 1, 1);
 
 UPDATE balance
 SET ending_balance_actual = beginning_cash + income_received 
