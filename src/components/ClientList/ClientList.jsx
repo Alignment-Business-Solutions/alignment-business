@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ClientListItem from "../ClientListItem/ClientListItem";
 import AddAccountant from "../AddAccountant/AddAccountant";
+import axios from "axios";
+import AddClient from "../AddClient/AddClient";
 
 function ClientList() {
   const dispatch = useDispatch();
@@ -38,9 +40,52 @@ function ClientList() {
     setShowModal(false);
   };
 
+  const [showClientModal, setShowClientModal] = useState(false);
+
+  const handleOpenClientModal = () => {
+    setShowClientModal(true);
+  };
+
+  const handleCloseClientModal = () => {
+    setShowClientModal(false);
+  };
+
   const handleAddAccountant = (accountantData) => {
-    // Handle the data sent from the AddAccountant modal
-    console.log(accountantData);
+    // Send a POST request to your server with the accountantData
+    axios
+      .post("/api/client/createaccountant", {
+        first_name: accountantData.firstName,
+        last_name: accountantData.lastName,
+      })
+      .then((response) => {
+        console.log("Accountant created successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error creating accountant:", error);
+        // Handle errors if necessary
+      });
+
+    // Close the modal after sending the request
+    handleCloseModal();
+  };
+
+  const handleAddClient = (clientData) => {
+    // Send a POST request to your server with the clientData
+    axios
+      .post("/api/client/createclient", {
+        company_name: clientData.companyName,
+      })
+      .then((response) => {
+        console.log("Client created successfully:", response.data);
+        // You can perform any additional actions here if needed
+      })
+      .catch((error) => {
+        console.error("Error creating client:", error);
+        // Handle errors if necessary
+      });
+
+    // Close the modal after sending the request
+    handleCloseClientModal();
   };
 
   return (
@@ -75,6 +120,17 @@ function ClientList() {
           isOpen={showModal}
           onRequestClose={handleCloseModal}
           onAdd={handleAddAccountant}
+        />
+      </div>
+      <div>
+      {/* Conditionally render the button if access_level is 1 or 2 */}
+      {user.access_level >= 2 && (
+          <button onClick={handleOpenClientModal}>New Client</button>
+        )}
+        <AddClient
+          isOpen={showClientModal}
+          onRequestClose={handleCloseClientModal}
+          onAdd={handleAddClient}
         />
       </div>
     </>

@@ -81,6 +81,53 @@ router.delete('/', (req, res) => {
 
 });
 
+// Route for admin to add a new accountant to database:
+router.post('/createaccountant', (req, res) => {
+  const { first_name, last_name } = req.body;
 
+  const queryText = `
+    INSERT INTO "accountants" (first_name, last_name)
+    VALUES ($1, $2)
+    RETURNING id;
+  `;
+
+  const values = [first_name, last_name];
+
+  pool
+    .query(queryText, values)
+    .then((result) => {
+      console.log('Accountant added to the database:', result.rows[0]);
+      res.sendStatus(201); // Respond with a success status code
+    })
+    .catch((error) => {
+      console.error('Error adding accountant to the database:', error);
+      res.sendStatus(500); // Respond with an error status code
+    });
+});
+
+// Route for accountant to create a new client:
+router.post('/createclient', (req, res) => {
+  const { company_name } = req.body;
+  console.log("REQ.BODY IS:", req.body)
+
+  const queryText = `
+    INSERT INTO "client" (company_name)
+    VALUES ($1)
+    RETURNING id;
+  `;
+
+  const values = [company_name];
+
+  pool
+    .query(queryText, values)
+    .then((result) => {
+      console.log('Client added to the database:', result.rows[0]);
+      res.sendStatus(201); // Respond with a success status code
+    })
+    .catch((error) => {
+      console.error('Error adding client to the database:', error);
+      res.sendStatus(500); // Respond with an error status code
+    });
+});
 
 module.exports = router;
