@@ -136,13 +136,12 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
-          <Route
+        <ProtectedRoute
             exact
             path="/singlePL/:client_id/:week_id"
-          >
+        >
             <SinglePL/>
-          </Route>
+        </ProtectedRoute>
 
           <Route
             exact
