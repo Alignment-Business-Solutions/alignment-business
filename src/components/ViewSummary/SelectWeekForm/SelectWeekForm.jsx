@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useParams, Link } from "react-router-dom";
 
 
 function SelectWeekForm() {
@@ -11,11 +12,17 @@ function SelectWeekForm() {
     const weeksDropdown = useSelector(store => store.weeksDropdown)
     const [weekSelected, setWeekSelected] = useState(0)
 
+    const clientID = useParams();
+
+    const path = `/singlePL/${clientID.client_id}/${weekSelected}`
+
+    console.log('clientID is:', clientID)
+
     function goToWeek(event) {
         event.preventDefault();
         console.log('weekSelected is:', weekSelected);
-        dispatch({ type: 'FETCH_WEEK', payload: weekSelected});
-        history.push('/one');
+        // dispatch({ type: 'FETCH_WEEK', payload: weekSelected});
+        // history.push('/one');
     }
 
     return (
@@ -30,7 +37,7 @@ function SelectWeekForm() {
                         <option key={week.id} value={week.id}>{week.start_date}</option>
                     ))}
                 </select>
-                <button type="submit">Go To Week Details</button>
+                <Link to={path}>Go To Week Details</Link>
             </form>
         </div>
     )

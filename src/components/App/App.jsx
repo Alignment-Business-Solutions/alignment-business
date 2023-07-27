@@ -131,7 +131,7 @@ function App() {
 
           <Route
             exact
-            path="/one"
+            path="/singlePL/:client_id/:week_id"
           >
             <SinglePL/>
           </Route>

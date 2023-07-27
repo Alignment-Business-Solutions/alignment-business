@@ -5,6 +5,8 @@ import Table from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportQBCSV from "./ImportCSV/ImportQBCSV";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+
 
 function SinglePL() {
 
@@ -20,9 +22,11 @@ function SinglePL() {
         setFormVis(!formVis);    
     }
 
+    const pathData = useParams();
+    console.log('pathData is:', pathData);
 
     useEffect(() => {
-        dispatch({type:"FETCH_WEEK", payload: {week:1, client:1}}); 
+        dispatch({type:"FETCH_WEEK", payload: {week: pathData.week_id/1, client: pathData.client_id/1}}); 
     }, []);
 
     return (
