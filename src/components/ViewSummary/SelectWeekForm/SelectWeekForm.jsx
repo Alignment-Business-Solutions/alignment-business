@@ -16,7 +16,7 @@ function SelectWeekForm() {
 
     const path = `/singlePL/${clientID.client_id}/${weekSelected}`
 
-    console.log('clientID is:', clientID)
+    // console.log('clientID is:', clientID)
 
     function goToWeek(event) {
         event.preventDefault();
