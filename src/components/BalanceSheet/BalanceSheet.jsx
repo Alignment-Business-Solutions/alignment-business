@@ -2,6 +2,7 @@ import React,{useEffect, useReact} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import BalanceItem from './BalanceItem/BalanceItem';
 import BalanceForm from './BalanceForm/BalanceForm';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function BalanceSheet(){
 

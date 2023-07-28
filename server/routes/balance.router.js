@@ -85,6 +85,7 @@ router.post('/', async (req, res) => {
         req.body.saving_balance, req.body.outstanding_checks,
         req.body.loan_to_from, req.body.client_id
      ]
+     console.log('SQL VALUES', sqlValues)
     // newBalance will hold id that's returned
     let newBalance = await connection.query(sqlBalance,sqlValues);
     console.log('newBalance.rows[0].id is:', newBalance.rows[0].id);
