@@ -73,6 +73,8 @@ router.post('/', async (req, res) => {
   try {
     await connection.query('BEGIN'); // begin transaction
 
+    const client_id = req.body.client_id/1
+
     const sqlBalance = `INSERT INTO balance ("start_date", "beginning_cash", "income_received", "expenses_paid", 
     "expenses_expected", "to_from_savings", "saving_balance",
      "outstanding_checks", "loan_to_from", "client_id")
@@ -80,14 +82,36 @@ router.post('/', async (req, res) => {
 
     RETURNING "id";;`
     
-    const sqlValues = [req.body.start_date,req.body.beginning_cash,req.body.income_received, req.body.expenses_paid, 
-        req.body.expenses_expected,req.body.to_from_savings,
-        req.body.saving_balance, req.body.outstanding_checks,
-        req.body.loan_to_from, req.body.client_id
-     ]
-     console.log('SQL VALUES', sqlValues)
+    // const sqlValues = [req.body.start_date,req.body.beginning_cash,req.body.income_received, req.body.expenses_paid, 
+    //     req.body.expenses_expected,req.body.to_from_savings,
+    //     req.body.saving_balance, req.body.outstanding_checks,
+    //     req.body.loan_to_from, req.body.client_id
+    //  ]
+
+    const {
+        start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid, 
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        
+    } = req.body
+     console.log('SQL VALUES', req.body)
     // newBalance will hold id that's returned
-    let newBalance = await connection.query(sqlBalance,sqlValues);
+    let newBalance = await connection.query(sqlBalance,[ start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid, 
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        client_id]);
     console.log('newBalance.rows[0].id is:', newBalance.rows[0].id);
     const insertResultId = newBalance.rows[0].id;
 
@@ -104,7 +128,7 @@ router.post('/', async (req, res) => {
   } catch (error) {
     // undo everything that changed in the transaction above
     await connection.query('ROLLBACK');
-    console.log('Transaction error:', error);
+    console.log('Balance error:', error);
     res.sendStatus(500);
   } finally {
     // this always runs, both after successful try and after catch

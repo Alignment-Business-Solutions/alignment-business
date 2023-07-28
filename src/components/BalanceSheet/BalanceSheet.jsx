@@ -8,6 +8,8 @@ function BalanceSheet(){
 
     const dispatch = useDispatch();
     const balanceSheet = useSelector((store) => store.balance);
+    const params = useParams()
+    console.log('Params for BalanceSheet ===>', params)
 
     useEffect(() => {
         dispatch({

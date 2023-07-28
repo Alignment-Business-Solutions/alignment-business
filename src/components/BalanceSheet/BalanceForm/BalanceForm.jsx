@@ -1,10 +1,14 @@
 import { useDispatch } from "react-redux"
 import {useState} from 'react'
+import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 
 function BalanceForm() {
 
     const dispatch = useDispatch()
+    const params = useParams()
+    // let client_id = params.client_id
+    // console.log(client_id)
 
     const totalBalance = {
         start_date: '',
@@ -17,7 +21,9 @@ function BalanceForm() {
         outstanding_checks: '',
         loan_to_from: '',
         ending_balance_cleared: '',
-        ending_balance_actual: ''
+        ending_balance_actual: '',
+        client_id: params.client_id,
+
     }
 
     let [balance, setBalance] = useState(totalBalance)

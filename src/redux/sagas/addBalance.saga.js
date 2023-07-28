@@ -5,8 +5,8 @@ import {put, takeLatest} from 'redux-saga/effects';
 
 function* addBalance(action) {
     try{
-        console.log('POST Add Balance action.payload ===>', action.payload)
-        yield axios.put('/api/balance/', action.payload)
+        console.log('POST Add Balance action.payload ===>', action.payload.balance)
+        yield axios.post('/api/balance/', action.payload.balance)
         yield put({
             type: 'FETCH_BALANCE'
         })
