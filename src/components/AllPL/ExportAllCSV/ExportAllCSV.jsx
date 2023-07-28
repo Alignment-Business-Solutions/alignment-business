@@ -1,7 +1,6 @@
 import { usePapaParse } from 'react-papaparse';
 
-export default function JsonToCSV({week, weekData, categories}) {
-
+export default function ExportAllWeeks({weeks, categories}) {
     const { jsonToCSV } = usePapaParse();
     const download = (data) => {
       
@@ -27,35 +26,39 @@ export default function JsonToCSV({week, weekData, categories}) {
     }
     const handleJsonToCSV = (data) => {
         const results = jsonToCSV(data);
+        console.log(results);
         download(results);
     };
 
     function processJSON() {
         const transformData = [];
-        let catName = '';
-
-        for (let item of weekData) {
+        for (let week of weeks) {
             
-            for ( let cat of categories) {
-                
-                if (cat.id === item.category_id) {
-                    catName = cat.category;
+            let catName = '';
+        
+            for (let item of week) {
 
-                    transformData.push({
-                        date: item.date,
-                        payee: item.payee,
-                        paid: item.paid,
-                        amount: item.amount,
-                        category: catName, 
-                    });
+                for ( let cat of categories) {
+
+                    if (cat.id === item.category_id) {
+                        catName = cat.category;
+
+                        transformData.push({
+                            date: item.date,
+                            payee: item.payee,
+                            paid: item.paid,
+                            amount: item.amount,
+                            category: catName, 
+                        });
+                    }
                 }
             }
         }
-
+        console.log(transformData);
         handleJsonToCSV(transformData);
     }
 
-  return <button onClick={() => processJSON()}>Export This Week</button>;
+  return <button onClick={() => processJSON()}>Export All Weeks</button>;
 }
 
 
