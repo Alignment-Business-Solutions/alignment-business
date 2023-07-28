@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import AllPL_Table from "./AllPL_Table/AllPLTable";
 import ExportCSV from "../SinglePL/ExportCSV/ExportCSV"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import ExportAllWeeks from "./ExportAllCSV/ExportAllCSV";
 
 function AllPL() {
 
@@ -20,6 +21,7 @@ function AllPL() {
     }
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_WEEKS' });
+        dispatch({ type: 'FETCH_CAT' });
         dispatch({ type: "FETCH_SELECTED_CLIENT", payload: client_id});
     }, []);
 
@@ -27,6 +29,7 @@ function AllPL() {
     return (
         <div>
             <h2>All Weeks Profits & Loss</h2>
+            <ExportAllWeeks weeks={allWeeks} categories={categories}/>
             <div>
                 {allWeeks.map(week => (
                     
