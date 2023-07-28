@@ -25,6 +25,13 @@ function BalanceForm() {
     const handleCreateBalance = (event) => {
         event.preventDefault()
         console.log('Created a New Balance')
+        dispatch({
+            type: 'ADD_BALANCE',
+            payload: {balance}
+        })
+
+       
+      setBalance('')
         
     }
 
