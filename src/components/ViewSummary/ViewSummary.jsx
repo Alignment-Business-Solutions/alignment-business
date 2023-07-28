@@ -14,16 +14,17 @@ function ViewSummary() {
     const params = useParams();
     const clientID = params.client_id;
 
-
-    console.log('params for viewSummary is:', params);
-
     function pageLoad() {
+        // dispatching to fetch_recent_pl.saga.js
         dispatch({ type: 'FETCH_RECENT_PL', payload: {client: clientID} });
+        // dispatching to fetchWeeksDropdown.saga.js
         dispatch({ type: 'FETCH_WEEKS_DROPDOWN'});
+        // dispatching to clients.saga.js
         dispatch({ type: "FETCH_SELECTED_CLIENT", payload: client_id});
     }
 
     useEffect(() => {
+        // on page load run this function
         pageLoad();
     }, [])
 
