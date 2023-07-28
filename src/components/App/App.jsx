@@ -97,7 +97,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/allPL/:client_d"
+            path="/allPL/:client_id"
           >
             <MultiPL />
           </ProtectedRoute>
