@@ -6,12 +6,11 @@ import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 
 import ExportCSV from './ExportCSV/ExportCSV.jsx';
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SinglePL() {
 
     const dispatch = useDispatch();
-    const history = useHistory();
     const weekData = useSelector(store => store.singlePL);
     const user = useSelector(store => store.user);
     const categories = useSelector(store => store.categories); 
@@ -33,6 +32,7 @@ function SinglePL() {
 
     useEffect(() => {
         dispatch({type:"FETCH_WEEK", payload: {week: weekID, client: clientID}}); 
+        dispatch({ type: "FETCH_SELECTED_CLIENT", payload: pathData});
     }, []);
 
     return (
@@ -67,6 +67,8 @@ function SinglePL() {
                 accLevel={user.access_level}
                 categories={categories}
                 tableType={1}
+                weekID={weekID}
+                clientID={clientID}
             />
                   
             <h1> IMPORTED DATA </h1>
@@ -76,6 +78,8 @@ function SinglePL() {
                 accLevel={user.access_level}
                 categories={categories}
                 tableType={2}
+                weekID={weekID}
+                clientID={clientID}
             />
             <Link
                 to={path}
