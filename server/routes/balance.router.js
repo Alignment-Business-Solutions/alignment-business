@@ -88,13 +88,14 @@ router.post('/', async (req, res) => {
     // newBalance will hold id that's returned
     let newBalance = await connection.query(sqlBalance,sqlValues);
     console.log('newBalance.rows[0].id is:', newBalance.rows[0].id);
+    const insertResultId = newBalance.rows[0].id;
 
     const sqlCalculation = `UPDATE balance
     SET ending_balance_actual = balance.beginning_cash + balance.income_received - balance.expenses_expected - balance.to_from_savings - balance.outstanding_checks,
         ending_balance_cleared = balance.beginning_cash + balance.income_received - balance.expenses_expected
     FROM balance 
-    WHERE balance."id" = (INSERT statement result);;`
-    await connection.query(sqlCalculation, [newBalance.rows.id]);
+    WHERE balance."id" = $1;`
+    await connection.query(sqlCalculation, [insertResultId]);
 
     // save all the changes made in this transaction
     await connection.query('COMMIT');
