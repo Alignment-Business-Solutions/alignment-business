@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import AllPL_Table from "./AllPL_Table/AllPLTable";
+import ExportCSV from "../SinglePL/ExportCSV/ExportCSV"
 
 function AllPL() {
+
+    const weekData = useSelector(store => store.singlePL);
+    const categories = useSelector(store => store.categories); 
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -76,8 +81,18 @@ function AllPL() {
                                 }
                             })}
                         </tbody>
-                        <button>Click for Detailed View of this Week</button>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <button>Click To Edit This Week!</button>
+                                    {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
+
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
+                    // <AllPL_Table week={week}/>
                 ))}
             </div>
         </div>

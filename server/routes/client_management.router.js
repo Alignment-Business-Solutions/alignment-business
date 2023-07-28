@@ -31,10 +31,6 @@ router.get('/', (req,res) => {
 
 })
 
-router.post('/', (req, res) => {
-    // POST route code here
-  });
-
 router.put('/add', (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here
@@ -129,5 +125,18 @@ router.post('/createclient', (req, res) => {
       res.sendStatus(500); // Respond with an error status code
     });
 });
+
+router.get('/info', (req, res) => {
+  console.log('In GET route for client info')
+  queryText = `SELECT * FROM "client" WHERE "user_id" = $1;`;
+  pool.query (queryText, [req.user.id])
+  .then((result) => {
+    console.log('Data received form getClientInfo:', result.rows);
+    res.send(result.rows)
+  }).catch(error => {
+    console.error('Error getting client info:', error)
+    res.sendStatus(500);
+  })
+})
 
 module.exports = router;
