@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 function AddWeekForm() {
 
     const dispatch = useDispatch();
+    // addClicker
     const [addClicker, setAddClicker] = useState(false);
     const [start_date, setStartDate] = useState('')
 

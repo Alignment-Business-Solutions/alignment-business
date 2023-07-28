@@ -33,7 +33,7 @@ function RecentPLTable() {
                                 <td>{transaction.date}</td>
                                 <td>{transaction.payee}</td>
                                 <td>{transaction.amount}</td>
-                                <td><input type="checkbox" checked readOnly /></td>
+                                <td><input type="checkbox" checked={transaction.paid} readOnly /></td>
                             </tr>
                             // otherwise if category is income, but paid is set to false, render this code
                         } else if (transaction.category_id === 1 && transaction.paid === false) {
@@ -41,7 +41,7 @@ function RecentPLTable() {
                                 <td>{transaction.date}</td>
                                 <td>{transaction.payee}</td>
                                 <td>{transaction.amount}</td>
-                                <td><input type="checkbox" disabled /></td>
+                                <td><input type="checkbox" readOnly /></td>
                             </tr>
                         }
                     })}
@@ -75,7 +75,7 @@ function RecentPLTable() {
                                 <td>{transaction.date}</td>
                                 <td>{transaction.payee}</td>
                                 <td>{transaction.amount}</td>
-                                <td><input type="checkbox" checked readOnly /></td>
+                                <td><input type="checkbox" checked={transaction.paid} readOnly /></td>
                             </tr>
                             // otherwise if category is expense, but paid is set to false, render this code
                         } else if (transaction.category_id === 2 && transaction.paid === false) {
