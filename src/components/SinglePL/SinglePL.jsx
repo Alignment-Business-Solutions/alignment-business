@@ -64,6 +64,8 @@ function SinglePL() {
                 accLevel={user.access_level}
                 categories={categories}
                 tableType={1}
+                weekID={weekID}
+                clientID={clientID}
             />
                   
             <h1> IMPORTED DATA </h1>
@@ -73,6 +75,8 @@ function SinglePL() {
                 accLevel={user.access_level}
                 categories={categories}
                 tableType={2}
+                weekID={weekID}
+                clientID={clientID}
             />
             <Link
                 to="/viewsummary"
