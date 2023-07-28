@@ -31,7 +31,7 @@ function BalanceForm() {
         })
 
        
-      setBalance('')
+    //   setBalance('')
         
     }
 
@@ -43,7 +43,7 @@ function BalanceForm() {
                         placeholder='Start Date'
                         value={balance.start_date}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            start_date: e.target.value
                         })} 
                         />
@@ -53,7 +53,7 @@ function BalanceForm() {
                         placeholder='Beginning Cash'
                         value={balance.beginning_cash}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            beginning_cash: e.target.value
                         })} 
                         />
@@ -63,7 +63,7 @@ function BalanceForm() {
                         placeholder='Income Received'
                         value={balance.income_received}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            income_received: e.target.value
                         })} 
                         />
@@ -73,7 +73,7 @@ function BalanceForm() {
                         placeholder='Expenses Paid'
                         value={balance.expenses_paid}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            expenses_paid: e.target.value
                         })} 
                         />
@@ -83,7 +83,7 @@ function BalanceForm() {
                         placeholder='Expenses Expected'
                         value={balance.expenses_expected}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            expenses_expected: e.target.value
                         })} 
                         />
@@ -93,7 +93,7 @@ function BalanceForm() {
                         placeholder='To/(From) Savings'
                         value={balance.to_from_savings}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            to_from_savings: e.target.value
                         })} 
                         />
@@ -103,7 +103,7 @@ function BalanceForm() {
                         placeholder='Saving Balance'
                         value={balance.saving_balance}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            saving_balance: e.target.value
                         })} 
                         />
@@ -113,7 +113,7 @@ function BalanceForm() {
                         placeholder='Outstanding Checks'
                         value={balance.outstanding_checks}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            outstanding_checks: e.target.value
                         })} 
                         />
@@ -123,7 +123,7 @@ function BalanceForm() {
                         placeholder='Loan (To)/From'
                         value={balance.loan_to_from}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            loan_to_from: e.target.value
                         })} 
                         />
@@ -133,7 +133,7 @@ function BalanceForm() {
                         placeholder='Ending Balance (cleared)'
                         value={balance.ending_balance_cleared}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            ending_balance_cleared: e.target.value
                         })} 
                         />
@@ -143,7 +143,7 @@ function BalanceForm() {
                         placeholder='Ending Balance (actual)'
                         value={balance.ending_balance_actual}
                         onChange={(e) => setBalance({
-                           ...totalBalance,
+                           ...balance,
                            ending_balance_actual: e.target.value
                         })} 
                         />
