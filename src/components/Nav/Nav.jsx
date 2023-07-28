@@ -49,27 +49,32 @@ function Nav() {
         ) : // If ACCOUNTANT-LEVEL user is logged in, show these links:
         user.access_level === 1 ? (
           <>
-            <Link className="navLink" to="/clients">
+            <Link className="navLink" to="/myClients">
               My Clients
             </Link>
+            {client.company_name !== undefined ? (
+                <>
+                <Link className="navLink" to={path}>
+            
+                {client.company_name}
+                </Link>
 
-            <Link className="navLink" to={path}>
-            {client.company_name}
-            </Link>
+                <Link className="navLink" to="/balance">
+                  Balance
+                </Link>
 
-            <Link className="navLink" to="/balance">
-              Balance
-            </Link>
+                <Link className="navLink" to="/allpl">
+                  P&L
+                </Link>
 
-            <Link className="navLink" to="/allpl">
-              P&L
-            </Link>
-
-            <Link className="navLink" to="/cashflow">
-              Cash Flow
-            </Link>
+                <Link className="navLink" to="/cashflow">
+                  Cash Flow
+                </Link>
+                </>
+            ):(<></>)}
 
             <LogOutButton className="navLink" />
+
           </>
         ) : (
           // If ADMIN-LEVEL user is logged in, show these links:
