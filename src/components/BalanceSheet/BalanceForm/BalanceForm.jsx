@@ -22,11 +22,11 @@ function BalanceForm() {
 
     let [balance, setBalance] = useState(totalBalance)
 
-    // const handleCreateBalance = (event) => {
-    //     event.preventDefault()
-    //     console.log('Created a New Balance')
-
-    // }
+    const handleCreateBalance = (event) => {
+        event.preventDefault()
+        console.log('Created a New Balance')
+        
+    }
 
     return (
         <form>
@@ -140,7 +140,7 @@ function BalanceForm() {
                            ending_balance_actual: e.target.value
                         })} 
                         />
-             
+              <button onClick={handleCreateBalance}>Submit</button>
         </form>
     )
 }
