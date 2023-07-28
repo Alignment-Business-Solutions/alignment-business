@@ -18,16 +18,23 @@ function SelectWeekForm() {
 
     return (
         <div>
-            <form onSubmit={(event) => goToWeek(event)}>
+            {/* beginning form */}
+            <form>
+                {/* beginning dropdown menu element */}
                 <select
+                // value will set value of weekSelected state variable
                     value={weekSelected}
                     onChange={(event) => setWeekSelected(event.target.value)}
                 >
+                    {/* default setting for dropdown menu */}
                     <option value=""> -- Click to Select a week!</option>
+                    {/* beginning map to loop through weeksDropdown varbiable */}
                     {weeksDropdown.map(week => (
+                        // for each week, render this dropdown menu option
                         <option key={week.id} value={week.id}>{week.start_date}</option>
                     ))}
                 </select>
+                {/*linking to week details view for selected week in dropdown menu */}
                 <Link to={path}>Go To Week Details</Link>
             </form>
         </div>
