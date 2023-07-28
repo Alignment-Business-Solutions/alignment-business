@@ -46,8 +46,8 @@ function ItemForm({categories, weekID, clientID}) {
                 category_id: 0,
                 amount: "$0.00",
                 paid: false,
-                week_id: 1,
-                client_id: 1,
+                week_id: weekID,
+                client_id: clientID,
                 });
     }
 
