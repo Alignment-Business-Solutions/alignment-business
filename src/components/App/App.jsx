@@ -109,7 +109,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              (user.access_level !== 0 ? (<Redirect to="/myClients"/>) : (<Redirect to={path}/>)) 
+              <Redirect to="/user"/> 
               :
               // Otherwise, show the login page
               <LoginPage />
