@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Table from "./Table/Table";
+import TableComp from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
@@ -62,7 +62,7 @@ function SinglePL() {
             ):(<></>)}
 
 
-            <Table 
+            <TableComp 
                 weekData={weekData}
                 accLevel={user.access_level}
                 categories={categories}
@@ -73,7 +73,7 @@ function SinglePL() {
                   
             <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
-            <Table
+            <TableComp
                 weekData={importRegData}
                 accLevel={user.access_level}
                 categories={categories}
