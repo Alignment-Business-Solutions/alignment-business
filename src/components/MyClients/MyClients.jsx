@@ -32,7 +32,7 @@ function MyClients() {
 
         return (
             <div>
-                <h2>Accountants's Clients</h2>
+                <h2>My Clients</h2>
             <ul>
                 {myClients && myClients.map((client, i) => (
                   <MyClientsItem key={i} client={client}/>
