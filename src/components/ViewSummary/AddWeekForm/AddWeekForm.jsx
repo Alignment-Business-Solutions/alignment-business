@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
+import { Button, TextField, OutlinedInput } from "@mui/material";
+
 
 
 function AddWeekForm() {
 
     const dispatch = useDispatch();
-    // addClicker
     const [addClicker, setAddClicker] = useState(false);
     const [start_date, setStartDate] = useState('')
 
@@ -25,17 +26,17 @@ function AddWeekForm() {
                 addClicker ?
                     <form onSubmit={(event) => submitNewWeek(event)}>
                         <label>Starting Date</label>
-                        <input
+                        <OutlinedInput
                             placeholder="Example: 12/12/2023"
                             value={start_date}
                             onChange={(event) => setStartDate(event.target.value)}
                             required
                         />
-                        <button type="submit">Submit New Week!</button>
+                        <Button variant="contained" type="submit">Submit New Week!</Button>
                         <button onClick={() => setAddClicker(false)}>Cancel Add Week</button>
                     </form>
                     :
-                    <button onClick={() => setAddClicker(true)}>Create New Week</button>
+                    <Button variant="contained" onClick={() => setAddClicker(true)}>Create New Week</Button>
             }
         </div>
     )
