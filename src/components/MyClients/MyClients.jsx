@@ -14,6 +14,7 @@ function MyClients() {
     dispatch({
       type: "FETCH_MY_CLIENTS",
     });
+      dispatch({type:"UNSET_SELECTED_CLIENT"});
   }, []);
 
   const goClients = () => {

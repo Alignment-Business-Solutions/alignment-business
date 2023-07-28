@@ -10,16 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ClientList from '../ClientList/ClientList';
 import MyClients from '../MyClients/MyClients';
-
 import MultiPL from '../AllPL/AllPL';
 import SinglePL from '../SinglePL/SinglePL';
 
@@ -34,9 +31,6 @@ function App() {
 
   const clientInfo = useSelector(store => store.clientInfo);
   const path = clientInfo && `/viewsummary/${clientInfo.id}`
-
-  console.log('clientInfo is:', clientInfo);
-  console.log('user.access_level is:', user.access_level);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -81,7 +75,7 @@ function App() {
           <ProtectedRoute
             // logged in shows the Balance Sheet View
             exact
-            path="/balance"
+            path="/balance/:client_id"
           >
             <BalanceSheet />
           </ProtectedRoute>
@@ -103,7 +97,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/allPL"
+            path="/allPL/:client_id"
           >
             <MultiPL />
           </ProtectedRoute>

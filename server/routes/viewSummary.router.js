@@ -6,12 +6,18 @@ const {
 } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
+    // console.log('req is:', req)
+    console.log('req.query is:', req.query);
+    console.log('req.body is:', req.body);
+    console.log('req.params is:', req.params)
+    const client_id = req.query.clientID/1;
+    console.log('clientID is:', client_id);
     const queryText = `SELECT "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
     WHERE "week_id" = (
-    SELECT MAX("week_id") FROM "transactions" WHERE "client_id" = 1
+    SELECT MAX("week_id") FROM "transactions" WHERE "client_id" = $1
     )
     ORDER BY "category_id";`;
-    pool.query(queryText)
+    pool.query(queryText, [client_id])
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
@@ -35,6 +41,45 @@ router.post('/', (req, res) => {
             console.log('error in createNewWeek POST request:', error)
             res.sendStatus(500);
         })
+});
+
+router.post('/', async (req, res) => {
+    // the same connection we use for all queries
+    const connection = await pool.connect();
+    const start_date = [
+        req.body.start_date
+    ]
+    console.log('start_date is:', start_date);
+
+    // basic JS try/catch/finally
+    try {
+        await connection.query('BEGIN'); // begin transaction
+
+        const sqlAddWeek = `INSERT INTO "weeks" ("start_date") VALUES
+      ($1) RETURNING "id";`
+
+        // newId will hold id that's returned
+        let newId = await connection.query(sqlAddWeek, [start_date]);
+        console.log('newId.rows[0].id is:', newId.rows[0].id);
+
+        const sqlRegister = `INSERT INTO "balance" ("client_id", "week_id")
+                          VALUES ($1, $2);`
+        await connection.query(sqlRegister, [newId.rows[0].id]);
+
+        // save all the changes made in this transaction
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        // undo everything that changed in the transaction above
+        await connection.query('ROLLBACK');
+        console.log('Transaction error:', error);
+        res.sendStatus(500);
+    } finally {
+        // this always runs, both after successful try and after catch
+        // puts the connection back in the pool for further use
+        // VERY IMPORTANT!
+        connection.release();
+    }
 });
 
 router.get('/weeks', rejectUnauthenticated, (req, res) => {

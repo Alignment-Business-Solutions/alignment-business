@@ -139,4 +139,20 @@ router.get('/info', (req, res) => {
   })
 })
 
+router.get('/selected/:id', (req, res) => {
+    console.log(req.params.id);
+    queryText = `SELECT * FROM "client" WHERE "id" = $1;`;
+    pool.query (queryText, [req.params.id/1])
+    .then((result) => {
+        console.log(result.rows);
+        res.send(result.rows)
+    }).catch(error => {
+        console.error('Error getting client info:', error)
+        res.sendStatus(500);
+    })
+
+
+
+});
+
 module.exports = router;

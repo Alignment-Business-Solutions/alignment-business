@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 
     if (req.isAuthenticated()) {
+        console.log('req.query is:', req.query);
         const week = req.query.week/1;
         const client_id = req.query.client/1;
         const user_id = req.user.id;

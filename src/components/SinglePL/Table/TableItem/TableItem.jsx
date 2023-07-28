@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
-function TableItem({item, accLevel, categories, tableType}) { 
+function TableItem({item, accLevel, categories, tableType, weekID, clientID}) { 
     
     const [editToggleValue, setEditToggleValue] = useState(false);
+    const [addToggleValue, setAddToggleValue] = useState(false);
     const [itemEd, setItemEd] = useState(item);
     const dispatch = useDispatch();
     const [cat, setCat] = useState(''); 
@@ -15,8 +15,8 @@ function TableItem({item, accLevel, categories, tableType}) {
             console.log('save');
             console.log(itemEd);
             dispatch({type:"UPDATE_ITEM", payload:{data: itemEd,
-                                                   week: 1,
-                                                   client: 1}});
+                                                   week: weekID,
+                                                   client: clientID}});
             setEditToggleValue(!editToggleValue); 
         } else {
             console.log('edit');
@@ -38,8 +38,8 @@ function TableItem({item, accLevel, categories, tableType}) {
     //figure out why delete isn't working consecutively
     function deleteItem() {
         dispatch({type:"DELETE_ITEM", payload: {data: itemEd.id,
-                                                week: 1,
-                                                client: 1}});
+                                                week: weekID,
+                                                client: clientID}});
     }
     
     function addItem() {
@@ -48,6 +48,7 @@ function TableItem({item, accLevel, categories, tableType}) {
             return;
         } else {
             dispatch({type:"POST_ITEM", payload: itemEd});
+            setAddToggleValue(true);
         }
     }
 
@@ -286,7 +287,7 @@ function TableItem({item, accLevel, categories, tableType}) {
                 />
                 
             </td>
-            {accLevel !== 0 && match === false ? (
+            {accLevel !== 0 && match === false && addToggleValue === false ? (
             <>
                 <td><button onClick={editToggleTwo}>Edit</button></td>
                 <td><button onClick={addItem}>Add</button></td>
