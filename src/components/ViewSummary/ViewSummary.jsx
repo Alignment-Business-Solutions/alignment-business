@@ -12,7 +12,7 @@ function ViewSummary() {
     const dispatch = useDispatch();
     const client_id = useParams();
     const params = useParams();
-    const clientID = params.client_id
+    const clientID = params.client_id;
 
 
     console.log('params for viewSummary is:', params);
