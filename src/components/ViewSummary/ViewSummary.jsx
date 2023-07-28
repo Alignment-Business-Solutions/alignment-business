@@ -17,10 +17,6 @@ function ViewSummary() {
 
     console.log('params for viewSummary is:', params);
 
-    // function pageLoad() {
-
-    //     dispatch({ type: 'FETCH_RECENT_PL' })
-    //     dispatch({ type: 'FETCH_WEEKS_DROPDOWN'})
     function pageLoad() {
         dispatch({ type: 'FETCH_RECENT_PL', payload: {client: clientID} });
         dispatch({ type: 'FETCH_WEEKS_DROPDOWN'});
