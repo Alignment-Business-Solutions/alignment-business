@@ -14,3 +14,9 @@ function* addBalance(action) {
         console.log('Error with Add Balance POST saga', err)
     }
 }
+
+function* addBalanceSaga(){
+    yield takeLatest('ADD_BALANCE', addBalance)
+}
+
+export default addBalanceSaga
