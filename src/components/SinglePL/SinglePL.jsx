@@ -25,6 +25,9 @@ function SinglePL() {
     const pathData = useParams();
     const weekID = pathData.week_id/1;
     const clientID = pathData.client_id/1;
+    console.log('clientID is:', clientID);
+    const path = `/viewsummary/${clientID}`
+
 
     console.log('pathData is:', pathData);
 
@@ -75,7 +78,7 @@ function SinglePL() {
                 tableType={2}
             />
             <Link
-                to="/viewsummary"
+                to={path}
             >
                 Go Back To Summary Page
             </Link>
