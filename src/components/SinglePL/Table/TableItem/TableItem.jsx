@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 function TableItem({item, accLevel, categories, tableType, weekID, clientID}) { 
     
     const [editToggleValue, setEditToggleValue] = useState(false);
