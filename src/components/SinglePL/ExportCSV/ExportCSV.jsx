@@ -55,7 +55,7 @@ export default function JsonToCSV({week, weekData, categories}) {
         handleJsonToCSV(transformData);
     }
 
-  return <button onClick={() => processJSON()}>Export</button>;
+  return <button onClick={() => processJSON()}>Export This Week</button>;
 }
 
 
