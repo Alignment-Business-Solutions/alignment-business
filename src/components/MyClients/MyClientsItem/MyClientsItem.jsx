@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux";
 
 function MyClientsItem({client}) {
 
     const path = `/viewsummary/${client.client_id}`
+    const dispatch = useDispatch();
 
     console.log('oneClient is:', client);
+
+    const removeClient = (client_id) => {
+        dispatch({
+            type: 'REMOVE_CLIENT',
+            payload: {client_id}
+        })
+        console.log("Assigned to Accountant");   
+  }
 
     return (
         <div>

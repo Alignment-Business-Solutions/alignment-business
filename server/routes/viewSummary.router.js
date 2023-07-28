@@ -14,8 +14,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('clientID is:', client_id);
     const queryText = `SELECT "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
     WHERE "week_id" = (
-    SELECT MAX("week_id") FROM "transactions" WHERE "client_id" = $1
+    SELECT MAX("week_id") 
+    FROM "transactions" 
+    WHERE "client_id" = $1
     )
+    AND "client_id" = $1
     ORDER BY "category_id";`;
     pool.query(queryText, [client_id])
         .then(result => {
