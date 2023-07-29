@@ -1,6 +1,6 @@
 import { useCSVReader } from 'react-papaparse';
 import { useDispatch } from 'react-redux';
-
+import { Button } from '@mui/material';
 
 function ImportRegCSV({week_id, client_id}) {
     const { CSVReader } = useCSVReader();
@@ -22,15 +22,15 @@ function ImportRegCSV({week_id, client_id}) {
           }: any) => (
             <>
               <div>
-                <button type='button' {...getRootProps()}>
+                <Button type='button' {...getRootProps()}>
                   Browse file
-                </button>
+                </Button>
                 <div>
                   {acceptedFile && acceptedFile.name}
                 </div>
-                <button {...getRemoveFileProps()} >
+                <Button {...getRemoveFileProps()} >
                   Remove
-                </button>
+                </Button>
               </div>
             </>
           )}
