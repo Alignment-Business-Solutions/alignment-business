@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import InputLabel from '@mui/material/InputLabel';
 import { TextField, Checkbox} from "@mui/material";
+import { Button } from "@mui/material";
+
 
 function ItemForm({categories, weekID, clientID}) {
     
@@ -116,7 +118,7 @@ function ItemForm({categories, weekID, clientID}) {
                     onChange={(e)=>handleChange("paid", e.target.checked)}
                 />
 
-                <button type="submit">Add</button>
+                <Button type="submit">Add</Button>
 
             </fieldset>
         </form>

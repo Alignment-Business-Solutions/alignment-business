@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import ExportCSV from './ExportCSV/ExportCSV.jsx';
 import { Link } from "react-router-dom";
 
+import { Button } from "@mui/material";
+
 function SinglePL() {
 
     const dispatch = useDispatch();
@@ -53,7 +55,7 @@ function SinglePL() {
             {formVis ? (
             <ItemForm categories={categories} clientID={clientID} weekID={weekID}/> 
                 ) : (<></>)} 
-            <button onClick={showForm}>Create New Item</button>
+            <Button onClick={showForm}>Create New Item</Button>
                 <p>     </p>
                 <p>     </p>
                 <p>     </p>
