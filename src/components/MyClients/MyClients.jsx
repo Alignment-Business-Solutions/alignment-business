@@ -20,14 +20,6 @@ function MyClients() {
   const goClients = () => {
     history.push('/clients')
   }
-   
-  const removeClient = (client_id) => {
-        dispatch({
-            type: 'REMOVE_CLIENT',
-            payload: {client_id}
-        })
-        console.log("Assigned to Accountant");   
-  }
 
   // console.log('my clients list is:', myClients);
 

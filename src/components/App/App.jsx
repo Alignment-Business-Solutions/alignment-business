@@ -23,6 +23,8 @@ import SinglePL from '../SinglePL/SinglePL';
 import './App.css';
 import ViewSummary from '../ViewSummary/ViewSummary';
 import BalanceSheet from '../BalanceSheet/BalanceSheet';
+import { createTheme, ThemeProvider } from '@mui/material';
+
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -36,6 +38,17 @@ function App() {
 
   const clientInfo = useSelector(store => store.clientInfo);
   const path = clientInfo && `/viewsummary/${clientInfo.id}`
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#EB017F',
+      },
+      secondary: {
+        main: '#451F44'
+      }
+    },
+  });
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -93,12 +106,15 @@ function App() {
             <MyClients />
           </ProtectedRoute>
 
-          <ProtectedRoute 
+          <ProtectedRoute
             exact
             path="/viewsummary/:client_id"
           >
-            <ViewSummary />
+            <ThemeProvider theme={theme}>
+              <ViewSummary />
+            </ThemeProvider>
           </ProtectedRoute>
+
 
           <ProtectedRoute
             exact
@@ -114,7 +130,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user"/> 
+              <Redirect to="/user" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -135,12 +151,12 @@ function App() {
               <RegisterPage />
             }
           </Route>
-        <ProtectedRoute
+          <ProtectedRoute
             exact
             path="/singlePL/:client_id/:week_id"
-        >
-            <SinglePL/>
-        </ProtectedRoute>
+          >
+            <SinglePL />
+          </ProtectedRoute>
 
           <Route
             exact
@@ -149,7 +165,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              (user.access_level !== 0 ? (<Redirect to="/myClients"/>) : (<Redirect to={path}/>)) 
+              (user.access_level !== 0 ? (<Redirect to="/myClients" />) : (<Redirect to={path} />))
 
               :
               // Otherwise, show the Login page

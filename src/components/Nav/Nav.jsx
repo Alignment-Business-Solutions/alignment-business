@@ -88,21 +88,25 @@ function Nav() {
                   Clients
                 </Link>
 
-                <Link className="navLink" to={path}>
-                    {client.company_name}
-                </Link>
+                {client.company_name !== undefined ? (
+                    <>
+                        <Link className="navLink" to={viewSummary}> 
+                            {client.company_name}
+                        </Link>
 
-                <Link className="navLink" to={viewBalance}>
-                  Balance
-                </Link>
+                        <Link className="navLink" to={viewBalance}>
+                            Balance
+                        </Link>
 
-                <Link className="navLink" to={viewAllpl}>
-                  P&L
-                </Link>
+                        <Link className="navLink" to={viewAllpl}>
+                            P&L
+                        </Link>
 
-                <Link className="navLink" to={viewCashFlow}>
-                  Cash Flow
-                </Link>
+                        <Link className="navLink" to={viewCashFlow}>
+                            Cash Flow
+                        </Link>
+                    </>
+                ):(<></>)}
 
                 <LogOutButton className="navLink" />
               </>
