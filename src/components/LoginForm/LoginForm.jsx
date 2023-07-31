@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import { TextField, Button, Typography, Container, CssBaseline, Grid } from '@mui/material';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,41 +26,50 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className="formPanel">
+          <Typography variant="h4">Login</Typography>
+          {errors.loginMessage && (
+            <Typography className="alert" role="alert" variant="h3" color="error">
+              {errors.loginMessage}
+            </Typography>
+          )}
+          <form onSubmit={login}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <label htmlFor="username">Username:</label>
+                <TextField
+                  variant="outlined"
+                  type="text"
+                  fullWidth
+                  name="username"
+                  required
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <label htmlFor="password">Password:</label>
+                <TextField
+                  variant="outlined"
+                  type="password"
+                  fullWidth
+                  name="password"
+                  required
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="submit" fullWidth variant="contained" color="primary" className="btn">
+                  Log In
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
   );
 }
 

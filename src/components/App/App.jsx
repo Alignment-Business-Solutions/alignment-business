@@ -133,10 +133,11 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
+              <ThemeProvider theme={theme}>
               <LoginPage />
+              </ThemeProvider>
             }
           </Route>
-
 
           <Route
             exact
@@ -148,9 +149,12 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the registration page
+              <ThemeProvider theme={theme}>
               <RegisterPage />
+              </ThemeProvider>
             }
           </Route>
+          
           <ProtectedRoute
             exact
             path="/singlePL/:client_id/:week_id"
@@ -171,7 +175,9 @@ function App() {
 
               :
               // Otherwise, show the Login page
+              <ThemeProvider theme={theme}>
               <LoginPage />
+              </ThemeProvider>
             }
           </Route>
 
