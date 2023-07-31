@@ -128,6 +128,7 @@ router.post('/createclient', (req, res) => {
 });
 
 router.get('/info', (req, res) => {
+    if (req.isAuthenticated()) {
   console.log('In GET route for client info')
   queryText = `SELECT * FROM "client" WHERE "user_id" = $1;`;
   pool.query (queryText, [req.user.id])
@@ -137,10 +138,14 @@ router.get('/info', (req, res) => {
   }).catch(error => {
     console.error('Error getting client info:', error)
     res.sendStatus(500);
-  })
+  });
+    } else {
+        res.sendStatus(403);
+    }
 })
 
 router.get('/selected/:id', (req, res) => {
+    if (req.isAuthenticated()) {
     console.log(req.params.id);
     queryText = `SELECT * FROM "client" WHERE "id" = $1;`;
     pool.query (queryText, [req.params.id/1])
@@ -150,7 +155,11 @@ router.get('/selected/:id', (req, res) => {
     }).catch(error => {
         console.error('Error getting client info:', error)
         res.sendStatus(500);
-    })
+    });
+    }
+    else {
+        res.sendStatus(403);
+    }
 
 
 
