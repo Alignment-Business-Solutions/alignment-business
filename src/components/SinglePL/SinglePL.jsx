@@ -4,7 +4,7 @@ import TableComp from "./Table/Table";
 import ItemForm from "./ItemForm/ItemForm";
 import ImportRegCSV from "./ImportCSV/ImportRegCSV";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
-
+import './SinglePL.css';
 import ExportCSV from './ExportCSV/ExportCSV.jsx';
 import { Link } from "react-router-dom";
 
