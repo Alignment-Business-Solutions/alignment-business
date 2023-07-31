@@ -3,7 +3,7 @@ const clientInfo = ( state = {}, action ) => {
         case 'SET_SELECTED_CLIENT' :
             return action.payload;
          case 'LOGOUT':
-             return [];
+             return {};
         default :
             return state
     }
