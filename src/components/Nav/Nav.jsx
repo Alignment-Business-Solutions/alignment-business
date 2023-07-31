@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
+import logo from './ABS_logo.png';
 
 function Nav() {
     
@@ -16,7 +17,7 @@ function Nav() {
     return (
         <div className="nav">
           <Link to="/home">
-            <h2 className="nav-title">Alignment Business Solutions</h2>
+            <img className="nav-title" src={logo} alt="Logo"></img>
           </Link>
           <div>
             {/* If no user is logged in, show these links */}
