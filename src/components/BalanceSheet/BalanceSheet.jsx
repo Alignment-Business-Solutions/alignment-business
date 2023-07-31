@@ -1,11 +1,15 @@
 import React,{useEffect, useReact} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import BalanceItem from '../BalanceItem/BalanceItem';
+import BalanceItem from './BalanceItem/BalanceItem';
+import BalanceForm from './BalanceForm/BalanceForm';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function BalanceSheet(){
 
     const dispatch = useDispatch();
     const balanceSheet = useSelector((store) => store.balance);
+    const params = useParams()
+    console.log('Params for BalanceSheet ===>', params)
 
     useEffect(() => {
         dispatch({
@@ -14,8 +18,8 @@ function BalanceSheet(){
       }, []);
       console.log('Balance Sheet', balanceSheet)
     return (
-       
-    
+       <>
+    <BalanceForm />
         
         <table >
   <thead>
@@ -43,7 +47,7 @@ function BalanceSheet(){
         ))}
 </tbody>
 </table>
-    )
+</> )
 }
 
 export default BalanceSheet
