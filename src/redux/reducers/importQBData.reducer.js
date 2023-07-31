@@ -2,7 +2,7 @@ const importQBDataReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_QB_IMPORT_DATA':
       return action.payload;
-    case 'UNSET_QB_IMPORT_DATA':
+    case 'LOGOUT':
       return [];
     default:
       return state;

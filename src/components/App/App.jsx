@@ -37,7 +37,7 @@ function App() {
   const user = useSelector(store => store.user);
 
   const clientInfo = useSelector(store => store.clientInfo);
-  const path = clientInfo && `/viewsummary/${clientInfo.id}`
+  const path = clientInfo && `/viewsummary/${clientInfo.id}`;
 
   const theme = createTheme({
     palette: {

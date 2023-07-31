@@ -2,7 +2,7 @@ const importRegDataReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_REG_IMPORT_DATA':
       return action.payload;
-    case 'UNSET_REG_IMPORT_DATA':
+    case 'LOGOUT':
       return [];
     default:
       return state;

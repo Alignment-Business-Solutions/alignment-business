@@ -5,9 +5,10 @@ const router = express.Router();
 
 router.get('/myClients', (req,res) => {
     // GET route code here
-    pool.query(`SELECT "client"."id" AS "client_id", * FROM client JOIN accountants 
-    ON client.accountant_id = accountants.id
-   WHERE accountant_id = $1;` , [req.user.id])
+    console.log(req.user.id);
+    pool.query(`SELECT "client"."id" AS "client_id", * FROM client 
+                JOIN accountants ON client.accountant_id = accountants.user_id
+                WHERE accountant_id = $1;`, [req.user.id])
     .then(result => {
         console.log('clientRouter GET result by Accountant ==> ', result.rows)
         res.send(result.rows)

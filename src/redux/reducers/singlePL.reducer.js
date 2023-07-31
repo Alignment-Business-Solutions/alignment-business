@@ -3,7 +3,7 @@ const singlePLReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_WEEK_DATA':
       return action.payload;
-    case 'UNSET_WEEK_DATA':
+    case 'LOGOUT':
       return [];
     default:
       return state;

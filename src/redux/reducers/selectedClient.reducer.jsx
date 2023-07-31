@@ -2,7 +2,7 @@ const clientInfo = ( state = {}, action ) => {
     switch (action.type) {
         case 'SET_SELECTED_CLIENT' :
             return action.payload;
-         case 'UNSET_SELECTED_CLIENT':
+         case 'LOGOUT':
              return [];
         default :
             return state
