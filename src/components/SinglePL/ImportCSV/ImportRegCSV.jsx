@@ -23,13 +23,13 @@ function ImportRegCSV({week_id, client_id}) {
             <>
               <div>
                 <Button type='button' {...getRootProps()}>
-                  Browse file
+                  Import Register of Quickbooks csv
                 </Button>
                 <div>
                   {acceptedFile && acceptedFile.name}
                 </div>
                 <Button {...getRemoveFileProps()} >
-                  Remove
+                  Remove Selected
                 </Button>
               </div>
             </>
