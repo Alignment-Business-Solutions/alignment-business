@@ -1,6 +1,15 @@
+.toolBtns { 
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.formCreate {
+    display: flex;
+    justify-content: space-evenly
 
 
-
+}
 
 
 

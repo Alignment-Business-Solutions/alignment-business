@@ -39,30 +39,18 @@ function SinglePL() {
 
     return (
         <>  
-            {user.access_level !== 0 ? (
-            <>
-            {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>
-            <h1>IMPORT ONLY SUPPORTS REGISTER and QB CSV'S</h1>
-            <ImportRegCSV week_id={weekID} client_id={clientID}/>
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>           
+            <div className="toolBtns">
+                {user.access_level !== 0 ? (
+                    <>
+                        <Button onClick={showForm}>Create New Item</Button>
+                        <ImportRegCSV week_id={weekID} client_id={clientID}/>
+                        {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
+                    </>
+                ):(<></>)}
+            </div>
             {formVis ? (
             <ItemForm categories={categories} clientID={clientID} weekID={weekID}/> 
                 ) : (<></>)} 
-            <Button onClick={showForm}>Create New Item</Button>
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>
-                <p>     </p>
-                </>
-            ):(<></>)}
-
 
             <TableComp 
                 weekData={weekData}

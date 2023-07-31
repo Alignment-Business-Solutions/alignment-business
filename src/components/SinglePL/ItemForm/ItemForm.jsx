@@ -68,7 +68,7 @@ function ItemForm({categories, weekID, clientID}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <fieldset>
+            <fieldset className="formCreate">
                 <legend>Add Transaction</legend>
 
                 <InputLabel htmlFor="TextFieldOne">Date</InputLabel>
