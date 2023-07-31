@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
-router.get('/myClients', (req,res) => {
+router.get('/myClients', rejectUnauthenticated, (req,res) => {
     // GET route code here
     console.log(req.user.id);
     pool.query(`SELECT "client"."id" AS "client_id", * FROM client 
@@ -19,7 +22,7 @@ router.get('/myClients', (req,res) => {
 
 });
 
-router.get('/', (req,res) => {
+router.get('/',rejectUnauthenticated, (req,res) => {
     // GET route code here
     pool.query(`SELECT * FROM client` )
     .then(result => {
@@ -32,7 +35,7 @@ router.get('/', (req,res) => {
 
 })
 
-router.put('/add', (req, res) => {
+router.put('/add',rejectUnauthenticated,  (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here
       // protect route at some point
@@ -52,7 +55,7 @@ router.put('/add', (req, res) => {
 
 });
 
-router.put('/remove', (req, res) => {
+router.put('/remove', rejectUnauthenticated, (req, res) => {
     console.log('OUR REQ.BODY',req.body)
       // PUT route code here
       // protect route at some point
@@ -79,7 +82,7 @@ router.delete('/', (req, res) => {
 });
 
 // Route for admin to add a new accountant to database:
-router.post('/createaccountant', (req, res) => {
+router.post('/createaccountant', rejectUnauthenticated, (req, res) => {
   const { first_name, last_name } = req.body;
 
   const queryText = `
@@ -103,7 +106,7 @@ router.post('/createaccountant', (req, res) => {
 });
 
 // Route for accountant to create a new client:
-router.post('/createclient', (req, res) => {
+router.post('/createclient', rejectUnauthenticated, (req, res) => {
   const { company_name } = req.body;
   console.log("REQ.BODY IS:", req.body)
 
@@ -127,8 +130,7 @@ router.post('/createclient', (req, res) => {
     });
 });
 
-router.get('/info', (req, res) => {
-    if (req.isAuthenticated()) {
+router.get('/info', rejectUnauthenticated, (req, res) => {
   console.log('In GET route for client info')
   queryText = `SELECT * FROM "client" WHERE "user_id" = $1;`;
   pool.query (queryText, [req.user.id])
@@ -139,9 +141,6 @@ router.get('/info', (req, res) => {
     console.error('Error getting client info:', error)
     res.sendStatus(500);
   });
-    } else {
-        res.sendStatus(403);
-    }
 })
 
 router.get('/selected/:id', (req, res) => {
