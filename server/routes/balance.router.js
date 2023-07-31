@@ -8,9 +8,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // GET route code here
-  pool.query(`SELECT balance.*, weeks.start_date
-  FROM balance
-  JOIN weeks ON balance.week_id = weeks.id;`)
+  pool.query(`SELECT * FROM "balance"
+  ORDER BY "id";`)
   .then(result => {
       console.log('balanceRouter GET result ==> ', result.rows)
       res.send(result.rows)
@@ -19,7 +18,9 @@ router.get('/', (req, res) => {
       res.sendStatus(500)
   })
 });
-
+// SELECT balance.*, weeks.start_date
+//   FROM balance
+//   JOIN weeks ON balance.week_id = weeks.id;
 // router.get('/', rejectUnauthenticated, async (req, res) => {
 //     // Note: I tested this code in Postman without rejectUnauthenticated
 //     // router.get('/', async (req, res) => {
@@ -63,9 +64,79 @@ router.put('/', (req, res) => {
   });
   
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // POST route code here
+
+  const connection = await pool.connect();
+
+  // basic JS try/catch/finally
+  try {
+    await connection.query('BEGIN'); // begin transaction
+
+    const client_id = req.body.client_id/1
+
+    const sqlBalance = `INSERT INTO balance ("start_date", "beginning_cash", "income_received", "expenses_paid", 
+    "expenses_expected", "to_from_savings", "saving_balance",
+     "outstanding_checks", "loan_to_from", "client_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+
+    RETURNING "id";;`
+    
+    // const sqlValues = [req.body.start_date,req.body.beginning_cash,req.body.income_received, req.body.expenses_paid, 
+    //     req.body.expenses_expected,req.body.to_from_savings,
+    //     req.body.saving_balance, req.body.outstanding_checks,
+    //     req.body.loan_to_from, req.body.client_id
+    //  ]
+
+    const {
+        start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid, 
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        
+    } = req.body
+     console.log('SQL VALUES', req.body)
+    // newBalance will hold id that's returned
+    let newBalance = await connection.query(sqlBalance,[ start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid, 
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        client_id]);
+    console.log('newBalance.rows[0].id is:', newBalance.rows[0].id);
+    const insertResultId = newBalance.rows[0].id;
+
+    const sqlCalculation = `UPDATE balance
+    SET ending_balance_actual = beginning_cash + income_received - expenses_expected - to_from_savings - outstanding_checks,
+        ending_balance_cleared = beginning_cash + income_received - expenses_expected
+    WHERE "id" = $1;`
+    await connection.query(sqlCalculation, [insertResultId]);
+
+    // save all the changes made in this transaction
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  } catch (error) {
+    // undo everything that changed in the transaction above
+    await connection.query('ROLLBACK');
+    console.log('Balance error:', error);
+    res.sendStatus(500);
+  } finally {
+    // this always runs, both after successful try and after catch
+    // puts the connection back in the pool for further use
+    // VERY IMPORTANT!
+    connection.release();
+  }
 });
+
 
 router.delete('/', (req, res) => {
     // DELETE route code here

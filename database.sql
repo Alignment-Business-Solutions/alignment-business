@@ -95,6 +95,7 @@ INSERT INTO "transactions" ("date", "payee", "amount", "paid", "client_id", "wee
 
 CREATE TABLE "balance" (
 	"id" SERIAL PRIMARY KEY,
+	"start_date" DATE UNIQUE,
 	"beginning_cash" MONEY DEFAULT 0,
 	"income_received" MONEY DEFAULT 0,
 	"expenses_paid" MONEY DEFAULT 0,
@@ -105,8 +106,7 @@ CREATE TABLE "balance" (
 	"loan_to_from" MONEY DEFAULT 0,
 	"ending_balance_cleared" MONEY DEFAULT 0,
 	"ending_balance_actual" MONEY DEFAULT 0,
-	"client_id" INTEGER REFERENCES "client" NOT NULL,
-	"week_id" INTEGER REFERENCES "weeks" NOT NULL
+	"client_id" INTEGER REFERENCES "client" NOT NULL
 );
 
 INSERT INTO balance ("beginning_cash", "income_received", "expenses_paid",
