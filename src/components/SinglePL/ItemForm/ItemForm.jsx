@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import InputLabel from '@mui/material/InputLabel';
+import { TextField, Checkbox} from "@mui/material";
+import { Button } from "@mui/material";
 
 
 function ItemForm({categories, weekID, clientID}) {
@@ -68,27 +71,27 @@ function ItemForm({categories, weekID, clientID}) {
             <fieldset>
                 <legend>Add Transaction</legend>
 
-                <lable htmlFor="inputOne">Date</lable>
-                <input 
-                    name="inputOne"
+                <InputLabel htmlFor="TextFieldOne">Date</InputLabel>
+                <TextField
+                    name="TextFieldOne"
                     type="date"
                     value={item.date}
                     onChange={(e)=>handleChange("date", e.target.value)}
                     required
                 />
 
-                <lable htmlFor="inputTwo">Payee</lable>
-                <input
-                    name="inputTwo"
+                <InputLabel htmlFor="TextFieldTwo">Payee</InputLabel>
+                <TextField
+                    name="TextFieldTwo"
                     type="text"
                     value={item.payee}
                     onChange={(e)=>handleChange("payee", e.target.value)}
                     required
                 />
 
-                <lable htmlFor="inputThree-select">Category</lable>
+                <InputLabel htmlFor="TextFieldThree-select">Category</InputLabel>
                 <select 
-                    htmlFor="inputThree"
+                    htmlFor="TextFieldThree"
                     onChange={(e)=>handleChange("cat", e.target.value)}
                     required
                 >
@@ -98,25 +101,24 @@ function ItemForm({categories, weekID, clientID}) {
                     ))}
                 </select>
 
-                <lable htmlFor="inputFour">Amount</lable>
-                <input
-                    name="inputFour"
+                <InputLabel htmlFor="TextFieldFour">Amount</InputLabel>
+                <TextField
+                    name="TextFieldFour"
                     type="text"
                     value={item.amount}
                     onChange={(e)=>handleChange("amount", e.target.value)}
                     required
                 />
         
-                <lable htmlFor="inputFive">Paid?</lable>
-                <input
-                    name="inputFive"
-                    type="checkbox"
+                <InputLabel htmlFor="TextFieldFive">Paid?</InputLabel>
+                <Checkbox
+                    name="TextFieldFive"
                     value={item.paid}
                     checked={item.paid}
                     onChange={(e)=>handleChange("paid", e.target.checked)}
                 />
 
-                <button type="submit">Add</button>
+                <Button type="submit">Add</Button>
 
             </fieldset>
         </form>

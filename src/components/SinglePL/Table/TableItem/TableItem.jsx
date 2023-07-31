@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { TableRow, TableCell,  } from "@mui/material";
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function TableItem({item, accLevel, categories, tableType, weekID, clientID}) { 
     
@@ -110,94 +118,92 @@ function TableItem({item, accLevel, categories, tableType, weekID, clientID}) {
     return (
         (editToggleValue) ? (
         <>
-        <tr key={itemEd.id}>
-            <td>
-                <input
+        <TableRow key={itemEd.id}>
+            <TableCell>
+                <TextField
                     type="date"
                     value={itemEd.date}
                     onChange={(e)=>handleChange("date", e.target.value)}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.payee}
                     onChange={(e)=>handleChange("payee", e.target.value)}
                 />
-            </td>
-            <td>
-                <select onChange={(e)=>handleChange("cat", e.target.value)}>
-                    <option value={itemEd.category_id}>{cat}</option>
+            </TableCell>
+            <TableCell>
+                <Select onChange={(e)=>handleChange("cat", e.target.value)}>
+                    <MenuItem value={itemEd.category_id}>{cat}</MenuItem>
                     {categories && categories.map((cat, i) => (
-                        <option key={i} value={cat.id}>{cat.category}</option>
+                        <MenuItem key={i} value={cat.id}>{cat.category}</MenuItem>
                     ))}
-                </select>
-            </td>
-            <td>
-                <input
+                </Select>
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.amount}
                     onChange={(e)=>handleChange("amount", e.target.value)}
                 />
-            </td>
-            <td>
-                <input
-                    type="checkbox"
+            </TableCell>
+            <TableCell>
+                <Checkbox
                     value={itemEd.paid}
                     checked={itemEd.paid}
                     onChange={(e)=>handleChange("paid", e.target.checked)}
                 />
                 
-            </td>
+            </TableCell>
                 {accLevel !== 0 ? (
                 <>
-                    <td><button onClick={editToggle}>Save</button></td>
-                    <td><button onClick={deleteItem}>Remove</button></td>
+                    <TableCell><Button onClick={editToggle}>Save</Button></TableCell>
+                    <TableCell><Button onClick={deleteItem}>Remove</Button></TableCell>
                 </>
                 ) : (<></>)}
-            </tr> 
+            </TableRow> 
             </>
         ) : (
         <>
-        <tr key={itemEd.id}>
-            <td>
-                <input
+        <TableRow key={itemEd.id}>
+            <TableCell>
+                <TextField
                     type="date"
                     value={itemEd.date}
                     readOnly
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.payee}
                     readOnly
                 />
-            </td>
-            <td>{cat}</td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>{cat}</TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.amount}
                     readOnly
                 />
-            </td>
-            <td>
-                <input
-                    type="checkbox"
+            </TableCell>
+            <TableCell>
+                <Checkbox
                     value={itemEd.paid}
                     checked={itemEd.paid}
                     readOnly
                 />
                 
-            </td>
+            </TableCell>
             {accLevel !== 0 ? (
             <>
-                <td><button onClick={editToggle}>Edit</button></td>
-                <td><button onClick={deleteItem}>Remove</button></td>
+                <TableCell><Button onClick={editToggle}>Edit</Button></TableCell>
+                <TableCell><Button onClick={deleteItem}>Remove</Button></TableCell>
             </>
             ) : (<></>)}
-        </tr>
+        </TableRow>
             </>
         )
     );
@@ -207,94 +213,92 @@ function TableItem({item, accLevel, categories, tableType, weekID, clientID}) {
     return (
         (editToggleValue) ? (
         <>
-        <tr key={itemEd.id}>
-            <td>
-                <input
+        <TableRow key={itemEd.id}>
+            <TableCell>
+                <TextField
                     type="date"
                     value={itemEd.date}
                     onChange={(e)=>handleChange("date", e.target.value)}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.payee}
                     onChange={(e)=>handleChange("payee", e.target.value)}
                 />
-            </td>
-            <td>
-                <select onChange={(e)=>handleChange("cat", e.target.value)}>
-                    <option value={itemEd.category_id}>{cat}</option>
+            </TableCell>
+            <TableCell>
+                <Select onChange={(e)=>handleChange("cat", e.target.value)}>
+                    <MenuItem value={itemEd.category_id}>{cat}</MenuItem>
                     {categories && categories.map((cat, i) => (
-                        <option key={i} value={cat.id}>{cat.category}</option>
+                        <MenuItem key={i} value={cat.id}>{cat.category}</MenuItem>
                     ))}
-                </select>
-            </td>
-            <td>
-                <input
+                </Select>
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.amount}
                     onChange={(e)=>handleChange("amount", e.target.value)}
                 />
-            </td>
-            <td>
-                <input
-                    type="checkbox"
+            </TableCell>
+            <TableCell>
+                <Checkbox
                     value={itemEd.paid}
                     checked={itemEd.paid}
                     onChange={(e)=>handleChange("paid", e.target.checked)}
                 />
                 
-            </td>
+            </TableCell>
                 {accLevel !== 0 ? (
                 <>
-                    <td><button onClick={editToggleTwo}>Save</button></td>
+                    <TableCell><Button onClick={editToggleTwo}>Save</Button></TableCell>
                 </>
                 ) : (<></>)}
-            </tr> 
+            </TableRow> 
             </>
         ) : (
         <>
-        <tr key={itemEd.id}>
-            <td>
-                <input
+        <TableRow key={itemEd.id}>
+            <TableCell>
+                <TextField
                     type="date"
                     value={itemEd.date}
                     readOnly
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.payee}
                     readOnly
                 />
-            </td>
-            <td>{cat}</td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>{cat}</TableCell>
+            <TableCell>
+                <TextField
                     type="text"
                     value={itemEd.amount}
                     readOnly
                 />
-            </td>
-            <td>
-                <input
-                    type="checkbox"
+            </TableCell>
+            <TableCell>
+                <Checkbox
                     value={itemEd.paid}
                     checked={itemEd.paid}
                     readOnly
                 />
                 
-            </td>
+            </TableCell>
             {accLevel !== 0 && match === false && addToggleValue === false ? (
             <>
-                <td><button onClick={editToggleTwo}>Edit</button></td>
-                <td><button onClick={addItem}>Add</button></td>
+                <TableCell><Button onClick={editToggleTwo}>Edit</Button></TableCell>
+                <TableCell><Button onClick={addItem}>Add</Button></TableCell>
             </>
             ) : (<></>)}
-            {match ? <td>MATCH!!!!!!!</td> : <></>}
-        </tr>
+            {match ? <TableCell>MATCH!!!!!!!</TableCell> : <></>}
+        </TableRow>
             </>
         )
     );

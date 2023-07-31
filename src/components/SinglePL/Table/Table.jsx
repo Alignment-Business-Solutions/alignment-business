@@ -1,41 +1,42 @@
 import TableItem from "./TableItem/TableItem";
+import { Table, TableHead, TableBody, TableRow, TableCell} from "@mui/material";
 
 
-function Table({weekData, accLevel, categories, tableType, clientID, weekID}) {
+function TableComp({weekData, accLevel, categories, tableType, clientID, weekID}) {
 
 
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Payee</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Paid?</th>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell><h2>Date</h2></TableCell>
+                    <TableCell><h2>Payee</h2></TableCell>
+                    <TableCell><h2>Category</h2></TableCell>
+                    <TableCell><h2>Amount</h2></TableCell>
+                    <TableCell><h2>Paid?</h2></TableCell>
                     {accLevel !== 0 ? (
                     <>
-                        <th>Edit</th>
-                        <th>Remove</th>
+                        <TableCell><h2>Edit</h2></TableCell>
+                        <TableCell><h2>Remove</h2></TableCell>
                     </>
                     ) : (<></>)}
-                </tr> 
-            </thead>
-            <tbody> 
-                <tr>
-                    <td>Income</td>
-                    <td>Income</td>
-                    <td>Income</td>
-                    <td>Income</td>
-                    <td>Income</td>
+                </TableRow> 
+            </TableHead>
+            <TableBody> 
+                <TableRow>
+                    <TableCell> </TableCell>
+                    <TableCell> </TableCell>
+                    <TableCell><h3>Income</h3></TableCell>
+                    <TableCell> </TableCell>
+                    <TableCell> </TableCell>
                      {accLevel !== 0 ? (
                         <>
-                            <td>Income</td>
-                            <td>Income</td>
+                            <TableCell> </TableCell>
+                            <TableCell> </TableCell>
                         </>
                      ) : (<></>)}
-                </tr>
+                </TableRow>
                 {weekData.map(item => (
                     (item.category_id === 1) ? (
                     <TableItem item={item} accLevel={accLevel} categories={categories} tableType={tableType} clientID={clientID} weekID={weekID}/>
@@ -43,19 +44,19 @@ function Table({weekData, accLevel, categories, tableType, clientID, weekID}) {
                         <></>
                     )
                 ))}
-                <tr>
-                    <td>Expense</td>
-                    <td>Expense</td>
-                    <td>Expense</td>
-                    <td>Expense</td>
-                    <td>Expense</td>
+                <TableRow>
+                    <TableCell> </TableCell>
+                    <TableCell> </TableCell>
+                    <TableCell><h3>Expense</h3></TableCell>
+                    <TableCell> </TableCell>
+                    <TableCell> </TableCell>
                       {accLevel !== 0 ? (
                         <>
-                            <td>Expense</td>
-                            <td>Expense</td>
+                            <TableCell> </TableCell>
+                            <TableCell> </TableCell>
                         </>
                      ) : (<></>)}
-                </tr>
+                </TableRow>
 
                 {weekData.map(item => (
                     (item.category_id !== 1) ? (
@@ -64,12 +65,12 @@ function Table({weekData, accLevel, categories, tableType, clientID, weekID}) {
                         <></>
                     )
                 ))}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
         );
 
 
 
 }
 
-export default Table;
+export default TableComp;

@@ -155,7 +155,9 @@ function App() {
             exact
             path="/singlePL/:client_id/:week_id"
           >
-            <SinglePL />
+            <ThemeProvider theme={theme}>
+                <SinglePL />
+            </ThemeProvider>    
           </ProtectedRoute>
 
           <Route

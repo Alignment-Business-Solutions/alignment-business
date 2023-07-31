@@ -1,4 +1,6 @@
 import { usePapaParse } from 'react-papaparse';
+import { Button } from '@mui/material';
+
 
 export default function JsonToCSV({week, weekData, categories}) {
 
@@ -55,7 +57,7 @@ export default function JsonToCSV({week, weekData, categories}) {
         handleJsonToCSV(transformData);
     }
 
-  return <button onClick={() => processJSON()}>Export This Week</button>;
+  return <Button onClick={() => processJSON()}>Export This Week</Button>;
 }
 
 
