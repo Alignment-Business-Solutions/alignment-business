@@ -116,10 +116,9 @@ router.post('/', async (req, res) => {
     const insertResultId = newBalance.rows[0].id;
 
     const sqlCalculation = `UPDATE balance
-    SET ending_balance_actual = balance.beginning_cash + balance.income_received - balance.expenses_expected - balance.to_from_savings - balance.outstanding_checks,
-        ending_balance_cleared = balance.beginning_cash + balance.income_received - balance.expenses_expected
-    FROM balance 
-    WHERE balance."id" = $1;`
+    SET ending_balance_actual = beginning_cash + income_received - expenses_expected - to_from_savings - outstanding_checks,
+        ending_balance_cleared = beginning_cash + income_received - expenses_expected
+    WHERE "id" = $1;`
     await connection.query(sqlCalculation, [insertResultId]);
 
     // save all the changes made in this transaction
