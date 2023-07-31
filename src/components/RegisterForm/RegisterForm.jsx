@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AccountantRegisterForm from "../AccountantRegisterForm/AccountantRegisterForm";
 import ClientRegisterForm from "../ClientRegisterForm/ClientRegisterForm";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Button, Typography } from "@mui/material";
 
 function RegisterForm() {
   const [userType, setUserType] = useState("Accountant");
@@ -31,47 +32,30 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <Typography variant="h4">Register User</Typography>
       {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
+        <Typography className="alert" role="alert" variant="h3" color="error">
           {errors.registrationMessage}
-        </h3>
+        </Typography>
       )}
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="userType"
-            value="Accountant"
-            checked={userType === "Accountant"}
-            onChange={() => setUserType("Accountant")}
-          />
-          Accountant
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="userType"
-            value="Client"
-            checked={userType === "Client"}
-            onChange={() => setUserType("Client")}
-          />
-          Client
-        </label>
-        {/* Conditionally render separate register forms based on userType */}
-        {userType === "Accountant" && (
+      <FormControl component="fieldset">
+        <RadioGroup row aria-label="userType" name="userType" value={userType} onChange={(e) => setUserType(e.target.value)}>
+          <FormControlLabel value="Accountant" control={<Radio />} label="Accountant" />
+          <FormControlLabel value="Client" control={<Radio />} label="Client" />
+        </RadioGroup>
+        {userType === 'Accountant' && (
           <AccountantRegisterForm
             username={username}
             password={password}
-            firstName={firstName} // Pass firstName to AccountantRegisterForm
-            lastName={lastName} // Pass lastName to AccountantRegisterForm
+            firstName={firstName}
+            lastName={lastName}
             setUsername={setUsername}
             setPassword={setPassword}
-            setFirstName={setFirstName} // Capture firstName changes
-            setLastName={setLastName} // Capture lastName changes
+            setFirstName={setFirstName}
+            setLastName={setLastName}
           />
         )}
-        {userType === "Client" && (
+        {userType === 'Client' && (
           <ClientRegisterForm
             username={username}
             password={password}
@@ -81,9 +65,10 @@ function RegisterForm() {
             setCompanyName={setCompanyName}
           />
         )}
-
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
+        <Button className="btn" type="submit" variant="contained" color="primary">
+          Register
+        </Button>
+      </FormControl>
     </form>
   );
 }
