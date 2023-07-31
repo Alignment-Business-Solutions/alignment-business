@@ -81,10 +81,6 @@ function Nav() {
             ) : (
               // If ADMIN-LEVEL user is logged in, show these links:
               <>
-                <Link className="navLink" to="/admin">
-                  Admin Dashboard
-                </Link>
-
                 <Link className="navLink" to="/myClients">
                   Clients
                 </Link>
