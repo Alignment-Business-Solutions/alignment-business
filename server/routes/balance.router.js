@@ -7,9 +7,12 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
+
+
+  console.log('What is the query ',req.query);
+ 
   // GET route code here
-  pool.query(`SELECT * FROM "balance"
-  ORDER BY "id";`)
+  pool.query(`SELECT * FROM "balance" WHERE client_id = $1;`, [req.query.client_id])
   .then(result => {
       console.log('balanceRouter GET result ==> ', result.rows)
       res.send(result.rows)

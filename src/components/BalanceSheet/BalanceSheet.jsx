@@ -14,6 +14,7 @@ function BalanceSheet(){
     useEffect(() => {
         dispatch({
           type: "FETCH_BALANCE",
+          payload: params.client_id
         });
       }, []);
       console.log('Balance Sheet', balanceSheet)
