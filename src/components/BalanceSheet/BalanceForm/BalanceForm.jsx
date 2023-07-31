@@ -20,8 +20,8 @@ function BalanceForm() {
         saving_balance: '',
         outstanding_checks: '',
         loan_to_from: '',
-        ending_balance_cleared: '',
-        ending_balance_actual: '',
+      //   ending_balance_cleared: '',
+      //   ending_balance_actual: '',
         client_id: params.client_id,
 
     }
@@ -133,7 +133,7 @@ function BalanceForm() {
                            loan_to_from: e.target.value
                         })} 
                         />
-                                  <label>Ending Balance (cleared)</label>
+                                  {/* <label>Ending Balance (cleared)</label>
                         <input 
                         type='text'
                         placeholder='Ending Balance (cleared)'
@@ -152,7 +152,7 @@ function BalanceForm() {
                            ...balance,
                            ending_balance_actual: e.target.value
                         })} 
-                        />
+                        /> */}
               <button onClick={handleCreateBalance}>Submit</button>
         </form>
     )
