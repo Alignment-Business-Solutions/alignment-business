@@ -85,7 +85,7 @@ function Nav() {
                   Admin Dashboard
                 </Link>
 
-                <Link className="navLink" to="/clients">
+                <Link className="navLink" to="/myClients">
                   Clients
                 </Link>
 
