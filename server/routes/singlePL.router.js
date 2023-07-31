@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log(req.body);
-    
+   if (req.isAuthenticated()) { 
     const item = req.body;
     const queryText = `
         INSERT INTO "transactions"
@@ -57,6 +57,9 @@ router.post('/', (req, res) => {
         console.log('error with query', queryText, "error", error);
         res.sendStatus(500);
     });
+   } else {
+       res.sendStatus(403);
+   }
 });
 
 router.put('/:id', (req, res) => {
