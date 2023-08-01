@@ -95,7 +95,7 @@ INSERT INTO "transactions" ("date", "payee", "amount", "paid", "client_id", "wee
 
 CREATE TABLE "balance" (
 	"id" SERIAL PRIMARY KEY,
-	"start_date" DATE UNIQUE,
+	"start_date" DATE,
 	"beginning_cash" MONEY DEFAULT 0,
 	"income_received" MONEY DEFAULT 0,
 	"expenses_paid" MONEY DEFAULT 0,
@@ -109,18 +109,25 @@ CREATE TABLE "balance" (
 	"client_id" INTEGER REFERENCES "client" NOT NULL
 );
 
+-- Dummy data for table
 INSERT INTO balance ("beginning_cash", "income_received", "expenses_paid",
 "expenses_expected" ,"to_from_savings", "saving_balance", 
-"outstanding_checks", "loan_to_from", "client_id","week_id")
+"outstanding_checks", "loan_to_from", "client_id")
 VALUES ('2,387.13', '14,987.78', '8,725.15', '8,725.15',
- '449.63', '1,942.59', '0.00', '0.00', 1, 1);
+ '449.63', '1,942.59', '0.00', '0.00', 1 );
 
+-- Calculation for ending_balance_actual will update asynchronously through POST
 UPDATE balance
 SET ending_balance_actual = beginning_cash + income_received 
 	- expenses_expected - to_from_savings - outstanding_checks
 WHERE "id" = 1;
 
-
+-- Calculation for ending_balance_cleared will update asynchronously through POST
 UPDATE balance
 SET ending_balance_cleared = beginning_cash + income_received - expenses_expected
 WHERE "id" = 1;
+
+-- UPDATE for edit feature on Balance Table
+UPDATE balance SET("start_date","beginning_cash", "income_received", "expenses_paid","expenses_expected" ,"to_from_savings", "saving_balance", "outstanding_checks", "loan_to_from","ending_balance_actual","ending_balance_cleared", "client_id")
+= ('2023-06-22','2,387.13', '14,987.78', '8,725.15', '8,725.15', '449.63', '1,942.59', '0.00', '0.00', '1,942.59','1,942.59',2)
+WHERE id=2;

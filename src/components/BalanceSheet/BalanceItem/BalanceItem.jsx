@@ -1,17 +1,21 @@
-
+import { useDispatch } from "react-redux";
+import React, { useCallback } from 'react';
 
 function BalanceItem({balance}) {
 console.log('Is this working?')
 console.log('Balance!', balance)
+const dispatch = useDispatch()
 
-const handleBDelete = (id) => {
-    console.log('Delete!');
+
+
+const handleBDelete = useCallback((id, client_id) => {
+    console.log('Delete!', id, client_id);
     dispatch({
-        type: 'DELETE_BALANCE',
-        payload: id
-    })
-}
+      type: 'DELETE_BALANCE',
+      payload: { id: id, client_id: client_id },
+});
 
+})
     return (
         <>
         <tr>
@@ -28,7 +32,7 @@ const handleBDelete = (id) => {
         <td>{balance.ending_balance_cleared}</td>
         <td>{balance.ending_balance_actual}</td>
         <button>🖊️</button>
-    <button onClick={() => handleBDelete(balance.id)}> Delete</button>
+    <button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</button>
     </tr>
    
     

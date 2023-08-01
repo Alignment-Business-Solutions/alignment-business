@@ -3,10 +3,12 @@ import {put, takeLatest} from 'redux-saga/effects';
 
 function* deleteBalanceItem(action){
     try{
-
-        yield axios.delete(`/api/balance/${action.payload}`)
+        const id = action.payload.id
+        console.log('what is the payload.', action.payload.id)
+        yield axios.delete(`/api/balance/${id}`)
         yield put({
-            type: 'FETCH_BALANCE'
+            type: 'FETCH_BALANCE',
+            payload: action.payload.client_id
         });
     } catch(err) {
         console.log('DELETE ERROR ===>', err)
