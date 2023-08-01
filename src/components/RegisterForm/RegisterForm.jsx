@@ -40,7 +40,7 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <Typography variant="h4">Register User</Typography>
+      <Typography variant="h4" style={{ textAlign: "center" }}>Register User</Typography>
       {errors.registrationMessage && (
         <Typography className="alert" role="alert" variant="h3" color="error">
           {errors.registrationMessage}
@@ -53,6 +53,7 @@ function RegisterForm() {
           name="userType"
           value={userType}
           onChange={(e) => setUserType(e.target.value)}
+          style={{ display: "flex", justifyContent: "center" }}
         >
           <FormControlLabel
             value="Accountant"
@@ -71,6 +72,7 @@ function RegisterForm() {
             setPassword={setPassword}
             setFirstName={setFirstName}
             setLastName={setLastName}
+            style={{ display: "flex", justifyContent: "center" }}
           />
         )}
         {userType === "Client" && (
