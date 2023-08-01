@@ -141,8 +141,18 @@ router.post('/', async (req, res) => {
 });
 
 
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
     // DELETE route code here
+    console.log(req.params.id);
+    const queryText = `DELETE FROM balance WHERE id=$1;`;
+    pool.query(queryText, [req.params.id])
+    .then(results => {
+        console.log('success');
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error with query', queryText, "error ==", error);
+        res.sendStatus(500);
+    });
   });
   
 module.exports = router;

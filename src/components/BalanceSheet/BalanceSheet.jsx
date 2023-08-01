@@ -37,6 +37,8 @@ function BalanceSheet(){
       <th>Loan (To)/From</th>
       <th>Ending Balance (cleared)</th>
       <th>Ending Balance (actual)</th>
+      {/* <th></th>
+      <th></th> */}
     </tr>
   </thead>
   <tbody>
