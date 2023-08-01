@@ -34,7 +34,6 @@ function LoginForm() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className="formPanel">
         <Typography variant="h4">Login</Typography>
         {errors.loginMessage && (
