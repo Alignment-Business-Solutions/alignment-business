@@ -47,6 +47,13 @@ function App() {
         main: "#451F44",
       },
     },
+    // palette: {
+    //   abs: {
+    //     main: '#EB017F',
+    //     purple: '#451F44',
+    //     blue: '#00B4EB'
+    //   }
+    // }
   });
 
   useEffect(() => {
