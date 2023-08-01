@@ -6,7 +6,9 @@ console.log('Is this working?')
 console.log('Balance!', balance)
 const dispatch = useDispatch()
 
-
+const handleBEdit = () => {
+    console.log('Edit!')
+}
 
 const handleBDelete = useCallback((id, client_id) => {
     console.log('Delete!', id, client_id);
@@ -31,10 +33,10 @@ const handleBDelete = useCallback((id, client_id) => {
         <td>{balance.loan_to_from}</td>
         <td>{balance.ending_balance_cleared}</td>
         <td>{balance.ending_balance_actual}</td>
-        <button>🖊️</button>
-    <button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</button>
+  <td><button onClick={handleBEdit}>🖊️</button></td>
+   <td> <button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</button> </td>
     </tr>
-   
+      
     
     </>)
   
