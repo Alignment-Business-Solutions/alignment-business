@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
-import { Select, InputLabel, MenuItem, FormControl, TextField } from "@mui/material"
+import { InputLabel, MenuItem, FormControl, TextField } from "@mui/material"
 
 
 function SelectWeekForm() {
@@ -20,30 +20,31 @@ function SelectWeekForm() {
     return (
         <div>
             {/* beginning form */}
-            <form>
+            {/* <form> */}
                 {/* beginning dropdown menu element */}
-                <select
-                    // value will set value of weekSelected state variable
-                    value={weekSelected}
-                    onChange={(event) => setWeekSelected(event.target.value)}
-                >
+                {/* <select */}
+                    {/* // value will set value of weekSelected state variable */}
+                    {/* value={weekSelected} */}
+                    {/* onChange={(event) => setWeekSelected(event.target.value)} */}
+                {/* > */}
                     {/* default setting for dropdown menu */}
-                    <option value=""> -- Click to Select a week!</option>
+                    {/* <option value=""> -- Click to Select a week!</option> */}
                     {/* beginning map to loop through weeksDropdown varbiable */}
-                    {weeksDropdown.map(week => (
-                        // for each week, render this dropdown menu option
-                        <option key={week.id} value={week.id}>{week.start_date}</option>
-                    ))}
-                </select>
+                    {/* {weeksDropdown.map(week => ( */}
+                        {/* // for each week, render this dropdown menu option */}
+                        {/* <option key={week.id} value={week.id}>{week.start_date}</option> */}
+                    {/* ))} */}
+                {/* </select> */}
                 {/*linking to week details view for selected week in dropdown menu */}
-                <Link to={path}>Go To Week Details</Link>
-            </form>
+                {/* <Link to={path}>Go To Week Details</Link> */}
+            {/* </form> */}
             <br/>
             <br/>
             <FormControl sx={{ minWidth: 300 }}>
                 {/* beginning dropdown menu element */}
                 <TextField
                     // value will set value of weekSelected state variable
+                    placeholder="Click to Select a Week!"
                     label="-- Click to Select a week!"
                     select
                     value={weekSelected}
