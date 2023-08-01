@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography, TextField } from "@mui/material";
+import { Typography, TextField, Container, Grid } from "@mui/material";
 
 function AccountantRegisterForm({
   username,
@@ -13,10 +13,12 @@ function AccountantRegisterForm({
 }) {
   return (
     <>
+    <Container style={{textAlign:"center"}}>
     <br></br>
       <Typography variant="h5">Accountant Registration:</Typography>
       <br></br>
-      <div>
+      <Grid container spacing={2}>
+      <Grid item xs={12}>
         <TextField
           label="First Name"
           type="text"
@@ -24,10 +26,11 @@ function AccountantRegisterForm({
           value={firstName}
           required
           onChange={(event) => setFirstName(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
       <br></br>
-      <div>
+      <Grid item xs={12}>
         <TextField
           label="Last Name"
           type="text"
@@ -35,10 +38,11 @@ function AccountantRegisterForm({
           value={lastName}
           required
           onChange={(event) => setLastName(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
       <br></br>
-      <div>
+      <Grid item xs={12}>
         <TextField
           label="Username"
           type="text"
@@ -46,10 +50,11 @@ function AccountantRegisterForm({
           value={username}
           required
           onChange={(event) => setUsername(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
       <br></br>
-      <div>
+      <Grid item xs={12}>
         <TextField
           label="Password"
           type="password"
@@ -57,9 +62,12 @@ function AccountantRegisterForm({
           value={password}
           required
           onChange={(event) => setPassword(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
+      </Grid>
       <br></br>
+      </Container>
     </>
   );
 }

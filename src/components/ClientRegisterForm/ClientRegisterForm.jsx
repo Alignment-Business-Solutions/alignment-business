@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography, TextField } from "@mui/material";
+import { Typography, TextField, Container, Grid } from "@mui/material";
 
 function ClientRegisterForm({
   username,
@@ -11,10 +11,12 @@ function ClientRegisterForm({
 }) {
   return (
     <>
+    <Container style={{textAlign:"center"}}>
       <br></br>
       <Typography variant="h5">Client Registration:</Typography>
       <br></br>
-      <div>
+      <Grid container spacing={2}>
+      <Grid item xs={12}>
         <TextField
           label="Company Name"
           type="text"
@@ -22,10 +24,11 @@ function ClientRegisterForm({
           value={companyName}
           required
           onChange={(event) => setCompanyName(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
       <br></br>
-      <div>
+      <Grid item xs={12}>
         <TextField
           label="Username"
           type="text"
@@ -33,10 +36,11 @@ function ClientRegisterForm({
           value={username}
           required
           onChange={(event) => setUsername(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
       <br></br>
-      <div>
+      <Grid item xs={12}>
         <TextField
           label="Password"
           type="password"
@@ -44,9 +48,12 @@ function ClientRegisterForm({
           value={password}
           required
           onChange={(event) => setPassword(event.target.value)}
+          fullWidth
         />
-      </div>
+      </Grid>
+      </Grid>
       <br></br>
+      </Container>
     </>
   );
 }
