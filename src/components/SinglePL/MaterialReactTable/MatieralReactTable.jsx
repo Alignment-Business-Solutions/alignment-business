@@ -14,6 +14,8 @@ import {
     Tooltip,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import Categories from './TableComps/Catagories';
+import Paid from './TableComps/Paid';
 
 const Example = ({weekData, categories}) => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
@@ -144,31 +146,30 @@ const Example = ({weekData, categories}) => {
                 {isPaid(cell.getValue())}
               </Box>
         ),
+        Edit: ({ cell }) => <Paid cell={cell}/>,
       },
       {
-            accessorKey: 'category_id',
-            // filterVariant: 'range', //if not using filter modes feature, use this instead of filterFn
-            filterFn: 'between',
-            header: 'Category',
-            size: 200,
-            //custom conditional format and styling
-            Cell: ({ cell }) => (
-              <Box
-                component="span"
-                sx={(theme) => ({
-                  backgroundColor:
-                    cell.getValue() === 1
-                      ? '#00ff00'
-                      : '#ff0000',
-                  borderRadius: '0.25rem',
-                  color: '#fff',
-                  maxWidth: '9ch',
-                  p: '0.25rem',
-                })}
-              >
-                {findeCategory(cell.getValue())}
-              </Box>
-            ),
+        accessorKey: 'category_id',
+        header: 'Category',
+        size: 200,
+        Cell: ({ cell }) => (
+          <Box
+            component="span"
+            sx={(theme) => ({
+              backgroundColor:
+                cell.getValue() === 1
+                  ? '#00ff00'
+                  : '#ff0000',
+              borderRadius: '0.25rem',
+              color: '#fff',
+              maxWidth: '9ch',
+              p: '0.25rem',
+            })}
+          >
+            {findeCategory(cell.getValue())}
+          </Box>
+        ),
+        Edit: ({ cell }) => <Categories cell={cell} categories={categories}/>,
         },
 
         ],
@@ -213,11 +214,11 @@ const Example = ({weekData, categories}) => {
             onClick={() => setCreateModalOpen(true)}
             variant="contained"
           >
-            Create New Account
+            Create New Item
           </Button>
         )}
       />
-      <CreateNewAccountModal
+      <CreateNewItemModal
         columns={columns}
         open={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
@@ -228,7 +229,7 @@ const Example = ({weekData, categories}) => {
 };
 
 //example of creating a mui dialog modal for creating new rows
-export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
+export const CreateNewItemModal = ({ open, columns, onClose, onSubmit }) => {
     const [values, setValues] = useState(() =>
         columns.reduce((acc, column) => {
             acc[column.accessorKey ?? ''] = '';
