@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
 //     });
 
 
-router.put('/', (req, res) => {
+router.put('/edit', (req, res) => {
     // PUT route code here
 
     console.log('OUR REQ.BODY',req.body)
