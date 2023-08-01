@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AccountantRegisterForm from "../AccountantRegisterForm/AccountantRegisterForm";
 import ClientRegisterForm from "../ClientRegisterForm/ClientRegisterForm";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Button, Typography } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Button,
+  Typography,
+} from "@mui/material";
 
 function RegisterForm() {
   const [userType, setUserType] = useState("Accountant");
@@ -23,9 +31,9 @@ function RegisterForm() {
         userType: userType,
         username: username,
         password: password,
-        firstName: firstName, 
-        lastName: lastName, 
-        companyName: companyName
+        firstName: firstName,
+        lastName: lastName,
+        companyName: companyName,
       },
     });
   };
@@ -39,11 +47,21 @@ function RegisterForm() {
         </Typography>
       )}
       <FormControl component="fieldset">
-        <RadioGroup row aria-label="userType" name="userType" value={userType} onChange={(e) => setUserType(e.target.value)}>
-          <FormControlLabel value="Accountant" control={<Radio />} label="Accountant" />
+        <RadioGroup
+          row
+          aria-label="userType"
+          name="userType"
+          value={userType}
+          onChange={(e) => setUserType(e.target.value)}
+        >
+          <FormControlLabel
+            value="Accountant"
+            control={<Radio />}
+            label="Accountant"
+          />
           <FormControlLabel value="Client" control={<Radio />} label="Client" />
         </RadioGroup>
-        {userType === 'Accountant' && (
+        {userType === "Accountant" && (
           <AccountantRegisterForm
             username={username}
             password={password}
@@ -55,7 +73,7 @@ function RegisterForm() {
             setLastName={setLastName}
           />
         )}
-        {userType === 'Client' && (
+        {userType === "Client" && (
           <ClientRegisterForm
             username={username}
             password={password}
@@ -65,7 +83,12 @@ function RegisterForm() {
             setCompanyName={setCompanyName}
           />
         )}
-        <Button className="btn" type="submit" variant="contained" color="primary">
+        <Button
+          className="btn"
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
           Register
         </Button>
       </FormControl>
