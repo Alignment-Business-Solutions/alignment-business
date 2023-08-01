@@ -4,8 +4,12 @@ function BalanceItem({balance}) {
 console.log('Is this working?')
 console.log('Balance!', balance)
 
-const handleBDelete = () => {
+const handleBDelete = (id) => {
     console.log('Delete!');
+    dispatch({
+        type: 'DELETE_BALANCE',
+        payload: id
+    })
 }
 
     return (
@@ -24,7 +28,7 @@ const handleBDelete = () => {
         <td>{balance.ending_balance_cleared}</td>
         <td>{balance.ending_balance_actual}</td>
         <button>🖊️</button>
-    <button onClick={handleBDelete}> Delete</button>
+    <button onClick={() => handleBDelete(balance.id)}> Delete</button>
     </tr>
    
     
