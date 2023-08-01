@@ -73,27 +73,34 @@ router.put('/edit', (req, res) => {
    = ('$1','$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10','$11')
     WHERE "id" = $12;
     `;
-  const [
-    start_date,
-        beginning_cash,
-        income_received,
-        expenses_paid, 
-        expenses_expected,
-        to_from_savings,
-        saving_balance,
-        outstanding_checks,
-        loan_to_from
-  ] = req.body
-
-    pool.query(sqlText,[ start_date,
+    const {
+      start_date,
       beginning_cash,
       income_received,
-      expenses_paid, 
+      expenses_paid,
       expenses_expected,
       to_from_savings,
       saving_balance,
       outstanding_checks,
-      loan_to_from])
+      loan_to_from,
+      ending_balance_actual,
+      ending_balance_cleared,
+    } = req.body;
+  
+    pool
+      .query(sqlText, [
+        start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid,
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        ending_balance_actual,
+        ending_balance_cleared,
+    ])
     .then(result => {
       res.sendStatus(201)
     }).catch(err => {
