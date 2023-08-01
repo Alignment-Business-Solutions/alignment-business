@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import AllPL_Table from "./AllPL_Table/AllPLTable";
+import AllPLTable from "./AllPL_Table/AllPLTable";
 import ExportCSV from "../SinglePL/ExportCSV/ExportCSV"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ExportAllWeeks from "./ExportAllCSV/ExportAllCSV";
+import "./AllPL.css"
 
 function AllPL() {
 
@@ -30,7 +31,7 @@ function AllPL() {
         <div>
             <h2>All Weeks Profits & Loss</h2>
             <ExportAllWeeks weeks={allWeeks} categories={categories}/>
-            <div>
+            <div className="allpl-table">
                 {allWeeks.map(week => (
                     
                     <table>
@@ -100,7 +101,7 @@ function AllPL() {
                             </tr>
                         </tbody>
                     </table>
-                    // <AllPL_Table week={week}/>
+                    // <AllPLTable week={week}/>
                 ))}
             </div>
         </div>
