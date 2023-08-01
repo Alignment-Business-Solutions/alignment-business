@@ -9,6 +9,7 @@ import ExportCSV from './ExportCSV/ExportCSV.jsx';
 import { Link } from "react-router-dom";
 
 import { Button } from "@mui/material";
+import Example from "./MaterialReactTable/MatieralReactTable";
 
 function SinglePL() {
 
@@ -76,6 +77,8 @@ function SinglePL() {
             >
                 Go Back To Summary Page
             </Link>
+
+            <Example weekData={weekData} categories={categories}/>
 
         </>
     );
