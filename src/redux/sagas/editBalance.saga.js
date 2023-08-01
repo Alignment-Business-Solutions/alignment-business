@@ -18,4 +18,4 @@ function* editBalanceSaga(){
     yield takeLatest('EDIT_BALANCE', editBalance)
 }
 
-export default editBalance
+export default editBalanceSaga
