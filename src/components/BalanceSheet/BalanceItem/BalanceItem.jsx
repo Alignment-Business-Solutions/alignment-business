@@ -3,7 +3,13 @@
 function BalanceItem({balance}) {
 console.log('Is this working?')
 console.log('Balance!', balance)
+
+const handleBDelete = () => {
+    console.log('Delete!');
+}
+
     return (
+        <>
         <tr>
         <td>{balance.start_date}</td>
         <td>{balance.beginning_cash}</td>
@@ -17,10 +23,14 @@ console.log('Balance!', balance)
         <td>{balance.loan_to_from}</td>
         <td>{balance.ending_balance_cleared}</td>
         <td>{balance.ending_balance_actual}</td>
-       
-    </tr>)
+        <button>🖊️</button>
+    <button onClick={handleBDelete}> Delete</button>
+    </tr>
+   
     
-    // <p>Hello</p>)
+    </>)
+  
+ 
 }
 
 export default BalanceItem
