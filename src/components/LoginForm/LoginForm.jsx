@@ -35,12 +35,12 @@ function LoginForm() {
               {errors.loginMessage}
             </Typography>
           )}
+          <br></br>
           <form onSubmit={login}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <label htmlFor="username">Username:</label>
                 <TextField
-                  variant="outlined"
+                  label="Username"
                   type="text"
                   fullWidth
                   name="username"
@@ -50,9 +50,8 @@ function LoginForm() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <label htmlFor="password">Password:</label>
                 <TextField
-                  variant="outlined"
+                                  label="Password"
                   type="password"
                   fullWidth
                   name="password"
