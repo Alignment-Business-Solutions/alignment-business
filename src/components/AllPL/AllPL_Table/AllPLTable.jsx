@@ -1,6 +1,6 @@
 import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import ExportCSV from "../../SinglePL/ExportCSV/ExportCSV";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Checkbox } from "@mui/material";
 
 
 function AllPL_Table({ week, categories }) {
@@ -10,84 +10,84 @@ function AllPL_Table({ week, categories }) {
 
     function gotToWeek(week, client_id) {
         console.log(week, client_id);
-       history.push(`/singlePL/${client_id}/${week[0].week_id}`); 
+        history.push(`/singlePL/${client_id}/${week[0].week_id}`);
     }
 
     return (
-        
+
 
         <TableContainer>
-        <Table>
-        <TableHead sx={{ textAlign: "center"}}>
-            <TableRow>
-                <TableCell>Week of {week.start_date}</TableCell>
-            </TableRow>
-            <TableRow sx={{ textAlign: "center"}}>
-                <TableCell sx={{ textAlign: "center"}}>Income</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Payee</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Paid</TableCell>
-            </TableRow>
-        </TableHead>
-        <TableBody>
-            {week.map(transaction => {
-                if (transaction.category_id === 1 && transaction.paid === true) {
-                    return <TableRow key={transaction.id}>
-                        <TableCell>{transaction.date}</TableCell>
-                        <TableCell>{transaction.payee}</TableCell>
-                        <TableCell>{transaction.amount}</TableCell>
-                        <TableCell><input type="checkbox" checked readOnly /></TableCell>
+            <Table>
+                <TableHead sx={{ textAlign: "center" }}>
+                    <TableRow>
+                        <TableCell>Week of {week.start_date}</TableCell>
                     </TableRow>
-                } else if (transaction.category_id === 1 && transaction.paid === false) {
-                    return <TableRow key={transaction.id}>
-                        <TableCell>{transaction.date}</TableCell>
-                        <TableCell>{transaction.payee}</TableCell>
-                        <TableCell>{transaction.amount}</TableCell>
-                        <TableCell><input type="checkbox" disabled /></TableCell>
+                    <TableRow sx={{ textAlign: "center" }}>
+                        <TableCell sx={{ textAlign: "center" }}>Income</TableCell>
                     </TableRow>
-                }
-            })}
-        </TableBody>
-        <TableBody>
-            <TableRow>
-                <TableCell>Expenses</TableCell>
-            </TableRow>
-            {week.map(transaction => {
-                if (transaction.category_id === 2 && transaction.paid === true) {
-                    return <TableRow key={transaction.id}>
-                        <TableCell>{transaction.date}</TableCell>
-                        <TableCell>{transaction.payee}</TableCell>
-                        <TableCell>{transaction.amount}</TableCell>
-                        <TableCell><input type="checkbox" checked readOnly /></TableCell>
+                    <TableRow>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Payee</TableCell>
+                        <TableCell>Amount</TableCell>
+                        <TableCell>Paid</TableCell>
                     </TableRow>
-                } else if (transaction.category_id === 2 && transaction.paid === false) {
-                    return <TableRow key={transaction.id}>
-                        <TableCell>{transaction.date}</TableCell>
-                        <TableCell>{transaction.payee}</TableCell>
-                        <TableCell>{transaction.amount}</TableCell>
-                        <TableCell><input type="checkbox" disabled /></TableCell>
+                </TableHead>
+                <TableBody>
+                    {week.map(transaction => {
+                        if (transaction.category_id === 1 && transaction.paid === true) {
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><Checkbox checked readOnly /></TableCell>
+                            </TableRow>
+                        } else if (transaction.category_id === 1 && transaction.paid === false) {
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><Checkbox disabled /></TableCell>
+                            </TableRow>
+                        }
+                    })}
+                </TableBody>
+                <TableBody>
+                    <TableRow>
+                        <TableCell>Expenses</TableCell>
                     </TableRow>
-                }
-            })}
-        </TableBody>
-        <TableBody>
-            <TableRow>
-                <TableCell>
-                    <Button
-                    variant="contained" 
-                    onClick={() => gotToWeek(week, client_id.client_id)}
-                    >
-                        Click To Edit This Week!
-                        </Button>
-                    {week && <ExportCSV weekData={week} categories={categories} />}
-                </TableCell>
-            </TableRow>
-        </TableBody>
-    </Table>
-    </TableContainer>
+                    {week.map(transaction => {
+                        if (transaction.category_id === 2 && transaction.paid === true) {
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><Checkbox checked readOnly /></TableCell>
+                            </TableRow>
+                        } else if (transaction.category_id === 2 && transaction.paid === false) {
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><Checkbox disabled /></TableCell>
+                            </TableRow>
+                        }
+                    })}
+                </TableBody>
+                <TableBody>
+                    <TableRow>
+                        <TableCell>
+                            <Button
+                                variant="contained"
+                                onClick={() => gotToWeek(week, client_id.client_id)}
+                            >
+                                Click To Edit This Week!
+                            </Button>
+                            {week && <ExportCSV weekData={week} categories={categories} />}
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 }
 
