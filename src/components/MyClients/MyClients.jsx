@@ -24,7 +24,7 @@ function MyClients() {
 
   return (
     <div>
-      <Typography variant="h2">Accountants's Clients</Typography>
+      <Typography variant="h3">My Clients</Typography>
       {myClients && myClients.length > 0 ? (
         <ul>
           {myClients.map((client, i) => (
@@ -32,10 +32,13 @@ function MyClients() {
           ))}
         </ul>
       ) : (
-        <Typography variant="body1">No clients found.</Typography>
+        <>
+        <Typography variant="body1">You currently have no clients listed under your management.</Typography>
+        <Typography variant="body2">Click the button below to view and add clients.</Typography>
+        </>
       )}
       <Button variant="contained" onClick={goClients}>
-        Clients
+        All Clients
       </Button>
     </div>
   );

@@ -102,7 +102,7 @@ function ClientList() {
                 {client.accountant_id == null ? (
                   <ClientListItem client={client} assignClient={assignClient} />
                 ) : (
-                  <p>{client.company_name} (Assigned)</p>
+                  <Typography variant="h6">{client.company_name} (Assigned)</Typography>
                 )}
               </li>
             ))}

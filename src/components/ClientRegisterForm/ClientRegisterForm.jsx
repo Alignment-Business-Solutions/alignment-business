@@ -1,45 +1,52 @@
 import { useState } from "react";
+import { Typography, TextField } from "@mui/material";
 
-function ClientRegisterForm({ username, setUsername, password, setPassword, companyName, setCompanyName }) {
+function ClientRegisterForm({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  companyName,
+  setCompanyName,
+}) {
   return (
     <>
-      <h3>Client Registration:</h3>
+      <br></br>
+      <Typography variant="h5">Client Registration:</Typography>
+      <br></br>
       <div>
-        <label htmlFor="companyName">
-          Company Name:
-          <input
-            type="companyName"
-            name="companyName"
-            value={companyName}
-            required
-            onChange={(event) => setCompanyName(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Company Name"
+          type="text"
+          name="companyName"
+          value={companyName}
+          required
+          onChange={(event) => setCompanyName(event.target.value)}
+        />
       </div>
+      <br></br>
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Username"
+          type="text"
+          name="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+        />
       </div>
+      <br></br>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
+      <br></br>
     </>
   );
 }
