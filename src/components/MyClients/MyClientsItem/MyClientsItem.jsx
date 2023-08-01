@@ -18,8 +18,9 @@ function MyClientsItem({ client }) {
 
   return (
     <div>
-      <Typography variant="body1">{client.company_name}</Typography>
+      <Typography variant="h6">{client.company_name}</Typography>
       <Link to={path}>View Client Details</Link>
+      <br></br>
       <Button
         variant="contained"
         onClick={() => removeClient(client.client_id)}
