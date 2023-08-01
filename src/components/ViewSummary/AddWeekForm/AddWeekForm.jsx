@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { Button, TextField, OutlinedInput } from "@mui/material";
+import { Button, TextField, OutlinedInput, InputLabel, Box } from "@mui/material";
+import './AddWeekForm.css'
+
 
 
 
@@ -20,25 +22,54 @@ function AddWeekForm() {
         setAddClicker(false);
     }
 
+
     return (
-        <div>
+        <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            // sx={{ border: 1}}
+        >
             {
                 addClicker ?
                     <form onSubmit={(event) => submitNewWeek(event)}>
-                        <label>Starting Date</label>
+                        <InputLabel
+                            htmlFor="new-week-input"
+                        >
+                            Starting Date
+                        </InputLabel>
                         <OutlinedInput
                             placeholder="Example: 12/12/2023"
                             value={start_date}
                             onChange={(event) => setStartDate(event.target.value)}
                             required
+                            id="new-week-input"
                         />
-                        <Button variant="contained" type="submit">Submit New Week!</Button>
-                        <button onClick={() => setAddClicker(false)}>Cancel Add Week</button>
+                        <br />
+                        <Button
+                            variant="contained"
+                            type="submit"
+                        >
+                            Submit New Week!
+                        </Button>
+                        <br />
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => setAddClicker(false)}
+                        >
+                            Cancel Add Week
+                        </Button>
                     </form>
                     :
-                    <Button variant="contained" onClick={() => setAddClicker(true)}>Create New Week</Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => setAddClicker(true)}
+                    >
+                        Create New Week
+                    </Button>
             }
-        </div>
+        </Box>
     )
 }
 
