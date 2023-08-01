@@ -1,6 +1,6 @@
 import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import ExportCSV from "../../SinglePL/ExportCSV/ExportCSV";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 
 
 function AllPL_Table({ week, categories }) {
@@ -18,12 +18,12 @@ function AllPL_Table({ week, categories }) {
 
         <TableContainer>
         <Table>
-        <TableHead>
+        <TableHead sx={{ textAlign: "center"}}>
             <TableRow>
                 <TableCell>Week of {week.start_date}</TableCell>
             </TableRow>
-            <TableRow>
-                <TableCell>Income</TableCell>
+            <TableRow sx={{ textAlign: "center"}}>
+                <TableCell sx={{ textAlign: "center"}}>Income</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell>Date</TableCell>
@@ -76,7 +76,12 @@ function AllPL_Table({ week, categories }) {
         <TableBody>
             <TableRow>
                 <TableCell>
-                    <button onClick={() => gotToWeek(week, client_id.client_id)}>Click To Edit This Week!</button>
+                    <Button
+                    variant="contained" 
+                    onClick={() => gotToWeek(week, client_id.client_id)}
+                    >
+                        Click To Edit This Week!
+                        </Button>
                     {week && <ExportCSV weekData={week} categories={categories} />}
                 </TableCell>
             </TableRow>

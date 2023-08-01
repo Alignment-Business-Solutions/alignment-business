@@ -122,7 +122,9 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/allPL/:client_id">
-            <MultiPL />
+            <ThemeProvider theme={theme}>
+              <MultiPL />
+            </ThemeProvider>
           </ProtectedRoute>
 
           <Route exact path="/login">
