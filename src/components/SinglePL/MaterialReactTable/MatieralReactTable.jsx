@@ -1,17 +1,17 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  MenuItem,
-  Stack,
-  TextField,
-  Tooltip,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    MenuItem,
+    Stack,
+    TextField,
+    Tooltip,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 
@@ -20,24 +20,26 @@ const Example = ({weekData, categories}) => {
     const [tableData, setTableData] = useState(() => weekData);
     const [validationErrors, setValidationErrors] = useState({});
 
+    //submit new item to db
     const handleCreateNewRow = (values) => {
-        tableData.push(values);
-        setTableData([...tableData]);
+         
     };
+   
     const findeCategory = (id) => {
         for (let cat of categories){
             if (id === cat.id){
                 return cat.category;
             }
         }
-    }
+    };
+   
     const isPaid = (value) => {
         if(value){
             return '✅';
         } else {
             return '🚫';
         }
-    }
+    };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
         if (!Object.keys(validationErrors).length) {
@@ -64,36 +66,36 @@ const Example = ({weekData, categories}) => {
         [tableData],
     );
 
-  const getCommonEditTextFieldProps = useCallback(
-    (cell) => {
-      return {
-        error: !!validationErrors[cell.id],
-        helperText: validationErrors[cell.id],
-        onBlur: (event) => {
-          const isValid =
-            cell.column.id === 'email'
-              ? validateEmail(event.target.value)
-              : cell.column.id === 'age'
-              ? validateAge(+event.target.value)
-              : validateRequired(event.target.value);
-          if (!isValid) {
-            //set validation error for cell if invalid
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: `${cell.column.columnDef.header} is required`,
-            });
-          } else {
-            //remove validation error for cell if valid
-            delete validationErrors[cell.id];
-            setValidationErrors({
-              ...validationErrors,
-            });
-          }
-        },
-      };
-    },
-    [validationErrors],
-  );
+    const getCommonEditTextFieldProps = useCallback(
+        (cell) => {
+            return {
+                error: !!validationErrors[cell.id],
+                helperText: validationErrors[cell.id],
+                    onBlur: (event) => {
+                        const isValid =
+                            cell.column.id === 'email'
+                            ? validateEmail(event.target.value)
+                            : cell.column.id === 'age'
+                            ? validateAge(+event.target.value)
+                            : validateRequired(event.target.value);
+                        if (!isValid) {
+                            //set validation error for cell if invalid
+                            setValidationErrors({
+                                ...validationErrors,
+                                [cell.id]: `${cell.column.columnDef.header} is required`,
+                            });
+                        } else {
+                            //remove validation error for cell if valid
+                            delete validationErrors[cell.id];
+                            setValidationErrors({
+                                ...validationErrors,
+                            });
+                        }
+                    },
+                };
+            },
+        [validationErrors],
+    );
 
   const columns = useMemo(
     () => [
@@ -169,9 +171,9 @@ const Example = ({weekData, categories}) => {
             ),
         },
 
-    ],
-    [getCommonEditTextFieldProps],
-  );
+        ],
+        [getCommonEditTextFieldProps],
+    );
 
     return (
     <>
@@ -252,16 +254,39 @@ export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
                         gap: '1.5rem',
                         }}
                     >
-                    {columns.map((column) => (
                         <TextField
-                            key={column.accessorKey}
-                            label={column.header}
-                            name={column.accessorKey}
+                            key='tes'
+                            label='test'
+                            name='test'
                             onChange={(e) =>
-                              setValues({ ...values, [e.target.name]: e.target.value })
+                                setValues({ ...values, [e.target.name]: e.target.value })
                             }
                         />
-                    ))}
+                        <TextField
+                            key='asdf'
+                            label='asdf'
+                            name='asdf'
+                            
+                        />
+                       <TextField
+                            key='fdas'
+                            label='fdsa'
+                            name='fdsa'
+
+                        />
+                        <TextField
+                            key='qwer'
+                            label='qwer'
+                            name='qwer'
+
+                        />
+                        <TextField
+                            key='rewq'
+                            label='rewq'
+                            name='rewq'
+
+                        />
+                         
                     </Stack>
                 </form>
             </DialogContent>
@@ -270,7 +295,7 @@ export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
                 <Button color="secondary" onClick={handleSubmit} variant="contained">
                     Create New Account
                 </Button>
-                </DialogActions>
+            </DialogActions>
         </Dialog>
     );
 };
