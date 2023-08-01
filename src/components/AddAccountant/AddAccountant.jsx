@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { Typography, TextField, Button } from "@mui/material";
 
 const AddAccountant = ({ isOpen, onRequestClose, onAdd }) => {
   const [firstName, setFirstName] = useState("");
@@ -13,41 +14,51 @@ const AddAccountant = ({ isOpen, onRequestClose, onAdd }) => {
     onRequestClose(); // Close the modal after adding the accountant
   };
 
+  const customModalStyle = {
+    content: {
+      width: "400px",
+      height: "310px",
+      margin: "auto",
+    },
+  };
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Add Accountant Modal"
       ariaHideApp={false}
+      style={customModalStyle}
     >
-      <button type="button" onClick={onRequestClose}>
+      <Button variant="contained" onClick={onRequestClose}>
         X
-      </button>
-      <h2>New Accountant</h2>
+      </Button>
+      <br></br>
+      <br></br>
+      <Typography variant="h4">New Accountant</Typography>
+      <br></br>
       <form>
         <div>
-          <label>
-            First Name:
-            <input
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </label>
+          <TextField
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            fullWidth
+          />
         </div>
+        <br></br>
         <div>
-          <label>
-            Last Name:
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </label>
+          <TextField
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            fullWidth
+          />
         </div>
-        <button type="button" onClick={handleAdd}>
-          Add
-        </button>
+        <br></br>
+        <Button variant="contained" onClick={handleAdd}>
+          Create
+        </Button>
       </form>
     </Modal>
   );
