@@ -31,13 +31,13 @@ function MyClients() {
         </Button>
       </div>
       {myClients && myClients.length > 0 ? (
-        <ul className="client-ul">
+        <div className="client-ul">
           {myClients.map((client, i) => (
             <div className="client-box">
               <MyClientsItem key={i} client={client} />
             </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <>
           <br></br>
