@@ -128,7 +128,7 @@ function ClientList() {
           </div>
         </div>
         {allClients && allClients.length > 0 ? (
-          <ul className="client-ul">
+          <div className="client-ul">
             {allClients.map((client, i) => (
               <div className="client-box">
                 <div key={i}>
@@ -139,13 +139,13 @@ function ClientList() {
                     />
                   ) : (
                     <Typography variant="h6">
-                      {client.company_name} (Assigned)
+                      {client.company_name} <br></br> (Assigned)
                     </Typography>
                   )}
                 </div>
               </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>There are no clients available at this time.</p>
         )}

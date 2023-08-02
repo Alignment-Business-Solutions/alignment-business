@@ -5,6 +5,7 @@
     margin: 10px;
     flex: 0 0 200px; 
     text-align: center;
+    height: 100px;
 }
 
 .button-container {
