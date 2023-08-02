@@ -6,6 +6,7 @@ import AddAccountant from "../AddAccountant/AddAccountant";
 import axios from "axios";
 import AddClient from "../AddClient/AddClient";
 import { Button, Typography } from "@mui/material";
+import "./ClientList.css";
 
 function ClientList() {
   const dispatch = useDispatch();
@@ -93,51 +94,57 @@ function ClientList() {
 
   return (
     <>
-      <div>
-        <Typography variant="h3">Clients</Typography>
-        {allClients && allClients.length > 0 ? (
-          <ul>
-            {allClients.map((client, i) => (
-              <li key={i}>
+              <Typography variant="h3">Clients</Typography>
+      <div className="button-container">
+        <div>
+          <Button variant="contained" onClick={goToMyClients}>
+            My Clients
+          </Button>
+        </div>
+        <div>
+          {user.access_level === 2 && (
+            <Button variant="contained" onClick={handleOpenModal}>
+              New Accountant
+            </Button>
+          )}
+          <AddAccountant
+            isOpen={showModal}
+            onRequestClose={handleCloseModal}
+            onAdd={handleAddAccountant}
+          />
+        </div>
+        <div>
+          {user.access_level >= 1 && (
+            <Button variant="contained" onClick={handleOpenClientModal}>
+              New Client
+            </Button>
+          )}
+          <AddClient
+            isOpen={showClientModal}
+            onRequestClose={handleCloseClientModal}
+            onAdd={handleAddClient}
+          />
+        </div>
+      </div>
+      {allClients && allClients.length > 0 ? (
+        <ul>
+          {allClients.map((client, i) => (
+            <div className="client-box">
+              <div key={i}>
                 {client.accountant_id == null ? (
                   <ClientListItem client={client} assignClient={assignClient} />
                 ) : (
-                  <Typography variant="h6">{client.company_name} (Assigned)</Typography>
+                  <Typography variant="h6">
+                    {client.company_name} (Assigned)
+                  </Typography>
                 )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>There are no clients available at this time.</p>
-        )}
-        <Button variant="contained" onClick={goToMyClients}>
-          My Clients
-        </Button>
-      </div>
-      <div>
-        {user.access_level === 2 && (
-          <Button variant="contained" onClick={handleOpenModal}>
-            New Accountant
-          </Button>
-        )}
-        <AddAccountant
-          isOpen={showModal}
-          onRequestClose={handleCloseModal}
-          onAdd={handleAddAccountant}
-        />
-      </div>
-      <div>
-        {user.access_level >= 1 && (
-          <Button variant="contained" onClick={handleOpenClientModal}>
-            New Client
-          </Button>
-        )}
-        <AddClient
-          isOpen={showClientModal}
-          onRequestClose={handleCloseClientModal}
-          onAdd={handleAddClient}
-        />
-      </div>
+              </div>
+            </div>
+          ))}
+        </ul>
+      ) : (
+        <p>There are no clients available at this time.</p>
+      )}
     </>
   );
 }
