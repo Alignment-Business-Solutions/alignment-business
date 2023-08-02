@@ -23,23 +23,32 @@ function MyClients() {
   // console.log('my clients list is:', myClients);
 
   return (
-    <div>
+    <div className="page-container">
       <Typography variant="h3">My Clients</Typography>
+      <div className="button-container">
+        <Button variant="contained" onClick={goClients}>
+          All Clients
+        </Button>
+      </div>
       {myClients && myClients.length > 0 ? (
-        <ul>
+        <ul className="client-ul">
           {myClients.map((client, i) => (
-            <MyClientsItem key={i} client={client} />
+            <div className="client-box">
+              <MyClientsItem key={i} client={client} />
+            </div>
           ))}
         </ul>
       ) : (
         <>
-        <Typography variant="body1">You currently have no clients listed under your management.</Typography>
-        <Typography variant="body2">Click the button below to view and add clients.</Typography>
+          <br></br>
+          <Typography variant="body1">
+            You currently have no clients listed under your management.
+          </Typography>
+          <Typography variant="body2">
+            Click the "All Clients" button to view and add clients.
+          </Typography>
         </>
       )}
-      <Button variant="contained" onClick={goClients}>
-        All Clients
-      </Button>
     </div>
   );
 }
