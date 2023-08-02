@@ -57,26 +57,26 @@ const handleBDelete = useCallback((id, client_id) => {
 })
     return (
         <>
-        <tr>
+        <StyledTableRow>
         {!edit ? (
             
            <>
-          <td>{balance.start_date}</td>
-        <td>{balance.beginning_cash}</td>
-        <td>{balance.income_received}</td>
-        <td>{balance.income_received}</td>
-        <td>{balance.expenses_paid}</td>
-        <td>{balance.expenses_expected}</td>
-        <td>{balance.to_from_savings}</td>
-        <td>{balance.saving_balance}</td>
-        <td>{balance.outstanding_checks}</td>
-        <td>{balance.loan_to_from}</td>
-        <td>{balance.ending_balance_cleared}</td>
-        <td>{balance.ending_balance_actual}</td>
+          <StyledTableCell>{balance.start_date}</StyledTableCell>
+        <StyledTableCell>{balance.beginning_cash}</StyledTableCell>
+        <StyledTableCell>{balance.income_received}</StyledTableCell>
+        <StyledTableCell>{balance.income_received}</StyledTableCell>
+        <StyledTableCell>{balance.expenses_paid}</StyledTableCell>
+        <StyledTableCell>{balance.expenses_expected}</StyledTableCell>
+        <StyledTableCell>{balance.to_from_savings}</StyledTableCell>
+        <StyledTableCell>{balance.saving_balance}</StyledTableCell>
+        <StyledTableCell>{balance.outstanding_checks}</StyledTableCell>
+        <StyledTableCell>{balance.loan_to_from}</StyledTableCell>
+        <StyledTableCell>{balance.ending_balance_cleared}</StyledTableCell>
+        <StyledTableCell>{balance.ending_balance_actual}</StyledTableCell>
        <button onClick={() => setEdit(true)}>🖊️</button>
        </> ) : 
          
-          ( <td>
+          ( <StyledTableCell>
             <form>
                 
              <label>New Week</label>
@@ -172,9 +172,9 @@ const handleBDelete = useCallback((id, client_id) => {
               <button onClick={handleBEdit}>☑️</button>
               <button onClick={() => setEdit(false)}>Close</button>
            </form>
-           </td>
+           </StyledTableCell>
            )}
-        </tr>
+        </StyledTableRow>
          {/* <td> {!edit ? (
               <button onClick={() => setEdit(true)} >🖊️</button>
      ) : (
