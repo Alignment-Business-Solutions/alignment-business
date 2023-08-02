@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
-import { InputLabel, MenuItem, FormControl, TextField } from "@mui/material"
+import { InputLabel, MenuItem, FormControl, TextField, Box } from "@mui/material"
 
 
 function SelectWeekForm() {
@@ -18,7 +18,11 @@ function SelectWeekForm() {
     const path = `/singlePL/${clientID.client_id}/${weekSelected}`
 
     return (
-        <div>
+        <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        >
             {/* beginning form */}
             {/* <form> */}
                 {/* beginning dropdown menu element */}
@@ -59,7 +63,7 @@ function SelectWeekForm() {
                 {/*linking to week details view for selected week in dropdown menu */}
                 <Link to={path}>Go To Week Details</Link>
             </FormControl>
-        </div>
+        </Box>
     )
 }
 export default SelectWeekForm;

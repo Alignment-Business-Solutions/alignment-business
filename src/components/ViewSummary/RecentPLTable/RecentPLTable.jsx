@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Checkbox } from "@mui/material";
 
 
 
@@ -10,12 +10,10 @@ function RecentPLTable() {
 
     return (
         <div>
+            <p className="center-text">Most Recent Week Profit and Loss</p>
             <TableContainer>
                 <Table aria-label="recent-PL">
                     <TableHead>
-                        <TableRow align="center">
-                            <TableCell>Most Recent Week Profit and Loss</TableCell>
-                        </TableRow>
                         <TableRow>
                             <TableCell
                             align="center"
@@ -37,7 +35,7 @@ function RecentPLTable() {
                                 <TableCell>{transaction.date}</TableCell>
                                 <TableCell>{transaction.payee}</TableCell>
                                 <TableCell>{transaction.amount}</TableCell>
-                                <TableCell><input type="checkbox" checked={transaction.paid} readOnly /></TableCell>
+                                <TableCell><Checkbox checked={transaction.paid} readOnly /></TableCell>
                             </TableRow>
                             // otherwise if category is expense, but paid is set to false, render this code
                         } else if (transaction.category_id === 1 && transaction.paid === false) {
@@ -45,7 +43,7 @@ function RecentPLTable() {
                                 <TableCell>{transaction.date}</TableCell>
                                 <TableCell>{transaction.payee}</TableCell>
                                 <TableCell>{transaction.amount}</TableCell>
-                                <TableCell><input type="checkbox" disabled /></TableCell>
+                                <TableCell><Checkbox disabled /></TableCell>
                             </TableRow>
                         }
                     })}
@@ -76,7 +74,7 @@ function RecentPLTable() {
                                 <TableCell>{transaction.date}</TableCell>
                                 <TableCell>{transaction.payee}</TableCell>
                                 <TableCell>{transaction.amount}</TableCell>
-                                <TableCell><input type="checkbox" checked={transaction.paid} readOnly /></TableCell>
+                                <TableCell><Checkbox checked={transaction.paid} readOnly /></TableCell>
                             </TableRow>
                             // otherwise if category is expense, but paid is set to false, render this code
                         } else if (transaction.category_id === 2 && transaction.paid === false) {
@@ -84,7 +82,7 @@ function RecentPLTable() {
                                 <TableCell>{transaction.date}</TableCell>
                                 <TableCell>{transaction.payee}</TableCell>
                                 <TableCell>{transaction.amount}</TableCell>
-                                <TableCell><input type="checkbox" disabled /></TableCell>
+                                <TableCell><Checkbox type="checkbox" disabled /></TableCell>
                             </TableRow>
                         }
                     })}
