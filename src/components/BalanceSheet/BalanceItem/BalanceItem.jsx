@@ -170,6 +170,7 @@ const handleBDelete = useCallback((id, client_id) => {
                         })} 
                         />
               <button onClick={handleBEdit}>☑️</button>
+              <button onClick={() => setEdit(false)}>Close</button>
            </form>
            </td>
            )}
