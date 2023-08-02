@@ -21,7 +21,7 @@ function AllPL_Table({ week, categories }) {
         <div>
         {length > 0 ? (
             <TableContainer>
-            <Table sx={{border: 1}}>
+            <Table sx={{border: 1, width: "16.67%"}}>
                 <TableHead sx={{ textAlign: "center" }}>
                     <TableRow>
                         <TableCell>Week of {week.start_date}</TableCell>
