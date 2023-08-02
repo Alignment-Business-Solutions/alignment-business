@@ -40,14 +40,6 @@ function SinglePL() {
 
     return (
         <>  
-            <div className="toolBtns">
-                {user.access_level !== 0 ? (
-                    <>
-                        <ImportRegCSV week_id={weekID} client_id={clientID}/>
-                        {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
-                    </>
-                ):(<></>)}
-            </div>
 
             <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>
                   
