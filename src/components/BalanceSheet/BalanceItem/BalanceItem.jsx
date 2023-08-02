@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import React, { useCallback, useState } from 'react';
 
 
-function BalanceItem({balance}) {
+function BalanceItem({balance, StyledTableCell, StyledTableRow}) {
 console.log('Is this working?')
 console.log('Balance!', balance)
 
