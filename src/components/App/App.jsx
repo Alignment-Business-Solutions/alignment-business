@@ -102,7 +102,9 @@ function App() {
             exact
             path="/balance/:client_id"
           >
+             <ThemeProvider theme={theme}>
             <BalanceSheet />
+            </ThemeProvider>
           </ProtectedRoute>
 
           <ProtectedRoute

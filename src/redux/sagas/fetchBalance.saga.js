@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {put, takeLatest} from 'redux-saga/effects'
 
-function* fetchBalance() {
+function* fetchBalance(action) {
     try {
-        const balance = yield axios.get('/api/balance')
+        const balance = yield axios.get(`/api/balance?client_id=${action.payload}`)
         console.log('This is GET results coming from the Balance Server', balance.data)
         yield put({
             type: 'SET_BALANCE',
