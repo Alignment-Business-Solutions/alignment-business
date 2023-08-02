@@ -9,6 +9,7 @@ import ExportCSV from './ExportCSV/ExportCSV.jsx';
 import { Link } from "react-router-dom";
 
 import { Button } from "@mui/material";
+import Example from "./MaterialReactTable/MatieralReactTable";
 
 function SinglePL() {
 
@@ -42,24 +43,13 @@ function SinglePL() {
             <div className="toolBtns">
                 {user.access_level !== 0 ? (
                     <>
-                        <Button onClick={showForm}>Create New Item</Button>
                         <ImportRegCSV week_id={weekID} client_id={clientID}/>
                         {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
                     </>
                 ):(<></>)}
             </div>
-            {formVis ? (
-            <ItemForm categories={categories} clientID={clientID} weekID={weekID}/> 
-                ) : (<></>)} 
 
-            <TableComp 
-                weekData={weekData}
-                accLevel={user.access_level}
-                categories={categories}
-                tableType={1}
-                weekID={weekID}
-                clientID={clientID}
-            />
+            <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>
                   
             <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
@@ -76,6 +66,7 @@ function SinglePL() {
             >
                 Go Back To Summary Page
             </Link>
+
 
         </>
     );
