@@ -19,6 +19,9 @@ import {
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
+import ImportRegCSV from '../ImportCSV/ImportRegCSV';
+import ExportCSV from '../ExportCSV/ExportCSV.jsx';
+
 
 const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
     const dispatch = useDispatch(); 
@@ -295,13 +298,21 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
           </Box>
         )}
         renderTopToolbarCustomActions={() => (
-          <Button
-            color="secondary"
-            onClick={() => setCreateModalOpen(true)}
-            variant="contained"
-          >
-            Create New Item
-          </Button>
+         <> 
+            {accLevel !==0?
+                <>
+                <Button
+                color="secondary"
+                onClick={() => setCreateModalOpen(true)}
+                variant="contained"
+              >
+                Create New Item
+              </Button>
+
+             <ImportRegCSV week_id={weekID} client_id={clientID}/>
+             {weekData && <ExportCSV weekData={weekData} categories={categories}/> }
+                </> : <></>}
+        </>
         )}
       />
       <CreateNewItemModal
