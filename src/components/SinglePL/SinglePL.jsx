@@ -36,6 +36,12 @@ function SinglePL() {
     useEffect(() => {
         dispatch({type:"FETCH_WEEK", payload: {week: weekID, client: clientID}}); 
         dispatch({ type: "FETCH_SELECTED_CLIENT", payload: pathData});
+        
+        return () => {
+            dispatch({type:"UNSET_WEEK_DATA"});
+            dispatch({type:"UNSET_IMPORT_DATA"});
+        }
+
     }, []);
 
     return (
