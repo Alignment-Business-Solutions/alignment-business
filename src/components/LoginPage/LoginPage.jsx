@@ -1,14 +1,18 @@
 import React from "react";
 import LoginForm from "../LoginForm/LoginForm";
 import { useHistory } from "react-router-dom";
+import logo from './ABS_logo.png';
+import "./LoginPage.css";
 
 function LoginPage() {
   const history = useHistory();
 
   return (
     <div>
-      <LoginForm />
       <center>
+      <img className="login-logo" src={logo} alt="Logo"></img>
+      
+      <LoginForm />
         <button
           type="button"
           className="btn btn_asLink"
