@@ -1,9 +1,12 @@
-function ClientListItem({ assignClient, client }) {
+import { Button, Typography } from "@mui/material";
 
+function ClientListItem({ assignClient, client }) {
   return (
     <>
-      <p>{client.company_name}</p>
-      <button onClick={() => assignClient(client.id)}> Add</button>
+      <Typography variant="h6">{client.company_name}</Typography>
+      <Button variant="contained" onClick={() => assignClient(client.id)}>
+        Add
+      </Button>
     </>
   );
 }

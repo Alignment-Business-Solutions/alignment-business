@@ -1,4 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+
 
 
 function RecentPLTable() {
@@ -8,87 +10,87 @@ function RecentPLTable() {
 
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Most Recent Week</th>
-                    </tr>
-                    <tr>
-                        <th>Income</th>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <th>Payee</th>
-                        <th>Amount</th>
-                        <th>Paid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* using map to loop through recentPL variable */}
+            <TableContainer>
+                <Table aria-label="recent-PL">
+                    <TableHead>
+                        <TableRow align="center">
+                            <TableCell>Most Recent Week Profit and Loss</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell
+                            align="center"
+                            >Income</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Payee</TableCell>
+                            <TableCell>Amount</TableCell>
+                            <TableCell>Paid?</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                     {recentPL.map(transaction => {
-                        // for each transaction, if category id is equal to 1 (income) and paid is set to true
+                        // for each transaction, if category id is equal to 2 (expense) and paid is set to true
                         // return this code
                         if (transaction.category_id === 1 && transaction.paid === true) {
-                            return <tr key={transaction.id}>
-                                <td>{transaction.date}</td>
-                                <td>{transaction.payee}</td>
-                                <td>{transaction.amount}</td>
-                                <td><input type="checkbox" checked={transaction.paid} readOnly /></td>
-                            </tr>
-                            // otherwise if category is income, but paid is set to false, render this code
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><input type="checkbox" checked={transaction.paid} readOnly /></TableCell>
+                            </TableRow>
+                            // otherwise if category is expense, but paid is set to false, render this code
                         } else if (transaction.category_id === 1 && transaction.paid === false) {
-                            return <tr key={transaction.id}>
-                                <td>{transaction.date}</td>
-                                <td>{transaction.payee}</td>
-                                <td>{transaction.amount}</td>
-                                <td><input type="checkbox" readOnly /></td>
-                            </tr>
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><input type="checkbox" disabled /></TableCell>
+                            </TableRow>
                         }
                     })}
-                </tbody>
-                <tbody>
-
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Most Recent Week</th>
-                    </tr>
-                    <tr>
-                        <th>Expenses</th>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <th>Payee</th>
-                        <th>Amount</th>
-                        <th>Paid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* using map to loop through recentPL variable */}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TableContainer>
+                <Table aria-label="recent-PL">
+                    <TableHead>
+                        <TableRow>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Expenses</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Payee</TableCell>
+                            <TableCell>Amount</TableCell>
+                            <TableCell>Paid?</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                     {recentPL.map(transaction => {
                         // for each transaction, if category id is equal to 2 (expense) and paid is set to true
                         // return this code
                         if (transaction.category_id === 2 && transaction.paid === true) {
-                            return <tr key={transaction.id}>
-                                <td>{transaction.date}</td>
-                                <td>{transaction.payee}</td>
-                                <td>{transaction.amount}</td>
-                                <td><input type="checkbox" checked={transaction.paid} readOnly /></td>
-                            </tr>
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><input type="checkbox" checked={transaction.paid} readOnly /></TableCell>
+                            </TableRow>
                             // otherwise if category is expense, but paid is set to false, render this code
                         } else if (transaction.category_id === 2 && transaction.paid === false) {
-                            return <tr key={transaction.id}>
-                                <td>{transaction.date}</td>
-                                <td>{transaction.payee}</td>
-                                <td>{transaction.amount}</td>
-                                <td><input type="checkbox" disabled /></td>
-                            </tr>
+                            return <TableRow key={transaction.id}>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell>{transaction.payee}</TableCell>
+                                <TableCell>{transaction.amount}</TableCell>
+                                <TableCell><input type="checkbox" disabled /></TableCell>
+                            </TableRow>
                         }
                     })}
-                </tbody>
-            </table>
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 };

@@ -5,6 +5,7 @@ import ClientListItem from "../ClientListItem/ClientListItem";
 import AddAccountant from "../AddAccountant/AddAccountant";
 import axios from "axios";
 import AddClient from "../AddClient/AddClient";
+import { Button, Typography } from "@mui/material";
 
 function ClientList() {
   const dispatch = useDispatch();
@@ -93,7 +94,7 @@ function ClientList() {
   return (
     <>
       <div>
-        <h1>Clients</h1>
+        <Typography variant="h3">Clients</Typography>
         {allClients && allClients.length > 0 ? (
           <ul>
             {allClients.map((client, i) => (
@@ -101,7 +102,7 @@ function ClientList() {
                 {client.accountant_id == null ? (
                   <ClientListItem client={client} assignClient={assignClient} />
                 ) : (
-                  <p>{client.company_name} Assigned!</p>
+                  <Typography variant="h6">{client.company_name} (Assigned)</Typography>
                 )}
               </li>
             ))}
@@ -109,15 +110,16 @@ function ClientList() {
         ) : (
           <p>There are no clients available at this time.</p>
         )}
-        <button onClick={goToMyClients}>My Clients</button>
+        <Button variant="contained" onClick={goToMyClients}>
+          My Clients
+        </Button>
       </div>
       <div>
-        {/* Conditionally render the button if access_level is 2 */}
         {user.access_level === 2 && (
-          <button onClick={handleOpenModal}>New Accountant</button>
+          <Button variant="contained" onClick={handleOpenModal}>
+            New Accountant
+          </Button>
         )}
-
-        {/* The AddAccountant modal */}
         <AddAccountant
           isOpen={showModal}
           onRequestClose={handleCloseModal}
@@ -125,9 +127,10 @@ function ClientList() {
         />
       </div>
       <div>
-      {/* Conditionally render the button if access_level is 1 or 2 */}
-      {user.access_level >= 1 && (
-          <button onClick={handleOpenClientModal}>New Client</button>
+        {user.access_level >= 1 && (
+          <Button variant="contained" onClick={handleOpenClientModal}>
+            New Client
+          </Button>
         )}
         <AddClient
           isOpen={showClientModal}
