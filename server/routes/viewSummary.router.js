@@ -12,7 +12,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('req.params is:', req.params)
     const client_id = req.query.clientID/1;
     console.log('clientID is:', client_id);
-    const queryText = `SELECT "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
+    const queryText = `SELECT "id", "date", "payee", "amount", "paid", "category_id" FROM "transactions" 
     WHERE "week_id" = (
     SELECT MAX("week_id") 
     FROM "transactions" 

@@ -47,6 +47,13 @@ function App() {
         main: "#451F44",
       },
     },
+    // palette: {
+    //   abs: {
+    //     main: '#EB017F',
+    //     purple: '#451F44',
+    //     blue: '#00B4EB'
+    //   }
+    // }
   });
 
   useEffect(() => {
@@ -95,7 +102,9 @@ function App() {
             exact
             path="/balance/:client_id"
           >
+             <ThemeProvider theme={theme}>
             <BalanceSheet />
+            </ThemeProvider>
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -115,7 +124,9 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/allPL/:client_id">
-            <MultiPL />
+            <ThemeProvider theme={theme}>
+              <MultiPL />
+            </ThemeProvider>
           </ProtectedRoute>
 
           <Route exact path="/login">

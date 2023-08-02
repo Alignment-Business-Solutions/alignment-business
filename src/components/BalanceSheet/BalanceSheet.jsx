@@ -14,6 +14,7 @@ function BalanceSheet(){
     useEffect(() => {
         dispatch({
           type: "FETCH_BALANCE",
+          payload: params.client_id
         });
       }, []);
       console.log('Balance Sheet', balanceSheet)
@@ -36,6 +37,8 @@ function BalanceSheet(){
       <th>Loan (To)/From</th>
       <th>Ending Balance (cleared)</th>
       <th>Ending Balance (actual)</th>
+      {/* <th></th>
+      <th></th> */}
     </tr>
   </thead>
   <tbody>

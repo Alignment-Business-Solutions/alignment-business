@@ -5,6 +5,7 @@ import AllPL_Table from "./AllPL_Table/AllPLTable";
 import ExportCSV from "../SinglePL/ExportCSV/ExportCSV"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ExportAllWeeks from "./ExportAllCSV/ExportAllCSV";
+import "./AllPL.css"
 
 function AllPL() {
 
@@ -30,77 +31,10 @@ function AllPL() {
         <div>
             <h2>All Weeks Profits & Loss</h2>
             <ExportAllWeeks weeks={allWeeks} categories={categories}/>
-            <div>
+            <div className="allpl-table">
                 {allWeeks.map(week => (
                     
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Week of "Insert Week Here"</th>
-                            </tr>
-                            <tr>
-                                <th>Income</th>
-                            </tr>
-                            <tr>
-                                <th>Date</th>
-                                <th>Payee</th>
-                                <th>Amount</th>
-                                <th>Paid</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {week.map(transaction => {
-                                if (transaction.category_id === 1 && transaction.paid === true) {
-                                    return <tr key={transaction.id}>
-                                        <td>{transaction.date}</td>
-                                        <td>{transaction.payee}</td>
-                                        <td>{transaction.amount}</td>
-                                        <td><input type="checkbox" checked readOnly /></td>
-                                    </tr>
-                                } else if (transaction.category_id === 1 && transaction.paid === false) {
-                                    return <tr key={transaction.id}>
-                                        <td>{transaction.date}</td>
-                                        <td>{transaction.payee}</td>
-                                        <td>{transaction.amount}</td>
-                                        <td><input type="checkbox" disabled /></td>
-                                    </tr>
-                                }
-                            })}
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>Expenses</td>
-                            </tr>
-                            {week.map(transaction => {
-                                if (transaction.category_id === 2 && transaction.paid === true) {
-                                    return <tr key={transaction.id}>
-                                        <td>{transaction.date}</td>
-                                        <td>{transaction.payee}</td>
-                                        <td>{transaction.amount}</td>
-                                        <td><input type="checkbox" checked readOnly /></td>
-                                    </tr>
-                                } else if (transaction.category_id === 2 && transaction.paid === false) {
-                                    return <tr key={transaction.id}>
-                                        <td>{transaction.date}</td>
-                                        <td>{transaction.payee}</td>
-                                        <td>{transaction.amount}</td>
-                                        <td><input type="checkbox" disabled /></td>
-                                    </tr>
-                                }
-                            })}
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <button onClick={()=>gotToWeek(week, client_id.client_id)}>Click To Edit This Week!</button>
-                                    {week && <ExportCSV weekData={week} categories={categories}/> }
-
-                                    
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    // <AllPL_Table week={week}/>
+                    <AllPL_Table week={week} categories={categories}/>
                 ))}
             </div>
         </div>

@@ -7,9 +7,13 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
+
+
+  console.log('What is the GET query ',req.query);
+ 
   // GET route code here
-  pool.query(`SELECT * FROM "balance"
-  ORDER BY "id";`)
+  pool.query(`SELECT * FROM "balance" WHERE client_id = $1
+  ORDER BY id;`, [req.query.client_id])
   .then(result => {
       console.log('balanceRouter GET result ==> ', result.rows)
       res.send(result.rows)
@@ -59,8 +63,51 @@ router.get('/', (req, res) => {
 //     });
 
 
-router.put('/', (req, res) => {
+router.put('/edit', (req, res) => {
     // PUT route code here
+
+    console.log('OUR REQ.BODY',req.body)
+   const sqlText = `UPDATE balance SET "start_date" = $1, "beginning_cash" = $2, "income_received" = $3, 
+   "expenses_paid" = $4,"expenses_expected" = $5, "to_from_savings" = $6,
+    "saving_balance" = $7, "outstanding_checks" = $8, "loan_to_from" = $9
+    WHERE "id" = $10;
+    `;
+    const {
+      start_date,
+      beginning_cash,
+      income_received,
+      expenses_paid,
+      expenses_expected,
+      to_from_savings,
+      saving_balance,
+      outstanding_checks,
+      loan_to_from,
+      // ending_balance_actual,
+      // ending_balance_cleared,
+      id
+    } = req.body;
+  
+    pool
+      .query(sqlText, [
+        start_date,
+        beginning_cash,
+        income_received,
+        expenses_paid,
+        expenses_expected,
+        to_from_savings,
+        saving_balance,
+        outstanding_checks,
+        loan_to_from,
+        // ending_balance_actual,
+        // ending_balance_cleared,
+        id
+    ])
+    .then(result => {
+      res.sendStatus(201)
+    }).catch(err => {
+      console.log('Error with BALANCE PUT', err)
+      res.sendStatus(500)
+    })
   });
   
 
@@ -138,8 +185,18 @@ router.post('/', async (req, res) => {
 });
 
 
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
     // DELETE route code here
+    console.log(req.params.id);
+    const queryText = `DELETE FROM balance WHERE id=$1;`;
+    pool.query(queryText, [req.params.id])
+    .then(results => {
+        console.log('success');
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error with query', queryText, "error ==", error);
+        res.sendStatus(500);
+    });
   });
   
 module.exports = router;

@@ -14,6 +14,8 @@ import categoriesSaga from './categories.saga';
 import removeClientSaga from './removeClient.saga';
 import balanceSaga from './fetchBalance.saga'
 import addBalanceSaga from './addBalance.saga';
+import deleteBalanceSaga from './removeBalance.saga';
+import editBalanceSaga from './editBalance.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -39,5 +41,7 @@ export default function* rootSaga() {
     removeClientSaga(),
     balanceSaga(),
     addBalanceSaga(),
+    deleteBalanceSaga(),
+    editBalanceSaga(),
   ]);
 }

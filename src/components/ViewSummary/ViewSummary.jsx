@@ -2,10 +2,12 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Box } from "@mui/material";
 
 import AddWeekForm from "./AddWeekForm/AddWeekForm";
 import RecentPLTable from "./RecentPLTable/RecentPLTable";
 import SelectWeekForm from "./SelectWeekForm/SelectWeekForm";
+import './ViewSummary.css';
 
 function ViewSummary() {
 
@@ -29,9 +31,14 @@ function ViewSummary() {
     }, [])
 
     return (
-        <div>
+        <div className="center">
             <AddWeekForm />
+            <br/>
             <RecentPLTable />
+            <br/>
+            <br/>
+            <p className="center-text">Select a Week from the menu to view/edit details!</p>
+            <br/>
             <SelectWeekForm />
         </div>
     )
