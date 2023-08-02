@@ -1,8 +1,14 @@
 import { useDispatch } from "react-redux";
 import React, { useCallback, useState } from 'react';
+import { Button, TextField } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
+import Card from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import FormControlContext from "@mui/material/FormControl/FormControlContext";
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
-
-function BalanceItem({balance}) {
+function BalanceItem({balance, StyledTableCell, StyledTableRow}) {
 console.log('Is this working?')
 console.log('Balance!', balance)
 
@@ -57,141 +63,112 @@ const handleBDelete = useCallback((id, client_id) => {
 })
     return (
         <>
-        <tr>
+        <StyledTableRow>
         {!edit ? (
             
            <>
-          <td>{balance.start_date}</td>
-        <td>{balance.beginning_cash}</td>
-        <td>{balance.income_received}</td>
-        <td>{balance.income_received}</td>
-        <td>{balance.expenses_paid}</td>
-        <td>{balance.expenses_expected}</td>
-        <td>{balance.to_from_savings}</td>
-        <td>{balance.saving_balance}</td>
-        <td>{balance.outstanding_checks}</td>
-        <td>{balance.loan_to_from}</td>
-        <td>{balance.ending_balance_cleared}</td>
-        <td>{balance.ending_balance_actual}</td>
-       <button onClick={() => setEdit(true)}>🖊️</button>
+          <StyledTableCell>{balance.start_date}</StyledTableCell>
+        <StyledTableCell>{balance.beginning_cash}</StyledTableCell>
+        <StyledTableCell>{balance.income_received}</StyledTableCell>
+        <StyledTableCell>{balance.income_received}</StyledTableCell>
+        <StyledTableCell>{balance.expenses_paid}</StyledTableCell>
+        <StyledTableCell>{balance.expenses_expected}</StyledTableCell>
+        <StyledTableCell>{balance.to_from_savings}</StyledTableCell>
+        <StyledTableCell>{balance.saving_balance}</StyledTableCell>
+        <StyledTableCell>{balance.outstanding_checks}</StyledTableCell>
+        <StyledTableCell>{balance.loan_to_from}</StyledTableCell>
+        <StyledTableCell>{balance.ending_balance_cleared}</StyledTableCell>
+        <StyledTableCell>{balance.ending_balance_actual}</StyledTableCell>
+      <TableCell> <Button onClick={() => setEdit(true)}>Edit</Button> </TableCell>
        </> ) : 
          
-          ( <td>
-            <form>
-                
-             <label>New Week</label>
-                        <input 
-                        type='date'
-                        placeholder='Start Date'
-                        value={upBalance.start_date || balance.start_date}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           start_date: e.target.value
-                        })} 
-                        />
-             <label>Beginning Cash</label>
-                        <input 
-                        type='text'
-                        placeholder='Beginning Cash'
-                        value={upBalance.beginning_cash || balance.beginning_cash}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           beginning_cash: e.target.value
-                        })} 
-                        />
-                         <label>Income Received</label>
-                        <input 
-                        type='text'
-                        placeholder='Income Received'
-                        value={upBalance.income_received || balance.income_received}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           income_received: e.target.value
-                        })} 
-                        />
-                          {/* <label>Expenses Paid</label>
-                        <input 
-                        type='text'
-                        placeholder='Expenses Paid'
-                        value={upBalance.expenses_paid || balance.expenses_paid}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           expenses_paid: e.target.value
-                        })} 
-                        />
-                            <label>Expenses Expected</label>
-                        <input 
-                        type='text'
-                        placeholder='Expenses Expected'
-                        value={upBalance.expenses_expected || balance.expenses_expected}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           expenses_expected: e.target.value
-                        })} 
-                        /> */}
-                            <label>To/(From) Savings</label>
-                        <input 
-                        type='text'
-                        placeholder='To/(From) Savings'
-                        value={upBalance.to_from_savings || balance.to_from_savings}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           to_from_savings: e.target.value
-                        })} 
-                        />
-                                <label>Saving Balance</label>
-                        <input 
-                        type='text'
-                        placeholder='Saving Balance'
-                        value={upBalance.saving_balance || balance.saving_balance}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           saving_balance: e.target.value
-                        })} 
-                        />
-                                  <label>Outstanding Checks</label>
-                        <input 
-                        type='text'
-                        placeholder='Outstanding Checks'
-                        value={upBalance.outstanding_checks || balance.outstanding_checks}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           outstanding_checks: e.target.value
-                        })} 
-                        />
-                                  <label>Loan (To)/From</label>
-                        <input 
-                        type='text'
-                        placeholder='Loan (To)/From'
-                        value={upBalance.loan_to_from || balance.loan_to_from}
-                        onChange={(e) => setUpBalance({
-                           ...upBalance,
-                           loan_to_from: e.target.value
-                        })} 
-                        />
-              <button onClick={handleBEdit}>☑️</button>
-              <button onClick={() => setEdit(false)}>Close</button>
-           </form>
-           </td>
+          ( <StyledTableCell>
+       <FormControl>
+       <TextField
+  label="New Week"
+  type="date"
+  placeholder="Start Date"
+  margin="normal"
+  value={upBalance.start_date || balance.start_date}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, start_date: e.target.value })
+  }
+/>
+
+<TextField
+  label="Beginning Cash"
+  type="text"
+  placeholder="Beginning Cash"
+  margin="normal"
+  value={upBalance.beginning_cash || balance.beginning_cash}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, beginning_cash: e.target.value })
+  }
+/>
+
+<TextField
+  label="Income Received"
+  type="text"
+  placeholder="Income Received"
+  margin="normal"
+  value={upBalance.income_received || balance.income_received}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, income_received: e.target.value })
+  }
+/>
+
+<TextField
+  label="To/(From) Savings"
+  type="text"
+  placeholder="To/(From) Savings"
+  margin="normal"
+  value={upBalance.to_from_savings || balance.to_from_savings}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, to_from_savings: e.target.value })
+  }
+/>
+
+<TextField
+  label="Saving Balance"
+  type="text"
+  placeholder="Saving Balance"
+  margin="normal"
+  value={upBalance.saving_balance || balance.saving_balance}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, saving_balance: e.target.value })
+  }
+/>
+
+<TextField
+  label="Outstanding Checks"
+  type="text"
+  placeholder="Outstanding Checks"
+  margin="normal"
+  value={upBalance.outstanding_checks || balance.outstanding_checks}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, outstanding_checks: e.target.value })
+  }
+/>
+
+<TextField
+  label="Loan (To)/From"
+  type="text"
+  placeholder="Loan (To)/From"
+  margin="normal"
+  value={upBalance.loan_to_from || balance.loan_to_from}
+  onChange={(e) =>
+    setUpBalance({ ...upBalance, loan_to_from: e.target.value })
+  }
+/>
+
+  <Button onClick={handleBEdit}>Save</Button>
+ <StyledTableCell> <Button onClick={() => setEdit(false)}>Back</Button></StyledTableCell>
+</FormControl>
+           </StyledTableCell>
            )}
-        </tr>
-         {/* <td> {!edit ? (
-              <button onClick={() => setEdit(true)} >🖊️</button>
-     ) : (
-      <form>
-             <p>Hey</p>
-         </form
-        <form>
-        
-       
-       </form>
-       
-        
-       
-     )}
- </td> */}
-   <td>
-     <button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</button> </td>
+        </StyledTableRow>
+   <StyledTableCell>
+     <Button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</Button> </StyledTableCell>
   
     
     </>)

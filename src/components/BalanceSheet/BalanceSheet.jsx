@@ -3,6 +3,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import BalanceItem from './BalanceItem/BalanceItem';
 import BalanceForm from './BalanceForm/BalanceForm';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Table, TableHead, TableBody, TableRow } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
 function BalanceSheet(){
 
@@ -18,11 +21,32 @@ function BalanceSheet(){
         });
       }, []);
       console.log('Balance Sheet', balanceSheet)
+
+      const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+          backgroundColor: theme.palette.common.black,
+          color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+          fontSize: 14,
+        },
+      }));
+    
+      const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        "&:nth-of-type(odd)": {
+          backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        "&:last-child td, &:last-child th": {
+          border: 0,
+        },
+      }));
+
     return (
        <>
-    <BalanceForm />
+    {/* <BalanceForm /> */}
         
-        <table >
+        {/* <table >
   <thead>
     <tr>
       <th>Weeks</th>
@@ -38,8 +62,7 @@ function BalanceSheet(){
       <th>Ending Balance (cleared)</th>
       <th>Ending Balance (actual)</th>
       {/* <th></th>
-      <th></th> */}
-    </tr>
+      <th></th>  </tr>
   </thead>
   <tbody>
    
@@ -49,7 +72,39 @@ function BalanceSheet(){
       
         ))}
 </tbody>
-</table>
+</table> */}
+
+
+<BalanceForm />
+
+<Table>
+  <TableHead>
+    <TableRow>
+
+      <StyledTableCell>Weeks</StyledTableCell>
+      <StyledTableCell>Beginning Cash</StyledTableCell>
+      <StyledTableCell>Income (received)</StyledTableCell>
+      <StyledTableCell>Expenses (paid)</StyledTableCell>
+      <StyledTableCell>Expenses (expected)</StyledTableCell>
+      <StyledTableCell>Expenses (expected)</StyledTableCell>
+      <StyledTableCell>To/(From) Savings</StyledTableCell>
+      <StyledTableCell>Saving Balance</StyledTableCell>
+      <StyledTableCell>Outstanding Checks</StyledTableCell>
+      <StyledTableCell>Loan (To)/From</StyledTableCell>
+      <StyledTableCell>Ending Balance (cleared)</StyledTableCell>
+      <StyledTableCell>Ending Balance (actual)</StyledTableCell>
+    
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {balanceSheet && balanceSheet.map((balance, i) => (
+      <BalanceItem key={i} balance={balance} StyledTableCell={StyledTableCell} StyledTableRow={StyledTableRow}/>
+    ))}
+  </TableBody>
+</Table>
+   
+
+
 </> )
 }
 
