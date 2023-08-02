@@ -8,6 +8,8 @@ function AllPL_Table({ week, categories }) {
     const client_id = useParams();
     const history = useHistory();
 
+    const length = week.length;
+
     function gotToWeek(week, client_id) {
         console.log(week, client_id);
         history.push(`/singlePL/${client_id}/${week[0].week_id}`);
@@ -15,9 +17,11 @@ function AllPL_Table({ week, categories }) {
 
     return (
 
-
-        <TableContainer>
-            <Table>
+        // {length > 0 ? () : ()}
+        <div>
+        {length > 0 ? (
+            <TableContainer>
+            <Table sx={{border: 1}}>
                 <TableHead sx={{ textAlign: "center" }}>
                     <TableRow>
                         <TableCell>Week of {week.start_date}</TableCell>
@@ -75,7 +79,7 @@ function AllPL_Table({ week, categories }) {
                 </TableBody>
                 <TableBody>
                     <TableRow>
-                        <TableCell>
+                        <TableCell align="center" colSpan={4}>
                             <Button
                                 variant="contained"
                                 onClick={() => gotToWeek(week, client_id.client_id)}
@@ -88,6 +92,12 @@ function AllPL_Table({ week, categories }) {
                 </TableBody>
             </Table>
         </TableContainer>
+        ) : (
+            <>
+            </>
+        )}
+        
+        </div>
     )
 }
 
