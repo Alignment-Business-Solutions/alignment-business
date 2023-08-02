@@ -40,7 +40,9 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <Typography variant="h4" style={{ textAlign: "center" }}>Register User</Typography>
+      <Typography variant="h4" style={{ textAlign: "center" }}>
+        Register User
+      </Typography>
       {errors.registrationMessage && (
         <Typography className="alert" role="alert" variant="h3" color="error">
           {errors.registrationMessage}
