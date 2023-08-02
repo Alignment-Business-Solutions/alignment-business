@@ -38,7 +38,8 @@ function SinglePL() {
         dispatch({ type: "FETCH_SELECTED_CLIENT", payload: pathData});
         
         return () => {
-            dispatch({type:"UNSET_WEEK_DATA"}); 
+            dispatch({type:"UNSET_WEEK_DATA"});
+            dispatch({type:"UNSET_IMPORT_DATA"});
         }
 
     }, []);

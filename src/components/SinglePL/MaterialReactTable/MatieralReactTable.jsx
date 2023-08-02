@@ -119,7 +119,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         },
       {
         accessorKey: 'date',
-        header: 'date',
+        header: 'Date',
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
         enableSorting: true,
@@ -128,7 +128,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       },
       {
         accessorKey: 'payee',
-        header: 'payee',
+        header: 'Payee',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
@@ -136,7 +136,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       },
       {
         accessorKey: 'amount',
-        header: 'amount',
+        header: 'Amount',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
@@ -144,7 +144,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       },
       {
         accessorKey: 'paid',
-        header: 'paid',
+        header: 'Paid Status',
         Cell: ({ cell }) => (
               <Box
                 component="span"
@@ -250,8 +250,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                label="Category"
                onChange={saveInputValueToRowCache}
              >
-             {categories.map(cat => (
-                 <MenuItem value={cat.id}>{cat.category}</MenuItem>
+             {categories.map((cat,i) => (
+                 <MenuItem key={i} value={cat.id}>{cat.category}</MenuItem>
              ))}
              </Select>
            </FormControl>
@@ -379,52 +379,52 @@ export const CreateNewItemModal = ({ open, columns, onClose, onSubmit, categorie
                         gap: '1.5rem',
                         }}
                     >
-                <InputLabel htmlFor="TextFieldOne">Date</InputLabel>
-                <TextField
-                    name="TextFieldOne"
-                    type="date"
-                    value={item.date}
-                    onChange={(e)=>handleChange("date", e.target.value)}
-                    required
-                />
+                        <InputLabel htmlFor="TextFieldOne">Date</InputLabel>
+                        <TextField
+                            name="TextFieldOne"
+                            type="date"
+                            value={item.date}
+                            onChange={(e)=>handleChange("date", e.target.value)}
+                            required
+                        />
 
-                <InputLabel htmlFor="TextFieldTwo">Payee</InputLabel>
-                <TextField
-                    name="TextFieldTwo"
-                    type="text"
-                    value={item.payee}
-                    onChange={(e)=>handleChange("payee", e.target.value)}
-                    required
-                />
+                        <InputLabel htmlFor="TextFieldTwo">Payee</InputLabel>
+                        <TextField
+                            name="TextFieldTwo"
+                            type="text"
+                            value={item.payee}
+                            onChange={(e)=>handleChange("payee", e.target.value)}
+                            required
+                        />
 
 
 
-                <InputLabel htmlFor="TextFieldFour">Amount</InputLabel>
-                <TextField
-                    name="TextFieldFour"
-                    type="text"
-                    value={item.amount}
-                    onChange={(e)=>handleChange("amount", e.target.value)}
-                    required
-                />
-        
-                <InputLabel htmlFor="TextFieldFive">Paid?</InputLabel>
-                <Checkbox
-                    name="TextFieldFive"
-                    value={item.paid}
-                    checked={item.paid}
-                    onChange={(e)=>handleChange("paid", e.target.checked)}
-                />
-                 <InputLabel htmlFor="TextFieldThree-select">Category</InputLabel>
-                <select 
-                    htmlFor="TextFieldThree"
-                    onChange={(e)=>handleChange("cat", e.target.value)}
-                    required
-                >
-                    {categories.map((cat, i) => (
-                        <option value={cat.id} key={i} >{cat.category} </option>
-                    ))}
-                </select>                        
+                        <InputLabel htmlFor="TextFieldFour">Amount</InputLabel>
+                        <TextField
+                            name="TextFieldFour"
+                            type="text"
+                            value={item.amount}
+                            onChange={(e)=>handleChange("amount", e.target.value)}
+                            required
+                        />
+                
+                        <InputLabel htmlFor="TextFieldFive">Paid?</InputLabel>
+                        <Checkbox
+                            name="TextFieldFive"
+                            value={item.paid}
+                            checked={item.paid}
+                            onChange={(e)=>handleChange("paid", e.target.checked)}
+                        />
+                         <InputLabel htmlFor="TextFieldThree-select">Category</InputLabel>
+                        <select 
+                            htmlFor="TextFieldThree"
+                            onChange={(e)=>handleChange("cat", e.target.value)}
+                            required
+                        >
+                            {categories.map((cat, i) => (
+                                <option value={cat.id} key={i} >{cat.category} </option>
+                            ))}
+                        </select>                        
                     </Stack>
                 </form>
             </DialogContent>

@@ -1,10 +1,14 @@
 import { useCSVReader } from 'react-papaparse';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 
 function ImportRegCSV({week_id, client_id}) {
     const { CSVReader } = useCSVReader();
+    const importData = useSelector(store => store.importRegData);
     const dispatch = useDispatch();
+    const unSetImportData= () => {
+        dispatch({type:"UNSET_IMPORT_DATA"})
+    }
 
     return (
         <CSVReader
@@ -19,21 +23,23 @@ function ImportRegCSV({week_id, client_id}) {
             getRootProps,
             acceptedFile,
             getRemoveFileProps,
-          }: any) => (
+          }: any) => {
+            return (
             <>
               <div>
-                <Button type='button' color="secondary" variant='contained'{...getRootProps()}>
-                  Import Register of Quickbooks csv
+                {importData.length === 0 ?
+                <Button type='button' color="secondary" variant='contained' {...getRootProps()}>
+                  Import Register or Quickbooks csv
                 </Button>
-                <div>
-                  {acceptedFile && acceptedFile.name}
-                </div>
-                <Button color="secondary" variant='contained'{...getRemoveFileProps()} >
-                  Remove Selected
-                </Button>
+                    :
+                <Button color="secondary" variant='contained' {...getRemoveFileProps()} onClick={()=>unSetImportData()}>
+                  Remove: {acceptedFile.name}
+                </Button>}
               </div>
             </>
-          )}
+            );
+
+          }}
         </CSVReader>
     );
 }
