@@ -78,7 +78,7 @@ function SinglePL() {
                 Go Back To Summary Page
             </Link>
 
-            <Example weekData={weekData} categories={categories}/>
+            <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>
 
         </>
     );

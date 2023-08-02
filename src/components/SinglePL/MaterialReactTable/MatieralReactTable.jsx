@@ -12,22 +12,27 @@ import {
     Stack,
     TextField,
     Tooltip,
+    FormControl,
+    InputLabel,
+    Select,
+    Checkbox,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import Categories from './TableComps/Catagories';
-import Paid from './TableComps/Paid';
+import { useDispatch } from 'react-redux';
 
-const Example = ({weekData, categories}) => {
+const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
+    const dispatch = useDispatch(); 
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [tableData, setTableData] = useState(() => weekData);
     const [validationErrors, setValidationErrors] = useState({});
 
     //submit new item to db
     const handleCreateNewRow = (values) => {
+        dispatch({type:"POST_ITEM", payload: values});
          
     };
    
-    const findeCategory = (id) => {
+    const findCategory = (id) => {
         for (let cat of categories){
             if (id === cat.id){
                 return cat.category;
@@ -44,12 +49,12 @@ const Example = ({weekData, categories}) => {
     };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-        if (!Object.keys(validationErrors).length) {
             tableData[row.index] = values;
             //send/receive api updates here, then refetch or update local table data for re-render
-            setTableData([...tableData]);
+            dispatch({type:"UPDATE_ITEM", payload:{data: values,
+                                       week: weekID,
+                                       client: clientID}});
             exitEditingMode(); //required to exit editing mode and close modal
-        }
     };
 
     const handleCancelRowEdits = () => {
@@ -58,12 +63,13 @@ const Example = ({weekData, categories}) => {
 
     const handleDeleteRow = useCallback(
         (row) => {
-            if (!confirm(`Are you sure you want to delete ${row.getValue('firstName')}`)) {
+            if (!confirm(`Are you sure you want to delete ${row.getValue('payee')}`)) {
                 return;
                 }
                 //send api delete request here, then refetch or update local table data for re-render
-            tableData.splice(row.index, 1);
-            setTableData([...tableData]);
+       dispatch({type:"DELETE_ITEM", payload: {data: row.id,
+                                                week: weekID,
+                                                client: clientID}});
             },
         [tableData],
     );
@@ -101,6 +107,13 @@ const Example = ({weekData, categories}) => {
 
   const columns = useMemo(
     () => [
+        {
+            accessorKey: 'id',
+            header: 'id',
+            enableEditing: false
+
+
+        },
       {
         accessorKey: 'date',
         header: 'date',
@@ -146,7 +159,40 @@ const Example = ({weekData, categories}) => {
                 {isPaid(cell.getValue())}
               </Box>
         ),
-        Edit: ({ cell }) => <Paid cell={cell}/>,
+        Edit: ({ column, row, table, cell }) => {
+          const {
+            getState,
+            setEditingRow,
+            setCreatingRow,
+          } = table;
+
+          const { creatingRow, editingRow } = getState();
+          const isCreating = creatingRow?.id === row.id;
+          const isEditing = editingRow?.id === row.id;
+          
+            const saveInputValueToRowCache = (newValue) => {
+            row._valuesCache[column.id] = newValue.target.checked;
+            if (isCreating) {
+              setCreatingRow({ ...row });
+            } else if (isEditing) {
+              setEditingRow({ ...row });
+            }
+          };
+            return (
+                 <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                    <InputLabel id="paid">Paid ?</InputLabel>
+                    <Checkbox 
+                            label="paid?"
+                            defaultChecked={cell.getValue()}
+                            onChange={saveInputValueToRowCache}
+                        />
+                   </FormControl>
+                 </Box>
+            )
+
+
+        },
       },
       {
         accessorKey: 'category_id',
@@ -166,10 +212,49 @@ const Example = ({weekData, categories}) => {
               p: '0.25rem',
             })}
           >
-            {findeCategory(cell.getValue())}
+            {findCategory(cell.getValue())}
           </Box>
         ),
-        Edit: ({ cell }) => <Categories cell={cell} categories={categories}/>,
+        Edit: ({ column, row, table }) => {
+          const {
+            getState,
+            setEditingRow,
+            setCreatingRow,
+          } = table;
+
+          const { creatingRow, editingRow } = getState();
+          const isCreating = creatingRow?.id === row.id;
+          const isEditing = editingRow?.id === row.id;
+          
+            const saveInputValueToRowCache = (newValue) => {
+            row._valuesCache[column.id] = newValue.target.value;
+            if (isCreating) {
+              setCreatingRow({ ...row });
+            } else if (isEditing) {
+              setEditingRow({ ...row });
+            }
+          };
+
+
+          return (
+          <Box sx={{ minWidth: 120 }}>
+           <FormControl fullWidth>
+             <InputLabel id="category">Category</InputLabel>
+             <Select
+               labelId="category"
+               id="categorySelect"
+               value={row.original.category_id}
+               label="Category"
+               onChange={saveInputValueToRowCache}
+             >
+             {categories.map(cat => (
+                 <MenuItem value={cat.id}>{cat.category}</MenuItem>
+             ))}
+             </Select>
+           </FormControl>
+         </Box>
+          );
+        },
         },
 
         ],
@@ -189,9 +274,10 @@ const Example = ({weekData, categories}) => {
         }}
         columns={columns}
         data={weekData}
+        initialState={{ columnVisibility: { id: false } }}
         editingMode="modal" //default
         enableColumnOrdering
-        enableEditing
+        enableEditing={(accLevel !==0 )? true: false}
         onEditingRowSave={handleSaveRowEdits}
         onEditingRowCancel={handleCancelRowEdits}
         renderRowActions={({ row, table }) => (
