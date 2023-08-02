@@ -8,7 +8,8 @@ function* addBalance(action) {
         console.log('POST Add Balance action.payload ===>', action.payload)
         yield axios.post('/api/balance/', action.payload.balance)
         yield put({
-            type: 'FETCH_BALANCE'
+            type: 'FETCH_BALANCE',
+            payload: action.payload.balance.client_id
         })
     } catch(err) {
         console.log('Error with Add Balance POST saga', err)

@@ -18,12 +18,13 @@ const updatedBalance = {
     saving_balance: balance.saving_balance || '',
     outstanding_checks: balance.outstanding_checks || '',
     loan_to_from: balance.loan_to_from || '',
+    id:balance.id,
     // ending_balance_cleared: '',
     // ending_balance_actual: '',
-    // client_id: params.client_id,
+    client_id: balance.client_id
   };
   
-  const [upBalance, setUpBalance] = useState({})
+  const [upBalance, setUpBalance] = useState(updatedBalance)
 
 
 
@@ -32,13 +33,14 @@ const [edit, setEdit] = useState(false)
 
 const handleBEdit = (event) => {
     event.preventDefault()
-    console.log('Edit!')
-    const filteredUpBalance = Object.fromEntries(
-        Object.entries(upBalance).filter(([key, value]) => value !== '')
-      );
+    console.log('Edit!', upBalance)
+
+    // const filteredUpBalance = Object.fromEntries(
+    //     Object.entries(upBalance).filter(([key, value]) => value !== '')
+    //   );
     dispatch({
         type: 'EDIT_BALANCE',
-        payload: {upBalance: filteredUpBalance}
+        payload: upBalance
     })
 
     setEdit(false)
@@ -107,7 +109,7 @@ const handleBDelete = useCallback((id, client_id) => {
                            income_received: e.target.value
                         })} 
                         />
-                          <label>Expenses Paid</label>
+                          {/* <label>Expenses Paid</label>
                         <input 
                         type='text'
                         placeholder='Expenses Paid'
@@ -126,7 +128,7 @@ const handleBDelete = useCallback((id, client_id) => {
                            ...upBalance,
                            expenses_expected: e.target.value
                         })} 
-                        />
+                        /> */}
                             <label>To/(From) Savings</label>
                         <input 
                         type='text'
