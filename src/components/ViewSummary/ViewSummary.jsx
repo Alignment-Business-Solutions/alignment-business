@@ -36,6 +36,9 @@ function ViewSummary() {
             <br/>
             <RecentPLTable />
             <br/>
+            <br/>
+            <p className="center-text">Select a Week from the menu to view/edit details!</p>
+            <br/>
             <SelectWeekForm />
         </div>
     )
