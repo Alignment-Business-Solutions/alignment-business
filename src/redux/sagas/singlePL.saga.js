@@ -32,6 +32,7 @@ function* addToAllPL(action) {
 }
 
 function* updateItemData(action) {
+    console.log(action.payload);
     const data = action.payload.data;
     const week = action.payload.week;
     const client = action.payload.client;
