@@ -309,29 +309,56 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         open={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
         onSubmit={handleCreateNewRow}
+        categories={categories}
+        weekID={weekID}
+        clientID={clientID}
       />
     </>
   );
 };
 
 //example of creating a mui dialog modal for creating new rows
-export const CreateNewItemModal = ({ open, columns, onClose, onSubmit }) => {
-    const [values, setValues] = useState(() =>
-        columns.reduce((acc, column) => {
-            acc[column.accessorKey ?? ''] = '';
-            return acc;
-        }, {}),
-    );
+export const CreateNewItemModal = ({ open, columns, onClose, onSubmit, categories, clientID, weekID }) => {
+    
+    const [item, setItem] = useState({
+                                    date:'',
+                                    payee: String,
+                                    category_id: 0,
+                                    amount: "$0.00",
+                                    paid: false,
+                                    week_id: weekID,
+                                    client_id: clientID,
+                                        });
+    
+    function handleChange(type, change) {
+        console.log('inhandleChange', type, change);
+        switch(type) {
+            case "date":
+                setItem({...item, date: change});
+                break
+            case "payee":
+                setItem({...item, payee: change});
+                break
+            case "cat":
+                setItem({...item, category_id: change});
+                break
+            case "amount":
+                setItem({...item, amount: change}); 
+                break
+            case "paid":
+                setItem({...item, paid: change});
+                break
+        }
+    }
 
     const handleSubmit = () => {
-        //put your validation logic here
-        onSubmit(values);
+        onSubmit(item);
         onClose();
     };
 
     return (
         <Dialog open={open}>
-            <DialogTitle textAlign="center">Create New Account</DialogTitle>
+            <DialogTitle textAlign="center">Create New Item</DialogTitle>
             <DialogContent>
                 <form onSubmit={(e) => e.preventDefault()}>
                     <Stack
@@ -341,46 +368,59 @@ export const CreateNewItemModal = ({ open, columns, onClose, onSubmit }) => {
                         gap: '1.5rem',
                         }}
                     >
-                        <TextField
-                            key='tes'
-                            label='test'
-                            name='test'
-                            onChange={(e) =>
-                                setValues({ ...values, [e.target.name]: e.target.value })
-                            }
-                        />
-                        <TextField
-                            key='asdf'
-                            label='asdf'
-                            name='asdf'
-                            
-                        />
-                       <TextField
-                            key='fdas'
-                            label='fdsa'
-                            name='fdsa'
+                <InputLabel htmlFor="TextFieldOne">Date</InputLabel>
+                <TextField
+                    name="TextFieldOne"
+                    type="date"
+                    value={item.date}
+                    onChange={(e)=>handleChange("date", e.target.value)}
+                    required
+                />
 
-                        />
-                        <TextField
-                            key='qwer'
-                            label='qwer'
-                            name='qwer'
+                <InputLabel htmlFor="TextFieldTwo">Payee</InputLabel>
+                <TextField
+                    name="TextFieldTwo"
+                    type="text"
+                    value={item.payee}
+                    onChange={(e)=>handleChange("payee", e.target.value)}
+                    required
+                />
 
-                        />
-                        <TextField
-                            key='rewq'
-                            label='rewq'
-                            name='rewq'
 
-                        />
-                         
+
+                <InputLabel htmlFor="TextFieldFour">Amount</InputLabel>
+                <TextField
+                    name="TextFieldFour"
+                    type="text"
+                    value={item.amount}
+                    onChange={(e)=>handleChange("amount", e.target.value)}
+                    required
+                />
+        
+                <InputLabel htmlFor="TextFieldFive">Paid?</InputLabel>
+                <Checkbox
+                    name="TextFieldFive"
+                    value={item.paid}
+                    checked={item.paid}
+                    onChange={(e)=>handleChange("paid", e.target.checked)}
+                />
+                 <InputLabel htmlFor="TextFieldThree-select">Category</InputLabel>
+                <select 
+                    htmlFor="TextFieldThree"
+                    onChange={(e)=>handleChange("cat", e.target.value)}
+                    required
+                >
+                    {categories.map((cat, i) => (
+                        <option value={cat.id} key={i} >{cat.category} </option>
+                    ))}
+                </select>                        
                     </Stack>
                 </form>
             </DialogContent>
             <DialogActions sx={{ p: '1.25rem' }}>
                 <Button onClick={onClose}>Cancel</Button>
                 <Button color="secondary" onClick={handleSubmit} variant="contained">
-                    Create New Account
+                    Create New Item
                 </Button>
             </DialogActions>
         </Dialog>
