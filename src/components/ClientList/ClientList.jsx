@@ -139,7 +139,7 @@ function ClientList() {
                     />
                   ) : (
                     <Typography variant="h6">
-                      {client.company_name} (Assigned)
+                      {client.company_name} <br></br> (Assigned)
                     </Typography>
                   )}
                 </div>
