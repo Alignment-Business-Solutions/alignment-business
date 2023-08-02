@@ -16,7 +16,8 @@ function RecentPLTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell
-                            align="center"
+                            sx={{textAlign: "center"}} 
+                            colSpan={4}
                             >Income</TableCell>
                         </TableRow>
                         <TableRow>
@@ -54,9 +55,10 @@ function RecentPLTable() {
                 <Table aria-label="recent-PL">
                     <TableHead>
                         <TableRow>
+                            <TableCell sx={{borderBottom: "none"}}></TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Expenses</TableCell>
+                            <TableCell sx={{textAlign: "center"}} colSpan={4}>Expenses</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Date</TableCell>
