@@ -21,7 +21,9 @@ import { Delete, Edit } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import ImportRegCSV from '../ImportCSV/ImportRegCSV';
 import ExportCSV from '../ExportCSV/ExportCSV.jsx';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
     const dispatch = useDispatch(); 
@@ -49,6 +51,12 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         } else {
             return '🚫';
         }
+    };
+
+    const dateSplice = (value) => {
+        let date = value;
+        date = date.slice(0, 10);
+        return date;
     };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -123,8 +131,43 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
         enableSorting: true,
-        type: 'date',
+        sortingFn: 'datetime',
         size: 80,
+        Filter: ({ column }) => (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  onChange={(newValue) => {
+                    column.setFilterValue(newValue);
+                  }}
+                  slotProps={{
+                    textField: {
+                      helperText: 'Filter Mode: Less Than',
+                      sx: { minWidth: '120px' },
+                      variant: 'standard',
+                    },
+                  }}
+                  value={column.getFilterValue()}
+                />
+              </LocalizationProvider>
+        ),
+        // Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
+        Cell: ({ cell }) => (
+              <Box
+                component="span"
+                sx={(theme) => ({
+                  backgroundColor:
+                    cell.getValue()
+                      ? '#00ff00'
+                      : '#ff0000',
+                  borderRadius: '0.25rem',
+                  color: '#fff',
+                  maxWidth: '9ch',
+                  p: '0.25rem',
+                })}
+              >
+                {dateSplice(cell.getValue())}
+              </Box>
+        ),
       },
       {
         accessorKey: 'payee',
