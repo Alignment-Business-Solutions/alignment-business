@@ -1,13 +1,3 @@
-.client-box {
-    border-style: solid;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px;
-    text-align: center;
-    height:fit-content;
-    width: 200px;
-}
-
 .button-container {
     display: flex;
     justify-content: center; 
@@ -27,5 +17,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.outer-box {
+    border-style: solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
 }
   
