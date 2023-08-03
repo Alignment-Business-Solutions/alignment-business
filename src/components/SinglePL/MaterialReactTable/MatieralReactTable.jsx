@@ -49,9 +49,9 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
    
     const isPaid = (value) => {
         if(value){
-            return '✅';
+            return " * * *";
         } else {
-            return '🚫';
+            return ' * * *';
         }
     };
 
@@ -198,7 +198,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                   backgroundColor:
                     cell.getValue()
                       ? '#528638'
-                      : '#ff0000',
+                      : '#cc0000',
                   borderRadius: '0.25rem',
                   color: '#fff',
                   maxWidth: '9ch',
@@ -253,8 +253,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
             sx={(theme) => ({
               backgroundColor:
                 cell.getValue() === 1
-                  ? '#00ff00'
-                  : '#ff0000',
+                  ? '#528638'
+                  : '#cc0000',
               borderRadius: '0.25rem',
               color: '#fff',
               maxWidth: '9ch',
