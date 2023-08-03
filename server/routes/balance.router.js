@@ -9,18 +9,18 @@ const router = express.Router();
 router.get('/', (req, res) => {
 
 
-  console.log('What is the GET query ',req.query);
- 
+  console.log('What is the GET query ', req.query);
+
   // GET route code here
   pool.query(`SELECT * FROM "balance" WHERE client_id = $1
   ORDER BY id;`, [req.query.client_id])
-  .then(result => {
+    .then(result => {
       console.log('balanceRouter GET result ==> ', result.rows)
       res.send(result.rows)
-  }).catch( err => {
+    }).catch(err => {
       console.log('Error with balanceRouter GET', err)
       res.sendStatus(500)
-  })
+    })
 });
 // SELECT balance.*, weeks.start_date
 //   FROM balance
@@ -31,15 +31,15 @@ router.get('/', (req, res) => {
 //         // array of arrays
 //         // [ [rows for week 1], [rows for week 2], [etc] ]
 //         let weeklyData = [];
-    
+
 //         // establish a connection, to be used by all these queries
 //         const connection = await pool.connect();
-    
+
 //         try {
 //             const weeksSql = `SELECT "weeks"."id" FROM "weeks";`;
 //             const weeksResult = await connection.query(weeksSql);
 //             // weeksResult.rows is something like [ {id: 1}, {id: 2}, {etc} ]
-    
+
 //             const balanceSql = `SELECT * FROM "balance" WHERE client_id = $1;`;
 //             // select all columns from transactions, one week at a time
 //             for (let week of weeksResult.rows) {
@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
 //                 weeklyData.push(balanceResult.rows[0]);
 //                 console.log('Balance Results', balanceResult.rows)
 //             }
-    
+
 //             res.send(weeklyData);
 //         } catch (error) {
 //             console.log('Error GETting Balance:', error);
@@ -61,17 +61,16 @@ router.get('/', (req, res) => {
 //             connection.release();
 //         }
 //     });
+router.put('/edit', async (req, res) => {
 
+  const connection = await pool.connect();
 
-router.put('/edit', (req, res) => {
-    // PUT route code here
-
-    console.log('OUR REQ.BODY',req.body)
-   const sqlText = `UPDATE balance SET "start_date" = $1, "beginning_cash" = $2, "income_received" = $3, 
-   "expenses_paid" = $4,"expenses_expected" = $5, "to_from_savings" = $6,
-    "saving_balance" = $7, "outstanding_checks" = $8, "loan_to_from" = $9
-    WHERE "id" = $10;
-    `;
+  try {
+    let sqlText = `UPDATE balance SET "start_date" = $1, "beginning_cash" = $2, "income_received" = $3, 
+    "expenses_paid" = $4,"expenses_expected" = $5, "to_from_savings" = $6,
+     "saving_balance" = $7, "outstanding_checks" = $8, "loan_to_from" = $9
+     WHERE "id" = $10;
+     `;
     const {
       start_date,
       beginning_cash,
@@ -82,34 +81,85 @@ router.put('/edit', (req, res) => {
       saving_balance,
       outstanding_checks,
       loan_to_from,
-      // ending_balance_actual,
-      // ending_balance_cleared,
       id
     } = req.body;
-  
-    pool
-      .query(sqlText, [
-        start_date,
-        beginning_cash,
-        income_received,
-        expenses_paid,
-        expenses_expected,
-        to_from_savings,
-        saving_balance,
-        outstanding_checks,
-        loan_to_from,
-        // ending_balance_actual,
-        // ending_balance_cleared,
-        id
-    ])
-    .then(result => {
-      res.sendStatus(201)
-    }).catch(err => {
-      console.log('Error with BALANCE PUT', err)
-      res.sendStatus(500)
-    })
-  });
-  
+
+    let newBalance = await connection.query(sqlText, [start_date,
+      beginning_cash,
+      income_received,
+      expenses_paid,
+      expenses_expected,
+      to_from_savings,
+      saving_balance,
+      outstanding_checks,
+      loan_to_from,
+      id]);
+
+    const sqlCalculation = `UPDATE balance
+      SET ending_balance_actual = beginning_cash + income_received - expenses_expected - to_from_savings - outstanding_checks,
+          ending_balance_cleared = beginning_cash + income_received - expenses_expected
+      WHERE "id" = $1;`
+    await connection.query(sqlCalculation, [id]);
+
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    console.log('Balance error:', error);
+    res.sendStatus(500);
+  } finally {
+    connection.release();
+  }
+
+});
+
+// router.put('/edit', (req, res) => {
+//   // PUT route code here
+
+//   console.log('OUR REQ.BODY', req.body)
+//   const sqlText = `UPDATE balance SET "start_date" = $1, "beginning_cash" = $2, "income_received" = $3, 
+//    "expenses_paid" = $4,"expenses_expected" = $5, "to_from_savings" = $6,
+//     "saving_balance" = $7, "outstanding_checks" = $8, "loan_to_from" = $9
+//     WHERE "id" = $10;
+//     `;
+//   const {
+//     start_date,
+//     beginning_cash,
+//     income_received,
+//     expenses_paid,
+//     expenses_expected,
+//     to_from_savings,
+//     saving_balance,
+//     outstanding_checks,
+//     loan_to_from,
+//     // ending_balance_actual,
+//     // ending_balance_cleared,
+//     id
+//   } = req.body;
+
+//   pool
+//     .query(sqlText, [
+//       start_date,
+//       beginning_cash,
+//       income_received,
+//       expenses_paid,
+//       expenses_expected,
+//       to_from_savings,
+//       saving_balance,
+//       outstanding_checks,
+//       loan_to_from,
+//       // ending_balance_actual,
+//       // ending_balance_cleared,
+//       id
+//     ])
+//     .then(result => {
+//       res.sendStatus(201)
+//     }).catch(err => {
+//       console.log('Error with BALANCE PUT', err)
+//       res.sendStatus(500)
+//     })
+// });
+
 
 router.post('/', async (req, res) => {
   // POST route code here
@@ -120,7 +170,7 @@ router.post('/', async (req, res) => {
   try {
     await connection.query('BEGIN'); // begin transaction
 
-    const client_id = req.body.client_id/1
+    const client_id = req.body.client_id / 1
 
     const sqlBalance = `INSERT INTO balance ("start_date", "beginning_cash", "income_received", "expenses_paid", 
     "expenses_expected", "to_from_savings", "saving_balance",
@@ -128,7 +178,7 @@ router.post('/', async (req, res) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 
     RETURNING "id";;`
-    
+
     // const sqlValues = [req.body.start_date,req.body.beginning_cash,req.body.income_received, req.body.expenses_paid, 
     //     req.body.expenses_expected,req.body.to_from_savings,
     //     req.body.saving_balance, req.body.outstanding_checks,
@@ -136,29 +186,29 @@ router.post('/', async (req, res) => {
     //  ]
 
     const {
-        start_date,
-        beginning_cash,
-        income_received,
-        expenses_paid, 
-        expenses_expected,
-        to_from_savings,
-        saving_balance,
-        outstanding_checks,
-        loan_to_from,
-        
+      start_date,
+      beginning_cash,
+      income_received,
+      expenses_paid,
+      expenses_expected,
+      to_from_savings,
+      saving_balance,
+      outstanding_checks,
+      loan_to_from,
+
     } = req.body
-     console.log('SQL VALUES', req.body)
+    console.log('SQL VALUES', req.body)
     // newBalance will hold id that's returned
-    let newBalance = await connection.query(sqlBalance,[ start_date,
-        beginning_cash,
-        income_received,
-        expenses_paid, 
-        expenses_expected,
-        to_from_savings,
-        saving_balance,
-        outstanding_checks,
-        loan_to_from,
-        client_id]);
+    let newBalance = await connection.query(sqlBalance, [start_date,
+      beginning_cash,
+      income_received,
+      expenses_paid,
+      expenses_expected,
+      to_from_savings,
+      saving_balance,
+      outstanding_checks,
+      loan_to_from,
+      client_id]);
     console.log('newBalance.rows[0].id is:', newBalance.rows[0].id);
     const insertResultId = newBalance.rows[0].id;
 
@@ -186,17 +236,17 @@ router.post('/', async (req, res) => {
 
 
 router.delete('/:id', (req, res) => {
-    // DELETE route code here
-    console.log(req.params.id);
-    const queryText = `DELETE FROM balance WHERE id=$1;`;
-    pool.query(queryText, [req.params.id])
+  // DELETE route code here
+  console.log(req.params.id);
+  const queryText = `DELETE FROM balance WHERE id=$1;`;
+  pool.query(queryText, [req.params.id])
     .then(results => {
-        console.log('success');
-        res.sendStatus(200);
+      console.log('success');
+      res.sendStatus(200);
     }).catch(error => {
-        console.log('error with query', queryText, "error ==", error);
-        res.sendStatus(500);
+      console.log('error with query', queryText, "error ==", error);
+      res.sendStatus(500);
     });
-  });
-  
+});
+
 module.exports = router;
