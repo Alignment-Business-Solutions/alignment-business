@@ -32,14 +32,13 @@ function ViewSummary() {
 
     return (
         <div className="center">
-            <AddWeekForm />
-            <br/>
-            <RecentPLTable />
-            <br/>
-            <br/>
             <p className="center-text">Select a Week from the menu to view/edit details!</p>
             <br/>
             <SelectWeekForm />
+            <br/>
+            <AddWeekForm />
+            <br/>
+            <RecentPLTable />
         </div>
     )
 }
