@@ -18,11 +18,14 @@ function MyClientsItem({ client }) {
 
   return (
     <div>
-      <Typography variant="h6">{client.company_name}</Typography>
+      <Typography style={{ marginBottom: "5px" }} variant="h6">
+        {client.company_name}
+      </Typography>
       <Link to={path}>View Client Details</Link>
       <br></br>
       <br></br>
       <Button
+        style={{ width: "200px" }}
         variant="contained"
         onClick={() => removeClient(client.client_id)}
       >

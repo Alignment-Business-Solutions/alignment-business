@@ -130,18 +130,20 @@ function ClientList() {
         {allClients && allClients.length > 0 ? (
           <div className="client-ul">
             {allClients.map((client, i) => (
-              <div className="client-box">
-                <div key={i}>
-                  {client.accountant_id == null ? (
-                    <ClientListItem
-                      client={client}
-                      assignClient={assignClient}
-                    />
-                  ) : (
-                    <Typography variant="h6">
-                      {client.company_name} <br></br> (Assigned)
-                    </Typography>
-                  )}
+              <div className="outer-box">
+                <div className="client-box">
+                  <div key={i}>
+                    {client.accountant_id == null ? (
+                      <ClientListItem
+                        client={client}
+                        assignClient={assignClient}
+                      />
+                    ) : (
+                      <Typography variant="h6">
+                        {client.company_name} <br></br> (Assigned)
+                      </Typography>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
