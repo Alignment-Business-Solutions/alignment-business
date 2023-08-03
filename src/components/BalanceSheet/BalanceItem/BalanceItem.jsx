@@ -60,6 +60,8 @@ const handleBDelete = useCallback((id, client_id) => {
       payload: { id: id, client_id: client_id },
 });
 
+
+
 })
     return (
         <>
