@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import MyClientsItem from "./MyClientsItem/MyClientsItem";
 import { Typography, Button } from "@mui/material";
+import "./MyClients.css";
 
 function MyClients() {
   const dispatch = useDispatch();
