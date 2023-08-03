@@ -5,6 +5,7 @@ import AllPL_Table from "./AllPL_Table/AllPLTable";
 import ExportCSV from "../SinglePL/ExportCSV/ExportCSV"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ExportAllWeeks from "./ExportAllCSV/ExportAllCSV";
+import { Box } from "@mui/material";
 import "./AllPL.css"
 
 function AllPL() {
@@ -29,8 +30,11 @@ function AllPL() {
 
     return (
         <div>
-            <h2>All Weeks Profits & Loss</h2>
+            <h2 style={{ textAlign: "center"}}>All Weeks Profits & Loss</h2>
+            <Box align="center">
             <ExportAllWeeks weeks={allWeeks} categories={categories} />
+            </Box>
+            <br/>
             <div className="allpl-table">
                 {allWeeks.map(week => (
                     <AllPL_Table week={week} categories={categories} />
