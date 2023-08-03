@@ -132,38 +132,9 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         header: 'Date',
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
-        enableSorting: true,
-        sortingFn: 'datetime',
+        enableColumnFilter: false,
         size: 80,
         Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
-        // Filter: ({ column }) => (
-        //       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        //         <DatePicker
-        //           onChange={(newValue) => {
-        //             column.setFilterValue(newValue);
-        //           }}
-        //           slotProps={{
-        //             textField: {
-        //               helperText: 'Filter Mode: Less Than',
-        //               sx: { minWidth: '120px' },
-        //               variant: 'standard',
-        //             },
-        //           }}
-        //           value={column.getFilterValue()}
-        //         />
-        //       </LocalizationProvider>
-        // ),
-        // Cell: ({ cell }) => (
-        //       <Box
-        //         component="span"
-        //         sx={(theme) => ({
-        //           borderRadius: '0.25rem',
-        //           maxWidth: '9ch',
-        //           p: '0.25rem',
-        //         })}
-        //       >
-        //       </Box>
-        // ),
         Edit: ({ column, row, table, cell }) => {
           const {
             getState,
@@ -171,7 +142,6 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
             setCreatingRow,
           } = table;
           const date = cell.getValue()?.toLocaleDateString();
-          console.log(date);
           const { creatingRow, editingRow } = getState();
           const isCreating = creatingRow?.id === row.id;
           const isEditing = editingRow?.id === row.id;
