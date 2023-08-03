@@ -8,7 +8,6 @@ function AllPL_Table({ week, categories }) {
 
     const client_id = useParams();
     const history = useHistory();
-    let startDate = ''
 
     const length = week.length;
 
@@ -17,20 +16,22 @@ function AllPL_Table({ week, categories }) {
         history.push(`/singlePL/${client_id}/${week[0].week_id}`);
     }
 
-    useEffect(() => {
+    console.log('week is:', week);
+
+    // useEffect(() => {
         // on page load run this function
         // startDate = week[0].start_date
-    }, [])
+    // }, [])
 
     return (
 
         <div>
             {length > 0 ? (
                 <TableContainer>
-                    <Table sx={{ border: 1, width: 100 }}>
+                    <Table sx={{ border: 1 }}>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ textAlign: "center" }} colSpan={4}>Week of {week.start_date}</TableCell>
+                                <TableCell sx={{ textAlign: "center" }} colSpan={4}>Week of {week[0].start_date}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ borderBottom: "none" }}></TableCell>
@@ -96,7 +97,7 @@ function AllPL_Table({ week, categories }) {
                                         variant="contained"
                                         onClick={() => gotToWeek(week, client_id.client_id)}
                                     >
-                                        Click To Edit This Week!
+                                        Edit This Week!
                                     </Button>
                                     {week && <ExportCSV weekData={week} categories={categories} />}
                                 </TableCell>
