@@ -19,6 +19,7 @@ import ClientList from "../ClientList/ClientList";
 import MyClients from "../MyClients/MyClients";
 import MultiPL from "../AllPL/AllPL";
 import SinglePL from "../SinglePL/SinglePL";
+import CashFlow from "../CashFlow/CashFlow";
 
 import "./App.css";
 import ViewSummary from "../ViewSummary/ViewSummary";
@@ -102,8 +103,8 @@ function App() {
             exact
             path="/balance/:client_id"
           >
-             <ThemeProvider theme={theme}>
-            <BalanceSheet />
+            <ThemeProvider theme={theme}>
+              <BalanceSheet />
             </ThemeProvider>
           </ProtectedRoute>
 
@@ -126,6 +127,12 @@ function App() {
           <ProtectedRoute exact path="/allPL/:client_id">
             <ThemeProvider theme={theme}>
               <MultiPL />
+            </ThemeProvider>
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/cashflow/:client_id">
+            <ThemeProvider theme={theme}>
+              <CashFlow />
             </ThemeProvider>
           </ProtectedRoute>
 
