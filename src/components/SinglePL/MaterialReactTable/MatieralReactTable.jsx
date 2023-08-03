@@ -21,6 +21,10 @@ import { Delete, Edit } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import ImportRegCSV from '../ImportCSV/ImportRegCSV';
 import ExportCSV from '../ExportCSV/ExportCSV.jsx';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 
 
 const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
@@ -49,6 +53,12 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         } else {
             return '🚫';
         }
+    };
+
+    const dateSplice = (value) => {
+        let date = value;
+        date = date.slice(0, 10);
+        return date;
     };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -118,13 +128,49 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
 
         },
       {
-        accessorKey: 'date',
+        accessorFn: (row) => new Date(row.date),
         header: 'Date',
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
-        enableSorting: true,
-        type: 'date',
+        enableColumnFilter: false,
         size: 80,
+        Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
+        Edit: ({ column, row, table, cell }) => {
+          const {
+            getState,
+            setEditingRow,
+            setCreatingRow,
+          } = table;
+          const date = cell.getValue()?.toLocaleDateString();
+          const { creatingRow, editingRow } = getState();
+          const isCreating = creatingRow?.id === row.id;
+          const isEditing = editingRow?.id === row.id;
+          
+            const saveInputValueToRowCache = (newValue) => {
+            // console.log(newValue);
+            row._valuesCache[column.id] = newValue.$d;
+            if (isCreating) {
+              setCreatingRow({ ...row });
+            } else if (isEditing) {
+              setEditingRow({ ...row });
+            }
+          };
+            return (
+                 <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                     <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          onChange={(newValue) => {
+                            saveInputValueToRowCache(newValue);
+                            }}
+                          defaultValue={dayjs(date)}
+                        />
+                     </LocalizationProvider>
+                   </FormControl>
+                 </Box>
+            )
+        },
+
       },
       {
         accessorKey: 'payee',
@@ -151,7 +197,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                 sx={(theme) => ({
                   backgroundColor:
                     cell.getValue()
-                      ? '#00ff00'
+                      ? '#528638'
                       : '#ff0000',
                   borderRadius: '0.25rem',
                   color: '#fff',
