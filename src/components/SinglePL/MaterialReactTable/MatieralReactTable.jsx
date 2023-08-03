@@ -24,6 +24,8 @@ import ExportCSV from '../ExportCSV/ExportCSV.jsx';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+
 
 const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
     const dispatch = useDispatch(); 
@@ -126,48 +128,79 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
 
         },
       {
-        accessorKey: 'date',
+        accessorFn: (row) => new Date(row.date),
         header: 'Date',
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
         enableSorting: true,
         sortingFn: 'datetime',
         size: 80,
-        Filter: ({ column }) => (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  onChange={(newValue) => {
-                    column.setFilterValue(newValue);
-                  }}
-                  slotProps={{
-                    textField: {
-                      helperText: 'Filter Mode: Less Than',
-                      sx: { minWidth: '120px' },
-                      variant: 'standard',
-                    },
-                  }}
-                  value={column.getFilterValue()}
-                />
-              </LocalizationProvider>
-        ),
-        // Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
-        Cell: ({ cell }) => (
-              <Box
-                component="span"
-                sx={(theme) => ({
-                  backgroundColor:
-                    cell.getValue()
-                      ? '#00ff00'
-                      : '#ff0000',
-                  borderRadius: '0.25rem',
-                  color: '#fff',
-                  maxWidth: '9ch',
-                  p: '0.25rem',
-                })}
-              >
-                {dateSplice(cell.getValue())}
-              </Box>
-        ),
+        Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
+        // Filter: ({ column }) => (
+        //       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        //         <DatePicker
+        //           onChange={(newValue) => {
+        //             column.setFilterValue(newValue);
+        //           }}
+        //           slotProps={{
+        //             textField: {
+        //               helperText: 'Filter Mode: Less Than',
+        //               sx: { minWidth: '120px' },
+        //               variant: 'standard',
+        //             },
+        //           }}
+        //           value={column.getFilterValue()}
+        //         />
+        //       </LocalizationProvider>
+        // ),
+        // Cell: ({ cell }) => (
+        //       <Box
+        //         component="span"
+        //         sx={(theme) => ({
+        //           borderRadius: '0.25rem',
+        //           maxWidth: '9ch',
+        //           p: '0.25rem',
+        //         })}
+        //       >
+        //       </Box>
+        // ),
+        Edit: ({ column, row, table, cell }) => {
+          const {
+            getState,
+            setEditingRow,
+            setCreatingRow,
+          } = table;
+          const date = cell.getValue()?.toLocaleDateString();
+          console.log(date);
+          const { creatingRow, editingRow } = getState();
+          const isCreating = creatingRow?.id === row.id;
+          const isEditing = editingRow?.id === row.id;
+          
+            const saveInputValueToRowCache = (newValue) => {
+            // console.log(newValue);
+            row._valuesCache[column.id] = newValue.$d;
+            if (isCreating) {
+              setCreatingRow({ ...row });
+            } else if (isEditing) {
+              setEditingRow({ ...row });
+            }
+          };
+            return (
+                 <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                     <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          onChange={(newValue) => {
+                            saveInputValueToRowCache(newValue);
+                            }}
+                          defaultValue={dayjs(date)}
+                        />
+                     </LocalizationProvider>
+                   </FormControl>
+                 </Box>
+            )
+        },
+
       },
       {
         accessorKey: 'payee',
@@ -194,7 +227,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                 sx={(theme) => ({
                   backgroundColor:
                     cell.getValue()
-                      ? '#00ff00'
+                      ? '#528638'
                       : '#ff0000',
                   borderRadius: '0.25rem',
                   color: '#fff',
