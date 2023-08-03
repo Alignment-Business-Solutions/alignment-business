@@ -60,6 +60,13 @@ const handleBDelete = useCallback((id, client_id) => {
       payload: { id: id, client_id: client_id },
 });
 
+function calculateBalances(balance) {
+  const ending_balance_actual = 0;
+  const ending_balance_cleared = 0;
+
+  ending_balance_cleared = balance.beginning_cash + balance.income_received - balance.expenses_paid;
+};
+
 })
     return (
         <>
@@ -80,6 +87,9 @@ const handleBDelete = useCallback((id, client_id) => {
         <StyledTableCell>{balance.ending_balance_cleared}</StyledTableCell>
         <StyledTableCell>{balance.ending_balance_actual}</StyledTableCell>
       <TableCell> <Button onClick={() => setEdit(true)}>Edit</Button> </TableCell>
+      <TableCell>
+        <Button onClick={() => calculateBalances(balance)}>Calculate Ending Balances</Button>
+      </TableCell>
        </> ) : 
          
           ( <StyledTableCell>
