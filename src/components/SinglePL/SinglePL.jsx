@@ -46,7 +46,7 @@ function SinglePL() {
     return (
         <>  
 
-        {categories && <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>}
+        {categories.length !== 0 ? <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>:<></>}
                   
         
 
