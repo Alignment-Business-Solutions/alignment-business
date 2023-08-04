@@ -52,7 +52,7 @@ function ViewSummary() {
                       width: 200,
                     }}>
                     <CardContent>
-                      <Typography sx={{ fontSize: "1.5rem" }}>
+                      <Typography sx={{ fontSize: "1.2rem" }}>
                         Week Start Date
                       </Typography>
                       <Typography>
