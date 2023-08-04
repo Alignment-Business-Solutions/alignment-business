@@ -67,10 +67,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
     };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-        console.log('handleSaveRowEdits');     
         tableData[row.index] = values;
-            // console.log(values);
-            // let newDate = values.Date;
             
             let newDate = values.Date.toUTCString().slice(5,16);
             let newDateTwo = Date.parse(newDate); 
@@ -84,8 +81,6 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                               paid: values.paid,
                               payee: values.payee,
             };
-            // console.log(newValues);
-            //send/receive api updates here, then refetch or update local table data for re-render
             dispatch({type:"UPDATE_ITEM", payload:{
                                           data: newValues,
                                           week: weekID,
