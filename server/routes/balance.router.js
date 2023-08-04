@@ -89,7 +89,8 @@ router.get('/end', rejectUnauthenticated, (req, res) => {
   const client_id = req.query.clientID / 1;
   console.log('req.query is:', req.query);
   const queryText = `SELECT "ending_balance_actual", "start_date" FROM "balance"
-  WHERE "client_id" = $1`;
+  WHERE "client_id" = $1
+  ORDER BY "start_date";`;
   pool.query(queryText, [client_id])
     .then(result => {
       res.send(result.rows);
