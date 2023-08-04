@@ -43,6 +43,8 @@ function ViewSummary() {
             <br/>
             <SelectWeekForm />
             <br/>
+            <AddWeekForm />
+            <br/>
             <Box align="center">
                 <p>Most Recent Balance</p>
                 <Card variant="outlined"
@@ -73,8 +75,6 @@ function ViewSummary() {
                     </CardContent>
                   </Card>
             </Box>
-            <br/>
-            <AddWeekForm />
             <br/>
             <RecentPLTable />
         </div>
