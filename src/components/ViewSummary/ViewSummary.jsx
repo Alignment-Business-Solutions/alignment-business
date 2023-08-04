@@ -17,6 +17,8 @@ function ViewSummary() {
     const params = useParams();
     const clientID = params.client_id;
     const recentBalance = useSelector(store => store.recentBalance);
+    const recentPL = useSelector(store => store.recentPL);
+
 
     console.log('Recent balance on viewSummary is:', recentBalance);
 
@@ -76,7 +78,7 @@ function ViewSummary() {
                   </Card>
             </Box>
             <br/>
-            <RecentPLTable />
+            <RecentPLTable recentPL={recentPL}/>
         </div>
     )
 }
