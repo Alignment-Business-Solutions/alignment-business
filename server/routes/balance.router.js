@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const {
-    rejectUnauthenticated,
+  rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
 
@@ -66,7 +66,7 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
   console.log('req.query is:', req.query);
   console.log('req.body is:', req.body);
   console.log('req.params is:', req.params)
-  const client_id = req.query.clientID/1;
+  const client_id = req.query.clientID / 1;
   console.log('clientID is:', client_id);
   const queryText = `SELECT "id", "start_date", "ending_balance_actual", "beginning_cash" FROM "balance" 
   WHERE "start_date" = (
@@ -77,13 +77,30 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
   AND "client_id" = $1
   ORDER BY id;`;
   pool.query(queryText, [client_id])
-      .then(result => {
-          res.send(result.rows);
-      }).catch(error => {
-          console.log('error in GET recent_PL router:', error);
-          res.sendStatus(500);
-      })
+    .then(result => {
+      res.send(result.rows);
+    }).catch(error => {
+      console.log('error in GET recent_PL router:', error);
+      res.sendStatus(500);
+    })
 });
+
+router.get('/end', rejectUnauthenticated, (req, res) => {
+  console.log('In get for endBalances');
+  const client_id = req.query.clientID / 1;
+  console.log('req.query is:', req.query);
+  const queryText = `SELECT "ending_balance_actual", "start_date" FROM "balance"
+  WHERE "client_id" = $1
+  ORDER BY "start_date";`;
+  pool.query(queryText, [client_id])
+    .then(result => {
+      res.send(result.rows);
+    }).catch(error => {
+      console.log('error in GET recent_PL router:', error);
+      res.sendStatus(500);
+    })
+
+})
 
 router.put('/edit', async (req, res) => {
 

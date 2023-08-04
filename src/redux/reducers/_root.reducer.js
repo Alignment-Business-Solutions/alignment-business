@@ -15,6 +15,7 @@ import balance from './balance.reducer';
 import clientInfo from './clientInfo.reducer';
 import selectedClient from './selectedClient.reducer.jsx';
 import recentBalance from './recentBalance.reducer';
+import endBalance from './endBalances.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -39,7 +40,7 @@ const rootReducer = combineReducers({
   balance,
   clientInfo,
   recentBalance,
-
+  endBalance,
 });
 
 export default rootReducer;
