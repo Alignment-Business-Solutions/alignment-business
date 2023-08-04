@@ -9,6 +9,7 @@ import AddWeekForm from "./AddWeekForm/AddWeekForm";
 import RecentPLTable from "./RecentPLTable/RecentPLTable";
 import SelectWeekForm from "./SelectWeekForm/SelectWeekForm";
 import './ViewSummary.css';
+import CashFlow from "../CashFlow/CashFlow";
 
 function ViewSummary() {
 
@@ -46,6 +47,8 @@ function ViewSummary() {
             <SelectWeekForm />
             <br/>
             <AddWeekForm />
+            <br/>
+            <CashFlow width={1000} height={350}/>
             <br/>
             <Box align="center">
                 <p>Most Recent Balance</p>

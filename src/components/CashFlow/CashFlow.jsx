@@ -5,7 +5,7 @@ import { Box } from "@mui/material"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-function CashFlow() {
+function CashFlow({width, height}) {
 
     const dispatch = useDispatch();
     const params = useParams();
@@ -18,7 +18,7 @@ function CashFlow() {
     const parsedData = endBalances.map(item => ({
         ending_balance: parseFloat(item.ending_balance_actual.replace(/[^0-9.-]+/g, "")),
         start_date: new Date(item.start_date).toLocaleDateString(),
-      }));
+    }));
 
 
 
@@ -28,22 +28,19 @@ function CashFlow() {
     }, [])
 
     return (
-        <Box 
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
+        <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
         >
-            {/* <p>{JSON.stringify(endBalanceActual)}</p> */}
-            
-            <LineChart color='#EB017F' width={1200} height={600} data={parsedData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="start_date" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="ending_balance" name="Ending Balance" stroke="#EB017F" dot={{ r: 10 }} />
-    </LineChart>
-
+            <LineChart color='#EB017F' width={width} height={height} data={parsedData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="start_date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="ending_balance" name="Ending Balance" stroke="#EB017F" dot={{ r: 10 }} />
+            </LineChart>
         </Box>
     )
 }
