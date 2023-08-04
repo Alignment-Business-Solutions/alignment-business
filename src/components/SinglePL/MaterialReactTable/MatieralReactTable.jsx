@@ -62,7 +62,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         if(value){
             return <Checkbox color='success'  readOnly checked />;
         } else {
-            return <Checkbox readOnly />;
+            return <Checkbox readOnly disabled/>;
         }
     };
 
