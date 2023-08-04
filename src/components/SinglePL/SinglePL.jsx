@@ -47,7 +47,7 @@ function SinglePL() {
     return (
         <>  
 
-            <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>
+        {categories && <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>}
                   
             <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
