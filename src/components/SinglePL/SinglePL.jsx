@@ -47,8 +47,12 @@ function SinglePL() {
     return (
         <>  
 
-            <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>
+        {categories && <Example weekData={weekData} categories={categories} weekID={weekID} clientID={clientID} accLevel={user.access_level}/>}
                   
+        
+
+
+        {importRegData.length !== 0? <>
             <h1> IMPORTED DATA </h1>
             <h3> Data not saved !!!</h3>
             <TableComp
@@ -59,6 +63,8 @@ function SinglePL() {
                 weekID={weekID}
                 clientID={clientID}
             />
+
+            </>: <></>}
             <Link
                 to={path}
             >

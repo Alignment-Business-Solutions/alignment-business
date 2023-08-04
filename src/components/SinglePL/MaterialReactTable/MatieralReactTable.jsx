@@ -60,17 +60,14 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
 
     const isPaid = (value) => {
         if(value){
-            return '✅';
+            return <Checkbox color='success'  readOnly checked />;
         } else {
-            return '🚫';
+            return <Checkbox readOnly />;
         }
     };
 
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-        console.log('handleSaveRowEdits');     
         tableData[row.index] = values;
-            // console.log(values);
-            // let newDate = values.Date;
             
             let newDate = values.Date.toUTCString().slice(5,16);
             let newDateTwo = Date.parse(newDate); 
@@ -84,8 +81,6 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                               paid: values.paid,
                               payee: values.payee,
             };
-            // console.log(newValues);
-            //send/receive api updates here, then refetch or update local table data for re-render
             dispatch({type:"UPDATE_ITEM", payload:{
                                           data: newValues,
                                           week: weekID,
@@ -156,6 +151,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
         enableColumnFilter: false,
+        enableSorting: false,
         size: 80,
         Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
         Edit: ({ column, row, table, cell }) => {
@@ -201,6 +197,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       {
         accessorKey: 'payee',
         header: 'Payee',
+        enableColumnFilter: true,
+        enableSorting: false,
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
@@ -209,6 +207,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       {
         accessorKey: 'amount',
         header: 'Amount',
+        enableSorting: false,
+        enableColumnFilter: false,
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
@@ -221,10 +221,6 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
               <Box
                 component="span"
                 sx={(theme) => ({
-                  backgroundColor:
-                    cell.getValue()
-                      ? '#528638'
-                      : '#ff0000',
                   borderRadius: '0.25rem',
                   color: '#fff',
                   maxWidth: '9ch',
@@ -279,8 +275,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
             sx={(theme) => ({
               backgroundColor:
                 cell.getValue() === 1
-                  ? '#00ff00'
-                  : '#ff0000',
+                  ? '#528638'
+                  : '#cc0000',
               borderRadius: '0.25rem',
               color: '#fff',
               maxWidth: '9ch',
