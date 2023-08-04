@@ -43,6 +43,8 @@ function ViewSummary() {
             <br/>
             <SelectWeekForm />
             <br/>
+            <AddWeekForm />
+            <br/>
             <Box align="center">
                 <p>Most Recent Balance</p>
                 <Card variant="outlined"
@@ -52,7 +54,7 @@ function ViewSummary() {
                       width: 200,
                     }}>
                     <CardContent>
-                      <Typography sx={{ fontSize: "1.5rem" }}>
+                      <Typography sx={{ fontSize: "1.2rem" }}>
                         Week Start Date
                       </Typography>
                       <Typography>
@@ -73,8 +75,6 @@ function ViewSummary() {
                     </CardContent>
                   </Card>
             </Box>
-            <br/>
-            <AddWeekForm />
             <br/>
             <RecentPLTable />
         </div>

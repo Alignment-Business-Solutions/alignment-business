@@ -34,8 +34,10 @@ function MyClients() {
       {myClients && myClients.length > 0 ? (
         <div className="client-ul">
           {myClients.map((client, i) => (
-            <div className="client-box">
-              <MyClientsItem key={i} client={client} />
+            <div className="my-outer-box">
+              <div className="client-box">
+                <MyClientsItem key={i} client={client} />
+              </div>
             </div>
           ))}
         </div>
