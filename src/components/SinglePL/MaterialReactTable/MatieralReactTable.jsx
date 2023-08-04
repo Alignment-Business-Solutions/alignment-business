@@ -60,7 +60,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
 
     const isPaid = (value) => {
         if(value){
-            return <Checkbox readOnly checked />;
+            return <Checkbox color='success'  readOnly checked />;
         } else {
             return <Checkbox readOnly />;
         }
@@ -216,7 +216,6 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
               <Box
                 component="span"
                 sx={(theme) => ({
-
                   borderRadius: '0.25rem',
                   color: '#fff',
                   maxWidth: '9ch',
