@@ -52,6 +52,8 @@ const handleBEdit = (event) => {
     setEdit(false)
  
 }
+const startDate = balance.start_date ? new Date(balance.start_date).toLocaleDateString() : '';
+
 
 const handleBDelete = useCallback((id, client_id) => {
     console.log('Delete!', id, client_id);
@@ -69,7 +71,7 @@ const handleBDelete = useCallback((id, client_id) => {
         {!edit ? (
             
            <>
-          <StyledTableCell>{balance.start_date}</StyledTableCell>
+          <StyledTableCell> {startDate}</StyledTableCell>
         <StyledTableCell>{balance.beginning_cash}</StyledTableCell>
         <StyledTableCell>{balance.income_received}</StyledTableCell>
         <StyledTableCell>{balance.income_received}</StyledTableCell>
