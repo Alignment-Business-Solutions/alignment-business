@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { Table, TableHead, TableBody, TableRow } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import Box from '@mui/material/Box';
 
 function BalanceSheet(){
 
@@ -14,11 +15,14 @@ function BalanceSheet(){
     const params = useParams()
     console.log('Params for BalanceSheet ===>', params)
 
+
+
     useEffect(() => {
         dispatch({
           type: "FETCH_BALANCE",
           payload: params.client_id
         });
+       
       }, []);
       console.log('Balance Sheet', balanceSheet)
 
@@ -69,15 +73,18 @@ function BalanceSheet(){
         {balanceSheet && balanceSheet.map((balance,i) => (
 
              <BalanceItem key={i} balance={balance}/>
-      
+    
         ))}
 </tbody>
 </table> */}
 
 
 <BalanceForm />
-
-<Table>
+<Box >
+<Table sx={{
+  tableLayout: 'fixed',
+  width: '100%',
+  margin: 'auto'}}>
   <TableHead>
     <TableRow>
 
@@ -96,15 +103,16 @@ function BalanceSheet(){
     
     </TableRow>
   </TableHead>
-  <TableBody>
+  <TableBody sx={  {whiteSpace: 'wrap',
+    textAlign: 'center',
+    padding: '8px'}}>
     {balanceSheet && balanceSheet.map((balance, i) => (
       <BalanceItem key={i} balance={balance} StyledTableCell={StyledTableCell} StyledTableRow={StyledTableRow}/>
     ))}
   </TableBody>
 </Table>
    
-
-
+</Box>
 </> )
 }
 
