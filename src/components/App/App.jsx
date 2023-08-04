@@ -132,7 +132,7 @@ function App() {
 
           <ProtectedRoute exact path="/cashflow/:client_id">
             <ThemeProvider theme={theme}>
-              <CashFlow width={2000} height={800}/>
+              <CashFlow width={1500} height={600}/>
             </ThemeProvider>
           </ProtectedRoute>
 

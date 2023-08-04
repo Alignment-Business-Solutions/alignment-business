@@ -48,7 +48,7 @@ function ViewSummary() {
             <br/>
             <AddWeekForm />
             <br/>
-            <CashFlow width={1000} height={350}/>
+            <CashFlow width={800} height={350}/>
             <br/>
             <Box align="center">
                 <p>Most Recent Balance</p>
