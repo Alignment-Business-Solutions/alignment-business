@@ -3,14 +3,16 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Check
 
 
 
-function RecentPLTable() {
+function RecentPLTable({recentPL}) {
 
     // sourcing recentPL reducer from store, setting equal to variable recentPL
-    const recentPL = useSelector(store => store.recentPL);
+    // const recentPL = useSelector(store => store.recentPL);
+
+    const start_date = recentPL.start_date
 
     return (
         <div>
-            <p className="center-text">Most Recent Profit and Loss - Week of {recentPL[0].start_date}</p>
+            <p className="center-text">Most Recent Profit and Loss - Week of {start_date}</p>
             <TableContainer>
                 <Table aria-label="recent-PL">
                     <TableHead>
