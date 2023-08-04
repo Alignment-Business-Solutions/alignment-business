@@ -1,9 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-// const {
-//     rejectUnauthenticated,
-// } = require('../modules/authentication-middleware');
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 router.get('/', (req, res) => {
@@ -61,6 +61,29 @@ router.get('/', (req, res) => {
 //             connection.release();
 //         }
 //     });
+router.get('/recent', rejectUnauthenticated, (req, res) => {
+  // console.log('req is:', req)
+  console.log('req.query is:', req.query);
+  console.log('req.body is:', req.body);
+  console.log('req.params is:', req.params)
+  const client_id = req.query.clientID/1;
+  console.log('clientID is:', client_id);
+  const queryText = `SELECT "id", "start_date", "ending_balance_actual", "beginning_cash" FROM "balance" 
+  WHERE "start_date" = (
+  SELECT MAX("start_date") 
+  FROM "balance" 
+  WHERE "client_id" = $1
+  )
+  AND "client_id" = $1;`;
+  pool.query(queryText, [client_id])
+      .then(result => {
+          res.send(result.rows);
+      }).catch(error => {
+          console.log('error in GET recent_PL router:', error);
+          res.sendStatus(500);
+      })
+});
+
 router.put('/edit', async (req, res) => {
 
   const connection = await pool.connect();

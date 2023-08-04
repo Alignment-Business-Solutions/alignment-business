@@ -18,11 +18,6 @@ function AllPL_Table({ week, categories }) {
 
     console.log('week is:', week);
 
-    // useEffect(() => {
-    // on page load run this function
-    // startDate = week[0].start_date
-    // }, [])
-
     return (
 
         <div>
@@ -91,19 +86,6 @@ function AllPL_Table({ week, categories }) {
                                     }
                                 })}
                             </TableBody>
-                            {/* <TableBody>
-                                <TableRow>
-                                    <TableCell align="center" colSpan={4}>
-                                        <Button
-                                            variant="contained"
-                                            onClick={() => gotToWeek(week, client_id.client_id)}
-                                        >
-                                            Edit This Week!
-                                        </Button>
-                                        {week && <ExportCSV weekData={week} categories={categories} />}
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody> */}
                         </Table>
                     </TableContainer>
                     <br/>

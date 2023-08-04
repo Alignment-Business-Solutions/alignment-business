@@ -14,6 +14,7 @@ import importRegData from './importRegData.reducer.js';
 import balance from './balance.reducer';
 import clientInfo from './clientInfo.reducer';
 import selectedClient from './selectedClient.reducer.jsx';
+import recentBalance from './recentBalance.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   importRegData,
   balance,
   clientInfo,
+  recentBalance,
 
 });
 

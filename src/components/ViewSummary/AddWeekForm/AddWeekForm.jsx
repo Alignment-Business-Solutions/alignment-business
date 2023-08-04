@@ -46,20 +46,24 @@ function AddWeekForm() {
                             id="new-week-input"
                         />
                         <br />
+                        <Box sx={{ paddingLeft: 2}}>
                         <Button
                             variant="contained"
                             type="submit"
                         >
                             Submit New Week!
                         </Button>
-                        <br />
+                        </Box>
+                        <Box sx={{ paddingLeft: 2.3}}>
                         <Button
+                            
                             variant="contained"
                             color="success"
                             onClick={() => setAddClicker(false)}
                         >
                             Cancel Add Week
                         </Button>
+                        </Box>
                     </form>
                     :
                     <Button

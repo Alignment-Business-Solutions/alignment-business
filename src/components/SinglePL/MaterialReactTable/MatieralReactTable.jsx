@@ -46,7 +46,18 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
             }
         }
     };
-   
+    function parseDate(milliseconds) {
+          const date = new Date(milliseconds);
+          const month = date.getMonth() + 1; // Adding 1 because months are zero-based
+          const day = date.getDate();
+          const year = date.getFullYear();
+
+          // Format the date components into "mm/dd/yyyy" format
+          const formattedDate = `${month}/${day}/${year}`;
+
+          return formattedDate;
+        }
+
     const isPaid = (value) => {
         if(value){
             return <Checkbox readOnly checked />;
@@ -55,18 +66,30 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         }
     };
 
-    const dateSplice = (value) => {
-        let date = value;
-        date = date.slice(0, 10);
-        return date;
-    };
-
     const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-            tableData[row.index] = values;
+        console.log('handleSaveRowEdits');     
+        tableData[row.index] = values;
+            // console.log(values);
+            // let newDate = values.Date;
+            
+            let newDate = values.Date.toUTCString().slice(5,16);
+            let newDateTwo = Date.parse(newDate); 
+            let newDateThree = parseDate(newDateTwo);
+            
+            let newValues = {
+                              date: newDateThree,
+                              amount: values.amount,
+                              category_id: values.category_id,
+                              id: values.id,
+                              paid: values.paid,
+                              payee: values.payee,
+            };
+            // console.log(newValues);
             //send/receive api updates here, then refetch or update local table data for re-render
-            dispatch({type:"UPDATE_ITEM", payload:{data: values,
-                                       week: weekID,
-                                       client: clientID}});
+            dispatch({type:"UPDATE_ITEM", payload:{
+                                          data: newValues,
+                                          week: weekID,
+                                          client: clientID}});
             exitEditingMode(); //required to exit editing mode and close modal
     };
 
@@ -147,13 +170,16 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
           const isEditing = editingRow?.id === row.id;
           
             const saveInputValueToRowCache = (newValue) => {
-            // console.log(newValue);
-            row._valuesCache[column.id] = newValue.$d;
-            if (isCreating) {
-              setCreatingRow({ ...row });
-            } else if (isEditing) {
-              setEditingRow({ ...row });
-            }
+                console.log(newValue);
+                // let newDate = newValue.$d.toUTCString();
+                // console.log(newDate);
+                
+                row._valuesCache[column.id] = newValue.$d;
+                if (isCreating) {
+                  setCreatingRow({ ...row });
+                } else if (isEditing) {
+                  setEditingRow({ ...row });
+                }
           };
             return (
                  <Box sx={{ minWidth: 120 }}>
