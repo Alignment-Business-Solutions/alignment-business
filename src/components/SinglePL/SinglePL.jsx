@@ -9,8 +9,7 @@ import ExportCSV from './ExportCSV/ExportCSV.jsx';
 import { Link } from "react-router-dom";
 
 import { Button } from "@mui/material";
-import Example from "./MaterialReactTable/MaterialReactTable";
-
+import Example from './MaterialReactTable/MatieralReactTable.jsx';
 function SinglePL() {
 
     const dispatch = useDispatch();
