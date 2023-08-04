@@ -27,7 +27,7 @@ function AllPL_Table({ week, categories }) {
                         <Table sx={{ border: 1 }}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell sx={{ textAlign: "center" }} colSpan={4}>Week of {week[0].start_date}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }} colSpan={4}>Week of {week[0].start_date.slice(0, 10)}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell sx={{ borderBottom: "none" }}></TableCell>
@@ -46,14 +46,14 @@ function AllPL_Table({ week, categories }) {
                                 {week.map(transaction => {
                                     if (transaction.category_id === 1 && transaction.paid === true) {
                                         return <TableRow key={transaction.id}>
-                                            <TableCell>{transaction.date}</TableCell>
+                                            <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                             <TableCell>{transaction.payee}</TableCell>
                                             <TableCell>{transaction.amount}</TableCell>
                                             <TableCell><Checkbox checked readOnly /></TableCell>
                                         </TableRow>
                                     } else if (transaction.category_id === 1 && transaction.paid === false) {
                                         return <TableRow key={transaction.id}>
-                                            <TableCell>{transaction.date}</TableCell>
+                                            <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                             <TableCell>{transaction.payee}</TableCell>
                                             <TableCell>{transaction.amount}</TableCell>
                                             <TableCell><Checkbox disabled /></TableCell>
@@ -71,14 +71,14 @@ function AllPL_Table({ week, categories }) {
                                 {week.map(transaction => {
                                     if (transaction.category_id === 2 && transaction.paid === true) {
                                         return <TableRow key={transaction.id}>
-                                            <TableCell>{transaction.date}</TableCell>
+                                            <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                             <TableCell>{transaction.payee}</TableCell>
                                             <TableCell>{transaction.amount}</TableCell>
                                             <TableCell><Checkbox checked readOnly /></TableCell>
                                         </TableRow>
                                     } else if (transaction.category_id === 2 && transaction.paid === false) {
                                         return <TableRow key={transaction.id}>
-                                            <TableCell>{transaction.date}</TableCell>
+                                            <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                             <TableCell>{transaction.payee}</TableCell>
                                             <TableCell>{transaction.amount}</TableCell>
                                             <TableCell><Checkbox disabled /></TableCell>
