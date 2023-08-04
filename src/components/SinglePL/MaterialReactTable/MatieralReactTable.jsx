@@ -151,6 +151,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
         enableColumnOrdering: true,
         enableEditing: true, //disable editing on this column
         enableColumnFilter: false,
+        enableSorting: false,
         size: 80,
         Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
         Edit: ({ column, row, table, cell }) => {
@@ -196,6 +197,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       {
         accessorKey: 'payee',
         header: 'Payee',
+        enableColumnFilter: true,
+        enableSorting: false,
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
@@ -204,6 +207,8 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
       {
         accessorKey: 'amount',
         header: 'Amount',
+        enableSorting: false,
+        enableColumnFilter: false,
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
