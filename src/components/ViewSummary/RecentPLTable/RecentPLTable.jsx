@@ -10,7 +10,7 @@ function RecentPLTable() {
 
     return (
         <div>
-            <p className="center-text">Most Recent Week Profit and Loss</p>
+            <p className="center-text">Most Recent Profit and Loss - Week of {recentPL[0].start_date}</p>
             <TableContainer>
                 <Table aria-label="recent-PL">
                     <TableHead>
