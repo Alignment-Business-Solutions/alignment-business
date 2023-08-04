@@ -15,7 +15,7 @@ function* fetchBalance(action) {
 }
 
 function* fetchRecentBalance(action) {
-    console.log('in fetchRecentPL saga!')
+    console.log('in fetchRecentBalance saga!')
     console.log('action.payload is:', action.payload)
     const clientID = action.payload.client
     console.log('clientID is:', clientID);
@@ -28,9 +28,24 @@ function* fetchRecentBalance(action) {
     }
 }
 
+function* fetchEndBalance(action) {
+    console.log('in endBalance saga!')
+    console.log('action.payload is:', action.payload)
+    const clientID = action.payload.client
+    try {
+        const endBalances = yield axios.get (`/api/balance/end/?clientID=${action.payload}`);
+        console.log('data received from fetchEndBalance get:', endBalances.data);
+        yield put({ type: 'SET_END_BALANCE', payload: endBalances.data})
+    } catch (error) {
+        console.log('Error in fetchEndBalance Saga:', error);
+
+    }
+}
+
 function* balanceFetch(){
     yield takeLatest('FETCH_BALANCE', fetchBalance)
     yield takeLatest('FETCH_RECENT_BALANCE', fetchRecentBalance)
+    yield takeLatest('FETCH_END_BALANCES', fetchEndBalance)
 }
 
 export default balanceFetch

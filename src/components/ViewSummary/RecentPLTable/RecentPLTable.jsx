@@ -8,11 +8,9 @@ function RecentPLTable({recentPL}) {
     // sourcing recentPL reducer from store, setting equal to variable recentPL
     // const recentPL = useSelector(store => store.recentPL);
 
-    const start_date = recentPL.start_date
-
     return (
         <div>
-            <p className="center-text">Most Recent Profit and Loss - Week of {start_date}</p>
+            <p className="center-text">Most Recent Profit and Loss - Week of {recentPL.length > 0 && recentPL[0].start_date.slice(0, 10)}</p>
             <TableContainer>
                 <Table aria-label="recent-PL">
                     <TableHead>
@@ -37,7 +35,7 @@ function RecentPLTable({recentPL}) {
                             // return this code
                             if (transaction.category_id === 1 && transaction.paid === true) {
                                 return <TableRow key={transaction.id}>
-                                    <TableCell>{transaction.date}</TableCell>
+                                    <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                     <TableCell>{transaction.payee}</TableCell>
                                     <TableCell>{transaction.amount}</TableCell>
                                     <TableCell><Checkbox checked={transaction.paid} readOnly /></TableCell>
@@ -45,7 +43,7 @@ function RecentPLTable({recentPL}) {
                                 // otherwise if category is expense, but paid is set to false, render this code
                             } else if (transaction.category_id === 1 && transaction.paid === false) {
                                 return <TableRow key={transaction.id}>
-                                    <TableCell>{transaction.date}</TableCell>
+                                    <TableCell>{transaction.date.slice(0, 10)}</TableCell>
                                     <TableCell>{transaction.payee}</TableCell>
                                     <TableCell>{transaction.amount}</TableCell>
                                     <TableCell><Checkbox disabled /></TableCell>
@@ -82,7 +80,7 @@ function RecentPLTable({recentPL}) {
                             // return this code
                             if (transaction.category_id === 2 && transaction.paid === true) {
                                 return <TableRow key={transaction.id}>
-                                    <TableCell>{transaction.date}</TableCell>
+                                    <TableCell>{transaction.date.slice(0,10)}</TableCell>
                                     <TableCell>{transaction.payee}</TableCell>
                                     <TableCell>{transaction.amount}</TableCell>
                                     <TableCell><Checkbox checked={transaction.paid} readOnly /></TableCell>
@@ -90,7 +88,7 @@ function RecentPLTable({recentPL}) {
                                 // otherwise if category is expense, but paid is set to false, render this code
                             } else if (transaction.category_id === 2 && transaction.paid === false) {
                                 return <TableRow key={transaction.id}>
-                                    <TableCell>{transaction.date}</TableCell>
+                                    <TableCell>{transaction.date.slice(0,10)}</TableCell>
                                     <TableCell>{transaction.payee}</TableCell>
                                     <TableCell>{transaction.amount}</TableCell>
                                     <TableCell><Checkbox type="checkbox" disabled /></TableCell>
