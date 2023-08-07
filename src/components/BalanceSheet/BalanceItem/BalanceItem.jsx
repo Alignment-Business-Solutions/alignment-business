@@ -7,6 +7,9 @@ import Card from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import FormControlContext from "@mui/material/FormControl/FormControlContext";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function BalanceItem({balance, StyledTableCell, StyledTableRow}) {
 console.log('Is this working?')
@@ -83,12 +86,16 @@ const handleBDelete = useCallback((id, client_id) => {
         <StyledTableCell>{balance.loan_to_from}</StyledTableCell>
         <StyledTableCell>{balance.ending_balance_cleared}</StyledTableCell>
         <StyledTableCell>{balance.ending_balance_actual}</StyledTableCell>
-      <TableCell> <Button onClick={() => setEdit(true)}>Edit</Button> </TableCell>
+      <TableCell> <Button onClick={() => setEdit(true)}>Edit</Button> </TableCell> <StyledTableCell> <IconButton onClick={() => handleBDelete(balance.id, balance.client_id)}>
+    <DeleteIcon />
+  </IconButton>
+  </StyledTableCell>  
        </> ) : 
          
-          ( <StyledTableCell>
-       <FormControl>
-       <TextField
+          ( <StyledTableRow>
+            
+       <FormControl  sx={{ display: 'flex' , flexDirection:"row", width:"225%", alignContent:"center"}}>
+       <TextField sx={{width:"20%"}}
   label="New Week"
   type="date"
   placeholder="Start Date"
@@ -168,13 +175,17 @@ const handleBDelete = useCallback((id, client_id) => {
   <Button onClick={handleBEdit}>Save</Button>
  <StyledTableCell> <Button onClick={() => setEdit(false)}>Back</Button></StyledTableCell>
 </FormControl>
-           </StyledTableCell>
+           </StyledTableRow>
            )}
+       
         </StyledTableRow>
-   <StyledTableCell>
+   {/* <StyledTableCell>
      <Button onClick={() => handleBDelete(balance.id, balance.client_id)}> Delete</Button> </StyledTableCell>
-  
-    
+   */}
+   {/* <IconButton onClick={() => handleBDelete(balance.id, balance.client_id)}>
+    <DeleteIcon />
+  </IconButton>
+     */} 
     </>)
   
  

@@ -112,11 +112,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
                 helperText: validationErrors[cell.id],
                     onBlur: (event) => {
                         const isValid =
-                            cell.column.id === 'email'
-                            ? validateEmail(event.target.value)
-                            : cell.column.id === 'age'
-                            ? validateAge(+event.target.value)
-                            : validateRequired(event.target.value);
+                            cell.column.id === 'amount' || cell.column.id === 'payee'? validateRequired(event.target.value): null;
                         if (!isValid) {
                             //set validation error for cell if invalid
                             setValidationErrors({
@@ -135,6 +131,7 @@ const Example = ({weekData, categories, weekID, clientID, accLevel}) => {
             },
         [validationErrors],
     );
+    const validateRequired = (value) => !!value.length;
 
   const columns = useMemo(
     () => [

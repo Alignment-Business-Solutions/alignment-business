@@ -74,7 +74,8 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
   FROM "balance" 
   WHERE "client_id" = $1
   )
-  AND "client_id" = $1;`;
+  AND "client_id" = $1
+  ORDER BY id;`;
   pool.query(queryText, [client_id])
     .then(result => {
       res.send(result.rows);
