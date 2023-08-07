@@ -42,6 +42,7 @@ function ViewSummary() {
 
     return (
         <div className="center">
+            <h1 className="center-text">Overview</h1>
             <p className="center-text">Select a Week from the menu to view/edit details!</p>
             <br/>
             <SelectWeekForm />
