@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { Box } from "@mui/material"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
 
 function CashFlow({width, height}) {
@@ -35,11 +35,13 @@ function CashFlow({width, height}) {
         >
             <LineChart color='#EB017F' width={width} height={height} data={parsedData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="start_date" />
-                <YAxis />
+                <XAxis dataKey="start_date">
+                    {/* <Label value="Week Start Date" position="bottom"/> */}
+                </XAxis>
+                <YAxis label={{value: 'End Week Cash', angle: -90, position: 'insideLeft'}} />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="ending_balance" name="Ending Balance" stroke="#EB017F" dot={{ r: 10 }} />
+                <Line type="monotone" dataKey="ending_balance" stroke="#EB017F" dot={{ r: 10 }} />
             </LineChart>
         </Box>
     )

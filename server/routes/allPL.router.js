@@ -19,7 +19,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         const connection = await pool.connect();
     
         try {
-            const weeksSql = `SELECT "weeks"."id", "start_date" FROM "weeks";`;
+            const weeksSql = `SELECT "weeks"."id", "start_date" FROM "weeks"
+            ORDER BY "start_date";`;
             const weeksResult = await connection.query(weeksSql);
             // weeksResult.rows is something like [ {id: 1}, {id: 2}, {etc} ]
     
