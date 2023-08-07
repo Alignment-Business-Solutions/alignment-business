@@ -21,12 +21,13 @@ function MyClientsItem({ client }) {
       <Typography style={{ marginBottom: "5px" }} variant="h6">
         {client.company_name}
       </Typography>
-      <Link to={path}>View Client Details</Link>
+      <Link to={path}><Button variant="contained">View Client Details</Button></Link>
       <br></br>
       <br></br>
       <Button
         style={{ width: "200px" }}
         variant="contained"
+        color="secondary"
         onClick={() => removeClient(client.client_id)}
       >
         Remove

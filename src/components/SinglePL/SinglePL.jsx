@@ -67,10 +67,10 @@ function SinglePL() {
             <Link
                 to={path}
             >
-                Go Back To Summary Page
+                <Button variant="contained">
+                    Go Back To Summary Page
+                </Button>
             </Link>
-
-
         </>
     );
 }
