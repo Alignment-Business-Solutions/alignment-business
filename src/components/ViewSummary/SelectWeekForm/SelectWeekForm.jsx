@@ -61,7 +61,7 @@ function SelectWeekForm() {
                     {/* beginning map to loop through weeksDropdown varbiable */}
                     {weeksDropdown.map(week => (
                         // for each week, render this dropdown menu option
-                        <MenuItem key={week.id} value={week.id}>{week.start_date}</MenuItem>
+                        <MenuItem key={week.id} value={week.id}>{week.start_date.slice(0,10)}</MenuItem>
                     ))}
                 </TextField>
                 {/*linking to week details view for selected week in dropdown menu */}
