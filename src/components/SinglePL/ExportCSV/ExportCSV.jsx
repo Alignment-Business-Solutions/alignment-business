@@ -22,7 +22,7 @@ export default function JsonToCSV({week, weekData, categories}) {
       
         // Setting the anchor tag attribute for downloading
         // and passing the download file name
-        a.setAttribute('download', `test.csv`);
+        a.setAttribute('download', `week_PL.csv`);
       
         // Performing a download with click
         a.click()
