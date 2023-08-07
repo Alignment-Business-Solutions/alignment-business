@@ -70,6 +70,8 @@ function AddWeekForm() {
                     <Button
                         variant="contained"
                         onClick={() => setAddClicker(true)}
+                        color="success"
+                        sx={{ color: "white"}}
                     >
                         Create New Week
                     </Button>
