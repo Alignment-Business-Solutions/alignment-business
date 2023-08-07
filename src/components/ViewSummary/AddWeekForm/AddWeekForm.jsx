@@ -66,12 +66,14 @@ function AddWeekForm() {
                         </Box>
                     </form>
                     :
+                    <Box>
                     <Button
                         variant="contained"
                         onClick={() => setAddClicker(true)}
                     >
                         Create New Week
                     </Button>
+                    </Box>
             }
         </Box>
     )

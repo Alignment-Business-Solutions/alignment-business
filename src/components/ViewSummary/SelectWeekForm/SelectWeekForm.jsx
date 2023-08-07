@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
-import { InputLabel, MenuItem, FormControl, TextField, Box } from "@mui/material"
+import { InputLabel, MenuItem, FormControl, TextField, Box, Button } from "@mui/material"
 
 
 function SelectWeekForm() {
@@ -47,7 +47,7 @@ function SelectWeekForm() {
                 </TextField>
                 {/*linking to week details view for selected week in dropdown menu */}
                 <Box>
-                    <Link style={{paddingLeft: 80}} to={path}>Go To Week Details</Link>
+                    <Link style={{paddingLeft: 60}} to={path}><Button variant="contained">Go To Week Details</Button></Link>
                 </Box>
             </FormControl>
         </Box>
