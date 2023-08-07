@@ -100,6 +100,8 @@ function BalanceSheet(){
       <StyledTableCell>Loan (To)/From</StyledTableCell>
       <StyledTableCell>Ending Balance (cleared)</StyledTableCell>
       <StyledTableCell>Ending Balance (actual)</StyledTableCell>
+      <StyledTableCell>Edit</StyledTableCell>
+      <StyledTableCell>Delete</StyledTableCell>
     
     </TableRow>
   </TableHead>
