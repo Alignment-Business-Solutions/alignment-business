@@ -20,7 +20,7 @@ export default function ExportAllWeeks({ weeks, categories }) {
 
         // Setting the anchor tag attribute for downloading
         // and passing the download file name
-        a.setAttribute('download', `test.csv`);
+        a.setAttribute('download', `export_all_weeks.csv`);
 
         // Performing a download with click
         a.click()
