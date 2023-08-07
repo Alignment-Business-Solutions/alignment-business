@@ -155,7 +155,7 @@ function BalanceForm() {
           />
           <Button variant="contained" onClick={handleCreateBalance}>Submit</Button>
           <Button onClick={() => setEdit(false)}>Close</Button>
-          <button onClick={() => setInputs()}></button>
+         
         </>)}
     </form>
   )
