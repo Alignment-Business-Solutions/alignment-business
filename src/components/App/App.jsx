@@ -47,6 +47,9 @@ function App() {
       secondary: {
         main: "#451F44",
       },
+      success: {
+        main: "#00B4EB"
+      }
     },
     // palette: {
     //   abs: {
